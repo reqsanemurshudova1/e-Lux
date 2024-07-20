@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+  }
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .advertising {
+    display: grid;
+    grid-template-columns: repeat(6, 2fr);
+    gap: 24px;
+    padding: 60px 0;
+  }
+  .outfit {
+    grid-column: 1/4;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    border-radius: 24px;
+    background: #E16F3D;
+  }
+  .outfit .title {
+    color: #E2DBCB;
+    font-family: 'Poppins', sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 64px;
+    display: flex;
+    justify-content:flex-start;
+  }
+  .outfit .content {
+    color: #E2DBCB;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .outfit img{
+    margin-bottom: 64px;
+  }
+  .casual-style {
+    padding: 40px;
+    grid-column: 4/7;
+    border-radius: 24px;
+    background: #F6F6F6;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .casual-style .title {
+    width: 50%;
+    color: var(--Grayscale-900, #171717);
+    font-family: "Inter", sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 72px;
+    
+  }
+  .casual-style img {
+    width: 100%;
+    position: absolute;
+    bottom: -25px;
+    right: -80px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .casual-style img {
+      width: 70%;
+      position: absolute;
+      bottom: -25px;
+      right: -45px;
+    }
+    .outfit .title {
+      font-size: 20px;
+      line-height: 32px;
+    }
+    .outfit .content {
+      font-size: 12px;
+      line-height: 16px;
+    }
+    .outfit img {
+    display: none;
+    }
+    .casual-style .title {
+      font-size: 20px;
+      line-height: 32px;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    .casual-style img {
+      width: 100%;
+   
+    }
+    
+  }

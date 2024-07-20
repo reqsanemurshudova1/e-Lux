@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+  }
+  
+  .container {
+    max-width: 1300px;
+    margin: auto;
+  }
+  
+  .footer {
+   display: flex;
+ padding: 60px 0;
+   flex-direction: column;
+   gap: 20px;
+  }
+  .foot {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  
+  .logo .title,
+  .menu .title,
+  .FAQ .title,
+  .connect .title,
+  .payment .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+  }
+  
+  .logo .title {
+display: flex;
+align-items: center;
+justify-content:flex-start;
+  }
+  
+  .text {
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+  }
+  
+  .text ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .text ul li {
+    margin-bottom: 5px;
+  }
+  
+  .menu .text {
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+  }
+  
+  .card-images ul {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  
+  
+  
+  .card-images img {
+    width: 50px;
+    height: auto;
+  }
+  
+  .copy {
+   display: flex;
+   align-items: center;
+   justify-content:center;
+    color: #999;
+    font-size: 12px;
+  }
+  
+  @media (max-width: 560px) {
+    /* .menu,
+    .FAQ,
+    .connect,
+    .payment {
+      display: flex;
+      align-items: center;
+      justify-content:center;
+      flex-direction: column;
+    } */
+ 
+  }
