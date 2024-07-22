@@ -1,4 +1,3 @@
-
 {
   "products": [
     {
@@ -9,139 +8,271 @@
       "image": "/Assets/dress.png",
       "category": "Dress",
       "gender": "Women"
-  },
-  {
-    "id": 9,
-    "name": "Graphic T-Shirt",
-    "description": "A comfortable graphic t-shirt with a trendy design.",
-    "price": 29.99,
-    "image": "/Assets/T-Shirt.png",
-    "category": "T-Shirt",
-    "gender": "Women"
-  },
-  {
-    "id": 10,
-    "name": "Casual Dress",
-    "description": "A stylish casual dress perfect for any day out.",
-    "price": 59.99,
-    "image": "/Assets/suit.png",
-    "category": "Dress",
-    "gender": "Women"
-  },
+    },
     {
-          "id": 1,
-          "name": "Winter Coat ",
-          "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
-          "price": 499.99,
-          "image": "/Assets/coat.png",
-          "category": "Hoodies",
-          "gender": "Women"
-          
-        },
-        {
-          "id": 2,
-          "name": "Casual Shirt",
-          "description": "A casual shirt that's perfect for everyday wear.",
-          "price": 39.99,
-          "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
-          "category": "Shirt",
-          "gender": "Men"
-        
-        },
-        {
-          "id": 3,
-          "name": "Sunglasses",
-          "description": "Trendy sunglasses that offer 100% UV protection and a stylish look.",
-          "price": 99.99,
-          "image": "https://www.montblanc.com/variants/images/42247633208661479/A/w2500.jpg",
-          "category": "Accessories",
-          "gender": "Unisex"
-        },
-        {
-          "id": 4,
-          "name": "Leather Wallet",
-          "description": "A premium leather wallet with multiple compartments for cards and cash.",
-          "price": 79.99,
-          "image": "https://www.iwalletsmen.com/cdn/shop/products/1_7a1b00b5-1261-40d9-a7c8-881062effdc5_1024x1024.jpg?v=1624511211",
-          "category": "Accessories",
-          "gender": "Men"
-        },
-        {
-          "id": 5,
-         "name": "Luxury Watch",
-          "description": "An elegant and stylish luxury watch with a leather strap and a sleek design.",
-          "price": 299.99,
-          "image": "https://images.augustman.com/wp-content/uploads/sites/3/2022/10/11191124/pexels-antony-trivet-9978785.jpg",
-          "category": "Accessories",
-          "gender": "Men"
-        },
-       
-        {
-          "id": 7,
-          "name": "Best pants",
-          "description": "High-quality wireless earbuds with noise cancellation and long battery life.",
-          "price": 149.99,
-          "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1683726370-3-645b9ffd678da.jpg?crop=1xw:1xh;center,top&resize=980:*",
-          "category": "Pants",
-          "gender": "Unisex"
-        },
-        
-        {
-          "id": 11,
-          "name": "Formal Pants",
-          "description": "Elegant formal pants suitable for office and events.",
-          "price": 89.99,
-          "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
-          "category": "Pants",
-          "gender": "Women"
-        },
-        {
-          "id": 12,
-          "name": "Winter Coat ",
-          "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
-          "price": 499.99,
-          "image": "/Assets/coat.png",
-          "category": "Hoodies",
-          "gender": "Women"
-       
-        },
-        {
-          "id": 13,
-          "name": "Kids T-Shirt",
-          "description": "A fun and vibrant t-shirt for kids.",
-          "price": 19.99,
-          "image": "https://img.freepik.com/free-photo/portrait-cool-teenage-boy-with-perm_23-2149085823.jpg",
-          "category": "T-Shirt",
-          "gender": "Kids"
-        },
-        {
-          "id": 14,
-          "name": "Women's Casual Pants",
-          "description": "Comfortable and stylish casual pants for women.",
-          "price": 49.99,
-          "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
-          "category": "Pants",
-          "gender": "Women"
-        },
-        {
-          "id": 15,
-          "name": "Men's Polo Shirt",
-          "description": "A classic men's polo shirt.",
-          "price": 34.99,
-          "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
-          "category": "Shirt",
-          "gender": "Men"
-        },
-        {
-          "id": 16,
-          "name": "Girls' Dress",
-          "description": "A cute dress for young girls.",
-          "price": 39.99,
-          "image": "https://i5.walmartimages.com/asr/3a9f8496-1418-4305-8f4f-d58c33d2c856.e3ed444397b67d549dcfb0ef2fd2b0bc.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
-          "category": "Dress",
-          "gender": "Kids"
-        }
+      "id": 9,
+      "name": "Graphic T-Shirt",
+      "description": "A comfortable graphic t-shirt with a trendy design.",
+      "price": 29.99,
+      "image": "/Assets/T-Shirt.png",
+      "category": "T-Shirt",
+      "gender": "Women"
+    },
+    {
+      "id": 10,
+      "name": "Casual Dress",
+      "description": "A stylish casual dress perfect for any day out.",
+      "price": 59.99,
+      "image": "/Assets/suit.png",
+      "category": "Dress",
+      "gender": "Women"
+    },
+    {
+      "id": 1,
+      "name": "Winter Coat ",
+      "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
+      "price": 499.99,
+      "image": "/Assets/coat.png",
+      "category": "Hoodies",
+      "gender": "Women"
+    },
+    {
+      "id": 2,
+      "name": "Casual Shirt",
+      "description": "A casual shirt that's perfect for everyday wear.",
+      "price": 39.99,
+      "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
+      "category": "Shirt",
+      "gender": "Men"
+    },
+    {
+      "id": 3,
+      "name": "Sunglasses",
+      "description": "Trendy sunglasses that offer 100% UV protection and a stylish look.",
+      "price": 99.99,
+      "image": "https://www.montblanc.com/variants/images/42247633208661479/A/w2500.jpg",
+      "category": "Accessories",
+      "gender": "Unisex"
+    },
+    {
+      "id": 4,
+      "name": "Leather Wallet",
+      "description": "A premium leather wallet with multiple compartments for cards and cash.",
+      "price": 79.99,
+      "image": "https://www.iwalletsmen.com/cdn/shop/products/1_7a1b00b5-1261-40d9-a7c8-881062effdc5_1024x1024.jpg?v=1624511211",
+      "category": "Accessories",
+      "gender": "Men"
+    },
+    {
+      "id": 5,
+      "name": "Luxury Watch",
+      "description": "An elegant and stylish luxury watch with a leather strap and a sleek design.",
+      "price": 299.99,
+      "image": "https://images.augustman.com/wp-content/uploads/sites/3/2022/10/11191124/pexels-antony-trivet-9978785.jpg",
+      "category": "Accessories",
+      "gender": "Men"
+    },
+
+    {
+      "id": 7,
+      "name": "Best pants",
+      "description": "High-quality wireless earbuds with noise cancellation and long battery life.",
+      "price": 149.99,
+      "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1683726370-3-645b9ffd678da.jpg?crop=1xw:1xh;center,top&resize=980:*",
+      "category": "Pants",
+      "gender": "Unisex"
+    },
+
+    {
+      "id": 11,
+      "name": "Formal Pants",
+      "description": "Elegant formal pants suitable for office and events.",
+      "price": 89.99,
+      "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
+      "category": "Pants",
+      "gender": "Women"
+    },
+    {
+      "id": 12,
+      "name": "Winter Coat ",
+      "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
+      "price": 499.99,
+      "image": "/Assets/coat.png",
+      "category": "Hoodies",
+      "gender": "Women"
+    },
+    {
+      "id": 13,
+      "name": "Kids T-Shirt",
+      "description": "A fun and vibrant t-shirt for kids.",
+      "price": 19.99,
+      "image": "https://img.freepik.com/free-photo/portrait-cool-teenage-boy-with-perm_23-2149085823.jpg",
+      "category": "T-Shirt",
+      "gender": "Kids"
+    },
+    {
+      "id": 14,
+      "name": "Women's Casual Pants",
+      "description": "Comfortable and stylish casual pants for women.",
+      "price": 49.99,
+      "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
+      "category": "Pants",
+      "gender": "Women"
+    },
+    {
+      "id": 15,
+      "name": "Men's Polo Shirt",
+      "description": "A classic men's polo shirt.",
+      "price": 34.99,
+      "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
+      "category": "Shirt",
+      "gender": "Men"
+    },
+    {
+      "id": 16,
+      "name": "Girls' Dress",
+      "description": "A cute dress for young girls.",
+      "price": 39.99,
+      "image": "https://i5.walmartimages.com/asr/3a9f8496-1418-4305-8f4f-d58c33d2c856.e3ed444397b67d549dcfb0ef2fd2b0bc.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+      "category": "Dress",
+      "gender": "Kids"
+    },
+    {
+      "id": 17,
+      "name": "Dress",
+      "description": "A beautiful and elegant dress perfect for special occasions.",
+      "price": 129.99,
+      "image": "/Assets/dress.png",
+      "category": "Dress",
+      "gender": "Women"
+    },
+    {
+      "id": 18,
+      "name": "Graphic T-Shirt",
+      "description": "A comfortable graphic t-shirt with a trendy design.",
+      "price": 29.99,
+      "image": "/Assets/T-Shirt.png",
+      "category": "T-Shirt",
+      "gender": "Women"
+    },
+    {
+      "id": 19,
+      "name": "Casual Dress",
+      "description": "A stylish casual dress perfect for any day out.",
+      "price": 59.99,
+      "image": "/Assets/suit.png",
+      "category": "Dress",
+      "gender": "Women"
+    },
+    {
+      "id": 20,
+      "name": "Winter Coat ",
+      "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
+      "price": 499.99,
+      "image": "/Assets/coat.png",
+      "category": "Hoodies",
+      "gender": "Women"
+    },
+    {
+      "id": 21,
+      "name": "Casual Shirt",
+      "description": "A casual shirt that's perfect for everyday wear.",
+      "price": 39.99,
+      "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
+      "category": "Shirt",
+      "gender": "Men"
+    },
+    {
+      "id": 22,
+      "name": "Sunglasses",
+      "description": "Trendy sunglasses that offer 100% UV protection and a stylish look.",
+      "price": 99.99,
+      "image": "https://www.montblanc.com/variants/images/42247633208661479/A/w2500.jpg",
+      "category": "Accessories",
+      "gender": "Unisex"
+    },
+    {
+      "id": 23,
+      "name": "Leather Wallet",
+      "description": "A premium leather wallet with multiple compartments for cards and cash.",
+      "price": 79.99,
+      "image": "https://www.iwalletsmen.com/cdn/shop/products/1_7a1b00b5-1261-40d9-a7c8-881062effdc5_1024x1024.jpg?v=1624511211",
+      "category": "Accessories",
+      "gender": "Men"
+    },
+    {
+      "id": 24,
+      "name": "Luxury Watch",
+      "description": "An elegant and stylish luxury watch with a leather strap and a sleek design.",
+      "price": 299.99,
+      "image": "https://images.augustman.com/wp-content/uploads/sites/3/2022/10/11191124/pexels-antony-trivet-9978785.jpg",
+      "category": "Accessories",
+      "gender": "Men"
+    },
+
+    {
+      "id": 25,
+      "name": "Best pants",
+      "description": "High-quality wireless earbuds with noise cancellation and long battery life.",
+      "price": 149.99,
+      "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1683726370-3-645b9ffd678da.jpg?crop=1xw:1xh;center,top&resize=980:*",
+      "category": "Pants",
+      "gender": "Unisex"
+    },
+
+    {
+      "id": 26,
+      "name": "Formal Pants",
+      "description": "Elegant formal pants suitable for office and events.",
+      "price": 89.99,
+      "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
+      "category": "Pants",
+      "gender": "Women"
+    },
+    {
+      "id": 27,
+      "name": "Winter Coat ",
+      "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
+      "price": 499.99,
+      "image": "/Assets/coat.png",
+      "category": "Hoodies",
+      "gender": "Women"
+    },
+    {
+      "id": 28,
+      "name": "Kids T-Shirt",
+      "description": "A fun and vibrant t-shirt for kids.",
+      "price": 19.99,
+      "image": "https://img.freepik.com/free-photo/portrait-cool-teenage-boy-with-perm_23-2149085823.jpg",
+      "category": "T-Shirt",
+      "gender": "Kids"
+    },
+    {
+      "id": 29,
+      "name": "Women's Casual Pants",
+      "description": "Comfortable and stylish casual pants for women.",
+      "price": 49.99,
+      "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
+      "category": "Pants",
+      "gender": "Women"
+    },
+    {
+      "id": 30,
+      "name": "Men's Polo Shirt",
+      "description": "A classic men's polo shirt.",
+      "price": 34.99,
+      "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
+      "category": "Shirt",
+      "gender": "Men"
+    },
+    {
+      "id": 31,
+      "name": "Girls' Dress",
+      "description": "A cute dress for young girls.",
+      "price": 39.99,
+      "image": "https://i5.walmartimages.com/asr/3a9f8496-1418-4305-8f4f-d58c33d2c856.e3ed444397b67d549dcfb0ef2fd2b0bc.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+      "category": "Dress",
+      "gender": "Kids"
+    }
   ]
 }
- 
-  
