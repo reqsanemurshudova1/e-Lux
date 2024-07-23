@@ -63,7 +63,8 @@ export default function Search() {
         <h1 className="search-heading container">
           Search Results for ({filteredProducts.length}) <span className="search-query">"{query}"</span>
         </h1>
-        <div className="short">
+      <div className="shortandfilter">
+      <div className="short">
           <select>
             <option value="short">Sort By</option>
             <option value="price">Price</option>
@@ -75,6 +76,7 @@ export default function Search() {
         <div className="filter1">
           Filter <img src="./Assets/Filter.svg" alt="Filter" />
         </div>
+      </div>
       </div>
       {currentProducts.length > 0 ? (
         <div className="search-results1 container">

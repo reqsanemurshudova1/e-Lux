@@ -39,9 +39,13 @@ export default function Navbar() {
 
   const closeLogin = () => {
     setLoginOpen(false);
-    setRegisterOpen(true);
+    // setRegisterOpen(true);
   };
 
+  const changeModal = () => {
+    setRegisterOpen(!registerOpen);
+    setLoginOpen(!loginOpen);
+  };
   const closeRegister = () => {
     setRegisterOpen(false);
   };
@@ -74,7 +78,7 @@ export default function Navbar() {
     if (event.key === "Enter") {
       if (searchQuery.length > 0) {
         if (!recentSearches.includes(searchQuery)) {
-          setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]); 
+          setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]);
         }
         navigate(`/search?query=${searchQuery}`);
         closeSearch();
@@ -233,8 +237,8 @@ export default function Navbar() {
           )}
         </div>
       )}
-      {loginOpen && <Login toggleLogin={toggleLogin} closeLogin={closeLogin} />}
-      {registerOpen && <Register closeRegister={closeRegister} />}
+      {loginOpen && <Login toggleLogin={toggleLogin} changeModal={changeModal} closeLogin={closeLogin} />}
+      {registerOpen && <Register closeRegister={changeModal} />}
     </div>
   );
 }

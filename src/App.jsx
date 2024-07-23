@@ -4,6 +4,7 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 import Search from './pages/Search';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Product from './pages/Product';
 
 export default function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function App() {
    
       <Routes>
         <Route path="/search" element={<Search />} />
+        <Route path='/product' element={<Product />} />
         <Route path="/" element={<Home />} />
       </Routes>
  
