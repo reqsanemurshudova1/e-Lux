@@ -5,6 +5,7 @@ import Footer from "../Components/HomePage/Footer/Footer";
 import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
 import "./Search.css";
 
+
 export default function Search() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('query');
@@ -98,13 +99,14 @@ export default function Search() {
       ) : (
         <p className="no-results"></p>
       )}
+
       <Pagination
         productsPerPage={productsPerPage}
         totalProducts={filteredProducts.length}
         paginate={paginate}
         currentPage={currentPage}
         nextPage={nextPage}
-        prevPage={prevPage}
+        prevPage={prevPage} 
       />
       <Subscribe />
       <Footer />

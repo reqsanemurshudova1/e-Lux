@@ -2,12 +2,43 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
+import Pagination from "../pages/Pagination/"; 
+
 import "./Product.css";
 
 export default function Product() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(5);
+  const [sortedProducts, setSortedProducts] = useState([]);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(sortedProducts.length / productsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const nextPage = () => {
+    if (currentPage < pageNumbers.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  useEffect(() => {
+    setSortedProducts(products);
+  }, [products]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,23 +80,30 @@ export default function Product() {
         </div>
       </div>
       <div className="product-result container">
-        {products.map((product) => (
-        <div className='prdct-cart' key={product.id}data-aos="zoom-in">
-        <div className='prdct-img'>
-          <img src={product.image} alt={product.name} />
-        </div>
-        <div className='prdct-desc'>
-          <div className='prdct-left'>
-            <div className='prdct-name'>{product.name}</div>
-            <div className='prdct-category'>{product.category}</div>
+        {currentProducts.map((product) => (
+          <div className='prdct-cart' key={product.id} data-aos="zoom-in">
+            <div className='prdct-img'>
+              <img src={product.image} alt={product.name} />
+            </div>
+            <div className='prdct-desc'>
+              <div className='prdct-left'>
+                <div className='prdct-name'>{product.name}</div>
+                <div className='prdct-category'>{product.category}</div>
+              </div>
+              <div className='prdct-right'>
+                <div className='prdct-price'>${product.price.toFixed(2)}</div>
+              </div>
+            </div>
           </div>
-          <div className='prdct-right'>
-            <div className='prdct-price'>${product.price.toFixed(2)}</div>
-          </div>
-        </div>
-      </div>
         ))}
       </div>
+      <Pagination
+        pageNumbers={pageNumbers}
+        currentPage={currentPage}
+        paginate={paginate}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
       <Subscribe />
       <Footer />
     </div>
