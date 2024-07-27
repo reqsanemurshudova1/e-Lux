@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Home from './pages/Home';
-// import 'aos/dist/aos.css'; 
+import 'aos/dist/aos.css'; 
 import AOS from 'aos';
 import Search from './pages/Search';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
