@@ -7,7 +7,10 @@
       "price": 129.99,
       "image": "/Assets/dress.png",
       "category": "Dress",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Red",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Classic"
     },
     {
       "id": 9,
@@ -16,7 +19,10 @@
       "price": 29.99,
       "image": "/Assets/T-Shirt.png",
       "category": "T-Shirt",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Black",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
     {
       "id": 10,
@@ -25,16 +31,22 @@
       "price": 59.99,
       "image": "/Assets/suit.png",
       "category": "Dress",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Blue",
+      "size": ["S", "M", "L", "XL"],
+      "style": "V"
     },
     {
       "id": 1,
-      "name": "Winter Coat ",
+      "name": "Winter Coat",
       "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
       "price": 499.99,
       "image": "/Assets/coat.png",
       "category": "Hoodies",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Green",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 2,
@@ -43,7 +55,10 @@
       "price": 39.99,
       "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
       "category": "Shirt",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "White",
+      "size": ["M", "L", "XL", "XXL"],
+      "style": "Circular"
     },
     {
       "id": 3,
@@ -52,7 +67,10 @@
       "price": 99.99,
       "image": "https://www.montblanc.com/variants/images/42247633208661479/A/w2500.jpg",
       "category": "Accessories",
-      "gender": "Unisex"
+      "gender": "Unisex",
+      "color": "Black",
+      "size": ["One Size"],
+      "style": "Sport"
     },
     {
       "id": 4,
@@ -61,7 +79,10 @@
       "price": 79.99,
       "image": "https://www.iwalletsmen.com/cdn/shop/products/1_7a1b00b5-1261-40d9-a7c8-881062effdc5_1024x1024.jpg?v=1624511211",
       "category": "Accessories",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "Brown",
+      "size": ["One Size"],
+      "style": "Classic"
     },
     {
       "id": 5,
@@ -70,9 +91,11 @@
       "price": 299.99,
       "image": "https://images.augustman.com/wp-content/uploads/sites/3/2022/10/11191124/pexels-antony-trivet-9978785.jpg",
       "category": "Accessories",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "Silver",
+      "size": ["One Size"],
+      "style": "Classic"
     },
-
     {
       "id": 7,
       "name": "Best pants",
@@ -80,9 +103,11 @@
       "price": 149.99,
       "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1683726370-3-645b9ffd678da.jpg?crop=1xw:1xh;center,top&resize=980:*",
       "category": "Pants",
-      "gender": "Unisex"
+      "gender": "Unisex",
+      "color": "Black",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
-
     {
       "id": 11,
       "name": "Formal Pants",
@@ -90,16 +115,22 @@
       "price": 89.99,
       "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
       "category": "Pants",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Navy Blue",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Classic"
     },
     {
       "id": 12,
-      "name": "Winter Coat ",
+      "name": "Winter Coat",
       "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
       "price": 499.99,
       "image": "/Assets/coat.png",
       "category": "Hoodies",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Grey",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 13,
@@ -108,7 +139,10 @@
       "price": 19.99,
       "image": "https://img.freepik.com/free-photo/portrait-cool-teenage-boy-with-perm_23-2149085823.jpg",
       "category": "T-Shirt",
-      "gender": "Kids"
+      "gender": "Kids",
+      "color": "Blue",
+      "size": ["S", "M", "L"],
+      "style": "Circular"
     },
     {
       "id": 14,
@@ -117,7 +151,10 @@
       "price": 49.99,
       "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
       "category": "Pants",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Beige",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
     {
       "id": 15,
@@ -126,7 +163,10 @@
       "price": 34.99,
       "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
       "category": "Shirt",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "Green",
+      "size": ["M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 16,
@@ -135,7 +175,10 @@
       "price": 39.99,
       "image": "https://i5.walmartimages.com/asr/3a9f8496-1418-4305-8f4f-d58c33d2c856.e3ed444397b67d549dcfb0ef2fd2b0bc.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
       "category": "Dress",
-      "gender": "Kids"
+      "gender": "Kids",
+      "color": "Pink",
+      "size": ["S", "M", "L"],
+      "style": "Basic"
     },
     {
       "id": 17,
@@ -144,7 +187,10 @@
       "price": 129.99,
       "image": "/Assets/dress.png",
       "category": "Dress",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Red",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Classic"
     },
     {
       "id": 18,
@@ -153,8 +199,12 @@
       "price": 29.99,
       "image": "/Assets/T-Shirt.png",
       "category": "T-Shirt",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Black",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
+
     {
       "id": 19,
       "name": "Casual Dress",
@@ -162,16 +212,22 @@
       "price": 59.99,
       "image": "/Assets/suit.png",
       "category": "Dress",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Green",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Casual"
     },
     {
       "id": 20,
-      "name": "Winter Coat ",
+      "name": "Winter Coat",
       "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
       "price": 499.99,
       "image": "/Assets/coat.png",
       "category": "Hoodies",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Grey",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 21,
@@ -180,7 +236,10 @@
       "price": 39.99,
       "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
       "category": "Shirt",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "White",
+      "size": ["M", "L", "XL", "XXL"],
+      "style": "Circular"
     },
     {
       "id": 22,
@@ -189,7 +248,10 @@
       "price": 99.99,
       "image": "https://www.montblanc.com/variants/images/42247633208661479/A/w2500.jpg",
       "category": "Accessories",
-      "gender": "Unisex"
+      "gender": "Unisex",
+      "color": "#000000",
+      "size": ["One Size"],
+      "style": "Sport"
     },
     {
       "id": 23,
@@ -198,7 +260,10 @@
       "price": 79.99,
       "image": "https://www.iwalletsmen.com/cdn/shop/products/1_7a1b00b5-1261-40d9-a7c8-881062effdc5_1024x1024.jpg?v=1624511211",
       "category": "Accessories",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "Brown",
+      "size": ["One Size"],
+      "style": "Classic"
     },
     {
       "id": 24,
@@ -207,9 +272,11 @@
       "price": 299.99,
       "image": "https://images.augustman.com/wp-content/uploads/sites/3/2022/10/11191124/pexels-antony-trivet-9978785.jpg",
       "category": "Accessories",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "Silver",
+      "size": ["One Size"],
+      "style": "Classic"
     },
-
     {
       "id": 25,
       "name": "Best pants",
@@ -217,9 +284,11 @@
       "price": 149.99,
       "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1683726370-3-645b9ffd678da.jpg?crop=1xw:1xh;center,top&resize=980:*",
       "category": "Pants",
-      "gender": "Unisex"
+      "gender": "Unisex",
+      "color": "Black",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
-
     {
       "id": 26,
       "name": "Formal Pants",
@@ -227,16 +296,22 @@
       "price": 89.99,
       "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
       "category": "Pants",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Navy Blue",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Classic"
     },
     {
       "id": 27,
-      "name": "Winter Coat ",
+      "name": "Winter Coat",
       "description": "A high-quality designer handbag made from premium materials, perfect for any occasion.",
       "price": 499.99,
       "image": "/Assets/coat.png",
       "category": "Hoodies",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Grey",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 28,
@@ -245,7 +320,10 @@
       "price": 19.99,
       "image": "https://img.freepik.com/free-photo/portrait-cool-teenage-boy-with-perm_23-2149085823.jpg",
       "category": "T-Shirt",
-      "gender": "Kids"
+      "gender": "Kids",
+      "color": "Blue",
+      "size": ["S", "M", "L"],
+      "style": "Circular"
     },
     {
       "id": 29,
@@ -254,7 +332,10 @@
       "price": 49.99,
       "image": "https://pantproject.com/cdn/shop/products/womenswear0032_80919cee-d9c9-423e-ad9d-7ea950c57968.jpg?v=1669977379",
       "category": "Pants",
-      "gender": "Women"
+      "gender": "Women",
+      "color": "Beige",
+      "size": ["S", "M", "L", "XL"],
+      "style": "Basic"
     },
     {
       "id": 30,
@@ -263,7 +344,10 @@
       "price": 34.99,
       "image": "https://getketchadmin.getketch.com/product/8905040617459/300/HLSH011581_1.JPG",
       "category": "Shirt",
-      "gender": "Men"
+      "gender": "Men",
+      "color": "#008000",
+      "size": ["M", "L", "XL"],
+      "style": "Sport"
     },
     {
       "id": 31,
@@ -272,7 +356,10 @@
       "price": 39.99,
       "image": "https://i5.walmartimages.com/asr/3a9f8496-1418-4305-8f4f-d58c33d2c856.e3ed444397b67d549dcfb0ef2fd2b0bc.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
       "category": "Dress",
-      "gender": "Kids"
+      "gender": "Kids",
+      "color": "Pink",
+      "size": ["S", "M", "L"],
+      "style": "V"
     }
   ]
 }

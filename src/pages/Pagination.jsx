@@ -1,6 +1,4 @@
 import React from "react";
-
-
 const Pagination = ({ pageNumbers, currentPage, paginate, nextPage, prevPage }) => {
   return (
     <nav className="pagination">
