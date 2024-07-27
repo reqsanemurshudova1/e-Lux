@@ -65,18 +65,18 @@ export default function Product() {
     const filterProducts = () => {
       let newFilteredProducts = products;
 
-      if (selectedFilter.sortBy) {
-        newFilteredProducts = newFilteredProducts.sort((a, b) => {
-          if (selectedFilter.sortBy === 'price') {
-            return a.price - b.price;
-          } else if (selectedFilter.sortBy === 'rating') {
-            return a.rating - b.rating;
-          } else if (selectedFilter.sortBy === 'date') {
-            return new Date(b.date) - new Date(a.date);
-          }
-          return 0;
-        });
-      }
+      // if (selectedFilter.sortBy) {
+      //   newFilteredProducts = newFilteredProducts.sort((a, b) => {
+      //     if (selectedFilter.sortBy === 'price') {
+      //       return a.price - b.price;
+      //     } else if (selectedFilter.sortBy === 'rating') {
+      //       return a.rating - b.rating;
+      //     } else if (selectedFilter.sortBy === 'date') {
+      //       return new Date(b.date) - new Date(a.date);
+      //     }
+      //     return 0;
+      //   });
+      // }
 
       if (selectedFilter.color) {
         newFilteredProducts = newFilteredProducts.filter(product => product.color === selectedFilter.color);
