@@ -13,20 +13,26 @@ export default function Product() {
   const [productsPerPage] = useState(9);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState({
-    sortBy: '',
-    color: '',
-    category: '',
-    style: ''
+    sortBy: "",
+    color: "",
+    category: "",
+    style: "",
   });
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(filteredProducts.length / productsPerPage); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(filteredProducts.length / productsPerPage);
+    i++
+  ) {
     pageNumbers.push(i);
   }
 
@@ -60,7 +66,6 @@ export default function Product() {
     fetchProducts();
   }, []);
 
-
   useEffect(() => {
     const filterProducts = () => {
       let newFilteredProducts = products;
@@ -79,15 +84,22 @@ export default function Product() {
       // }
 
       if (selectedFilter.color) {
-        newFilteredProducts = newFilteredProducts.filter(product => product.color === selectedFilter.color);
+        newFilteredProducts = newFilteredProducts.filter(
+          (product) => product.color === selectedFilter.color
+        );
       }
 
       if (selectedFilter.category) {
-        newFilteredProducts = newFilteredProducts.filter(product => product.size.includes(selectedFilter.category));
+        newFilteredProducts = newFilteredProducts.filter((product) =>
+          product.category.includes(selectedFilter.category)
+        );
       }
 
       if (selectedFilter.style) {
-        newFilteredProducts = newFilteredProducts.filter(product => product.style === selectedFilter.style);
+        newFilteredProducts = newFilteredProducts.filter(
+          // TODO: filter by style
+          (product) => product.style === selectedFilter.style[0]
+        );
       }
 
       setFilteredProducts(newFilteredProducts);
@@ -97,16 +109,15 @@ export default function Product() {
   }, [selectedFilter, products]);
 
   const handleFilterChange = (name, value) => {
-    setSelectedFilter(prevState => ({ ...prevState, [name]: value }));
+    setSelectedFilter((prevState) => ({ ...prevState, [name]: value }));
   };
-
 
   const handleResetFilters = () => {
     setSelectedFilter({
-      sortBy: '',
-      color: '',
-      category: '',
-      style: ''
+      sortBy: "",
+      color: "",
+      category: "",
+      style: "",
     });
   };
 
@@ -118,13 +129,21 @@ export default function Product() {
   }
 
   return (
-    <div >
+    <div>
       <Navbar />
       <div className="filter container">
-        <h1 className="search-heading container">All Products ({products.length})</h1>
-        <div className={`shortandfilter ${isFilterModalOpen ? 'hidden' : ''}`}>
+        <h1 className="search-heading container">
+          All Products ({products.length})
+        </h1>
+        <div className={`shortandfilter ${isFilterModalOpen ? "hidden" : ""}`}>
           <div className="short">
-            <select name="sortBy" onChange={(e) => handleFilterChange(e.target.name, e.target.value)} value={selectedFilter.sortBy}>
+            <select
+              name="sortBy"
+              onChange={(e) =>
+                handleFilterChange(e.target.name, e.target.value)
+              }
+              value={selectedFilter.sortBy}
+            >
               <option value="">Sort By</option>
               <option value="price">Price</option>
               <option value="rating">Rating</option>
@@ -137,34 +156,33 @@ export default function Product() {
           </div>
         </div>
       </div>
-    <div className="productAndFilter">
-    <div className="product-result container">
-        {currentProducts.map((product) => (
-          <div className='prdct-cart' key={product.id} data-aos="zoom-in">
-            <div className='prdct-img'>
-              <img src={product.image} alt={product.name} />
-            </div>
-            <div className='prdct-desc'>
-              <div className='prdct-left'>
-                <div className='prdct-name'>{product.name}</div>
-                <div className='prdct-category'>{product.category}</div>
+      <div className="productAndFilter">
+        <div className="product-result container">
+          {currentProducts.map((product) => (
+            <div className="prdct-cart" key={product.id} data-aos="zoom-in">
+              <div className="prdct-img">
+                <img src={product.image} alt={product.name} />
               </div>
-              <div className='prdct-right'>
-                <div className='prdct-price'>${product.price.toFixed(2)}</div>
+              <div className="prdct-desc">
+                <div className="prdct-left">
+                  <div className="prdct-name">{product.name}</div>
+                  <div className="prdct-category">{product.category}</div>
+                </div>
+                <div className="prdct-right">
+                  <div className="prdct-price">${product.price.toFixed(2)}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <FilterModal
+          isOpen={isFilterModalOpen}
+          onClose={closeFilterModal}
+          onFilterChange={handleFilterChange}
+          filterValues={selectedFilter}
+          onResetFilters={handleResetFilters}
+        />
       </div>
-      <FilterModal
-  isOpen={isFilterModalOpen}
-  onClose={closeFilterModal}
-  onFilterChange={handleFilterChange}
-  filterValues={selectedFilter}
-  onResetFilters={handleResetFilters}
-/>
-
-    </div>
       <Pagination
         pageNumbers={pageNumbers}
         currentPage={currentPage}
@@ -174,8 +192,6 @@ export default function Product() {
       />
       <Subscribe />
       <Footer />
-
-    
     </div>
   );
 }
