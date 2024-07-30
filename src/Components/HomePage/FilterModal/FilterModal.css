@@ -11,7 +11,7 @@
     top: -65px;
     right: 0; 
 
-    width: 25%;
+    width: 30%;
  
     background: white;
   
@@ -88,6 +88,9 @@ text-decoration-line: underline;
     width: 100%;
     cursor: pointer;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .accordion-content {
@@ -109,7 +112,7 @@ align-items: center;
 justify-content:center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 26px;
+  
 }
 
 .color {
@@ -137,7 +140,7 @@ justify-content:center;
     
   .filter-panel{
     position: absolute;
-    top: 23%;
+    top: 10%;
     right: 0;
     width: 100%;
   }
@@ -149,3 +152,9 @@ justify-content:center;
   color: black; 
   text-align: center; 
 }
+.price-range {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+

@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import "./FilterModal.css";
+import 'antd/dist/reset.css';
+import { Slider } from 'antd';
 
 const colorNames = {
   Red: "Red",
   Black: "Black",
   Blue: "Blue",
-  Green: "#00FF00",
-  Purple: "#800080",
-  Orange: "#FFA500",
-  Pink: "#FFC0CB",
-  "Dark Green": "#008000",
-  Olive: "#808000",
-  Cyan: "#00FFFF",
-  Maroon: "#800000",
+  Green: "Green",
+  White: "White",
+  Purple: "Purple",
+  Orange: "Orange",
+  Pink: "Pink",
+  Yellow: "Yellow",
+  Olive: "Olive",
+  Cyan: "Cyan",
+  Brown: "Brown"
 };
 
 const FilterModal = ({
@@ -24,6 +27,7 @@ const FilterModal = ({
 }) => {
   const [openAccordions, setOpenAccordions] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
+  const [priceRange, setPriceRange] = useState([20, 50]);
 
   if (!isOpen) return null;
 
@@ -61,8 +65,14 @@ const FilterModal = ({
     onFilterChange("color", hexColor);
   };
 
+  const handlePriceChange = (value) => {
+    setPriceRange(value);
+    onFilterChange("price", value);
+  };
+
   const handleReset = () => {
     setSelectedColors([]);
+    setPriceRange([20, 50]);
     onResetFilters();
   };
 
@@ -83,7 +93,7 @@ const FilterModal = ({
             className="accordion-header"
             onClick={() => handleAccordionClick("category")}
           >
-            Kind of Product
+           <span> Kind of Product </span>{openAccordions.includes("category") ? "-" : "+"}
           </button>
           {openAccordions.includes("category") && (
             <div className="accordion-content">
@@ -114,9 +124,34 @@ const FilterModal = ({
         <div className="accordion-item">
           <button
             className="accordion-header"
+            onClick={() => handleAccordionClick("price")}
+          >
+           <span>Price</span> {openAccordions.includes("price") ? "-" : "+"}
+          </button>
+          {openAccordions.includes("price") && (
+            <div className="accordion-content">
+              <div style={{ width: 330, margin: '0 auto', padding: '20px' }}>
+                <Slider
+                  range
+                  draggableTrack
+                  defaultValue={[20, 50]}
+                  value={priceRange}
+                  onChange={handlePriceChange}
+                />
+                <div className="price-range">
+                  <span>${priceRange[0]}</span>
+                  <span>${priceRange[1]}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
             onClick={() => handleAccordionClick("color")}
           >
-            Color
+           <span>Color</span> {openAccordions.includes("color") ? "-" : "+"}
           </button>
           {openAccordions.includes("color") && (
             <div className="accordion-content color-grid">
@@ -140,7 +175,7 @@ const FilterModal = ({
             className="accordion-header"
             onClick={() => handleAccordionClick("style")}
           >
-            Style
+            <span>Style </span>{openAccordions.includes("style") ? "-" : "+"}
           </button>
           {openAccordions.includes("style") && (
             <div className="accordion-content">

@@ -118,6 +118,7 @@ line-height: 26px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-width: 300px;
 }
 .productTitle{
   color: var(--Grayscale-900, #171717);

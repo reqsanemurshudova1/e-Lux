@@ -10,13 +10,14 @@ export default function Product() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(9);
+  const [productsPerPage] = useState(12);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState({
     sortBy: "",
-    color: "",
-    category: "",
-    style: "",
+    price: [0, 100],
+    color: [],
+    category: [],
+    style: [],
   });
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -70,35 +71,40 @@ export default function Product() {
     const filterProducts = () => {
       let newFilteredProducts = products;
 
-      // if (selectedFilter.sortBy) {
-      //   newFilteredProducts = newFilteredProducts.sort((a, b) => {
-      //     if (selectedFilter.sortBy === 'price') {
-      //       return a.price - b.price;
-      //     } else if (selectedFilter.sortBy === 'rating') {
-      //       return a.rating - b.rating;
-      //     } else if (selectedFilter.sortBy === 'date') {
-      //       return new Date(b.date) - new Date(a.date);
-      //     }
-      //     return 0;
-      //   });
-      // }
+      if (selectedFilter.sortBy) {
+        newFilteredProducts = newFilteredProducts.sort((a, b) => {
+          if (selectedFilter.sortBy === 'price') {
+            return a.price - b.price;
+          } else if (selectedFilter.sortBy === 'rating') {
+            return a.rating - b.rating;
+          } else if (selectedFilter.sortBy === 'date') {
+            return new Date(b.date) - new Date(a.date);
+          }
+          return 0;
+        });
+      }
 
-      if (selectedFilter.color) {
+      if (selectedFilter.price.length === 2) {
         newFilteredProducts = newFilteredProducts.filter(
-          (product) => product.color === selectedFilter.color
+          (product) => product.price >= selectedFilter.price[0] && product.price <= selectedFilter.price[1]
         );
       }
 
-      if (selectedFilter.category) {
+      if (selectedFilter.color.length > 0) {
+        newFilteredProducts = newFilteredProducts.filter(
+          (product) => selectedFilter.color.includes(product.color)
+        );
+      }
+
+      if (selectedFilter.category.length > 0) {
         newFilteredProducts = newFilteredProducts.filter((product) =>
-          product.category.includes(selectedFilter.category)
+          selectedFilter.category.includes(product.category)
         );
       }
 
-      if (selectedFilter.style) {
+      if (selectedFilter.style.length > 0) {
         newFilteredProducts = newFilteredProducts.filter(
-          // TODO: filter by style
-          (product) => product.style === selectedFilter.style[0]
+          (product) => selectedFilter.style.includes(product.style)
         );
       }
 
@@ -109,15 +115,35 @@ export default function Product() {
   }, [selectedFilter, products]);
 
   const handleFilterChange = (name, value) => {
-    setSelectedFilter((prevState) => ({ ...prevState, [name]: value }));
+    setSelectedFilter((prevState) => {
+      if (name === 'color' || name === 'style' || name === 'category') {
+        return {
+          ...prevState,
+          [name]: prevState[name].includes(value)
+            ? prevState[name].filter((item) => item !== value)
+            : [...prevState[name], value]
+        };
+      } else if (name === 'price') {
+        return {
+          ...prevState,
+          [name]: value
+        };
+      } else {
+        return {
+          ...prevState,
+          [name]: value
+        };
+      }
+    });
   };
 
   const handleResetFilters = () => {
     setSelectedFilter({
       sortBy: "",
-      color: "",
-      category: "",
-      style: "",
+      price: [0, 100],
+      color: [],
+      category: [],
+      style: [],
     });
   };
 

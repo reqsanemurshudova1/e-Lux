@@ -180,7 +180,9 @@ border-radius: 50%;
   .search-result-details1 .right1 p {
     font-size: 14px;
   }
-
+.overlay{
+  display: none;
+}
   .closeSearch {
     font-size: 12px;
   }
