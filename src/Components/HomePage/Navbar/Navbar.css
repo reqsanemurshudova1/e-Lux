@@ -192,7 +192,9 @@
   .burger-menu-items ul li a {
     transition: color 0.3s ease;
   }
-
+  .overlay{
+    display: none;
+  }
   .burger-menu-items ul li a.active {
     color: var(--Primary-Orange, #e16f3d);
   }

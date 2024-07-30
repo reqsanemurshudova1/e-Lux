@@ -214,5 +214,7 @@ border-radius: 50%;
   .search-heading{
     font-size: 24px;
   }
-  
+  .overlay{
+    display: none;
+  }
 }
