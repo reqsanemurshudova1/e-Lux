@@ -22,6 +22,8 @@ export default function App() {
       <Route path="/details" element={<Details />} />
       <Route path="/details/:id" element={<Details/>} />
 
+      <Route path="/" element={<Home />} />
+
       <Route path="/product/:id/details" element={<Details />} />
       <Route path="/product/:id/review" element={<Details />} />
       <Route path="/product/:id/discussion" element={<Details />} />
