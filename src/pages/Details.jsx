@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; 
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
-
+import DescRevDisc from "../Components/HomePage/details/DescRevDisc";
 import "./Details.css";
 
 export default function Details() {
+  const { id } = useParams(); 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -15,22 +17,22 @@ export default function Details() {
         const data = await response.json();
         setProducts(data.products);
 
-        if (data.products.length > 0) {
-          setSelectedProduct(data.products[0]);
-        }
+       
+        const product = data.products.find((p) => p.id.toString() === id);
+        setSelectedProduct(product);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     fetchProducts();
-  }, []);
+  }, [id]);
 
-  if (!selectedProduct) return null;
+  if (!selectedProduct) return <p>Loading...</p>;
 
   return (
     <div>
       <Navbar />
-      <div className="product-details">
+      <div className="product-details container">
         <div className="product-details-img">
           <div className="desc-img">
             {selectedProduct.images.map((img, index) => (
@@ -66,17 +68,16 @@ export default function Details() {
                   className={`color-option ${selectedProduct.colors[color] ? 'in-stock' : 'out-of-stock'}`}
                   style={{ backgroundColor: selectedProduct.colors[color] ? color.toLowerCase() : '#ddd' }}
                 >
-                
                 </span>
               ))}
             </div>
           </div>
-         <div className="btn"> <div className="product-price">
-           ${selectedProduct.price.toFixed(2)}
-          </div>
+         <div className="btn">
+         <div className="product-price">${selectedProduct.price.toFixed(2)}</div>
           <div className="product-btn">
             <button>Add to Cart</button>
-          </div></div>
+          </div>
+         </div>
           <div className="payment-details">
             <span>
               <img src="/Assets/securePay.svg" alt="" />
@@ -97,8 +98,7 @@ export default function Details() {
           </div>
         </div>
       </div>
-
-      
+      <DescRevDisc product={selectedProduct} />
       <Footer />
     </div>
   );

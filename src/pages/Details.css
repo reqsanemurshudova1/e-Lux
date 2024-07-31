@@ -4,7 +4,10 @@
   gap: 20px;
   
 }
-
+.container{
+  margin: 0 auto;
+  max-width: 1300px;
+}
 .product-details-desc {
   display: flex;
   align-items: flex-start;
@@ -52,6 +55,7 @@
 
 .main-img {
   flex: 1;
+  object-fit: cover;
 }
 
 .main-img img {

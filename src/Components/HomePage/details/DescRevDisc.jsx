@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react';
+import DetailsDesc from './DetailsDesc';
+import Review from './Review';
+import Discussions from './Discussions';
+import './common.css';
 
-import './common.css'
+export default function DescRevDisc({ product }) {
+  const [activeTab, setActiveTab] = useState('description');
 
-export default function DescRevDisc() {
   return (
-    <div>
-        <div className="titles">
-            <Link to={`/product/{$id}/details`} >
-            <h2>Description</h2>
-            </Link>
-            <Link to={`/product/{$id}/reviews`}>    <h2>Reviews</h2></Link>
-        
-          <Link to={`/product/{$id}/discussions`}>  <h2>Discussions</h2></Link>
-        </div>
-        <div className="border"></div>
-        <span className="activespan"></span>
+    <div className='container'>
+      <div className="titles">
+        <h2 className={activeTab === 'description' ? 'active' : ''} onClick={() => setActiveTab('description')}>
+          Description
+        </h2>
+        <h2 className={activeTab === 'reviews' ? 'active' : ''} onClick={() => setActiveTab('reviews')}>
+          Reviews
+        </h2>
+        <h2 className={activeTab === 'discussions' ? 'active' : ''} onClick={() => setActiveTab('discussions')}>
+          Discussions
+        </h2>
+      </div>
+      <div className="border"></div>
+      <span className="activespan" style={{ transform: `translateX(${activeTab === 'description' ? '0%' : activeTab === 'reviews' ? '100%' : '200%'})` }}></span>
+      {activeTab === 'description' && <DetailsDesc product={product} />}
+      {activeTab === 'reviews' && <Review />}
+      {activeTab === 'discussions' && <Discussions />}
     </div>
-  )
+  );
 }

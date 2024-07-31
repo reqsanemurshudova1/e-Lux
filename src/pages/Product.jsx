@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; 
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
@@ -185,7 +186,7 @@ export default function Product() {
       <div className="productAndFilter">
         <div className="product-result container">
           {currentProducts.map((product) => (
-            <div className="prdct-cart" key={product.id} data-aos="zoom-in">
+            <Link to={`/product/${product.id}/details`} key={product.id} className="prdct-cart" data-aos="zoom-in">
               <div className="prdct-img">
                 <img src={product.image} alt={product.name} />
               </div>
@@ -198,7 +199,7 @@ export default function Product() {
                   <div className="prdct-price">${product.price.toFixed(2)}</div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <FilterModal
