@@ -53,12 +53,11 @@ line-height: 28px; /* 140% */
 display: flex;
 align-items: center;
 justify-content:space-between;
+cursor: pointer;
   }
   .reset-title h2{
     color: var(--Grayscale-900, #171717);
-
-/* H5/Regular */
-font-family: Helvetica;
+    cursor: pointer;
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
@@ -74,6 +73,7 @@ font-size: 12px;
 font-style: normal;
 font-weight: 500;
 line-height: 18px; /* 150% */
+cursor: pointer;
 text-decoration-line: underline;
   }
   .filter-accordion .accordion-item {
@@ -94,12 +94,17 @@ text-decoration-line: underline;
   }
   
   .accordion-content {
+    cursor: pointer;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-  
+    
+  .accordion-content label  {
+    cursor: pointer;
+    font-size: 14px;
+  }
   .accordion-content span {
     cursor: pointer;
     font-size: 14px;
