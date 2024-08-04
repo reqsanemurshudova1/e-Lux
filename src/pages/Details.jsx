@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams, Link } from "react-router-dom"; 
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import DescRevDisc from "../Components/HomePage/details/DescRevDisc";
@@ -9,6 +9,7 @@ export default function Details() {
   const { id } = useParams(); 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,9 +18,15 @@ export default function Details() {
         const data = await response.json();
         setProducts(data.products);
 
-       
         const product = data.products.find((p) => p.id.toString() === id);
         setSelectedProduct(product);
+
+        if (product) {
+          const suggestions = data.products.filter(
+            (p) => p.category === product.category && p.id !== product.id
+          );
+          setSuggestedProducts(suggestions);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -45,7 +52,21 @@ export default function Details() {
         </div>
         <div className="product-details-desc">
           <h1 className="product-title">{selectedProduct.name}</h1>
-          <div className="product-rate">Rating: {selectedProduct.rating}</div>
+          <div className="product-rate">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className="star"
+                style={{
+                  color: selectedProduct.rating >= star ? "gold" : "gray",
+                  fontSize: "25px",
+                }}
+              >
+                ★
+              </span>
+            ))}
+            {selectedProduct.rating}
+          </div>
           <div className="product-size">
             <div>Select Size:</div>
             <div className="size-options">
@@ -67,17 +88,16 @@ export default function Details() {
                   key={color}
                   className={`color-option ${selectedProduct.colors[color] ? 'in-stock' : 'out-of-stock'}`}
                   style={{ backgroundColor: selectedProduct.colors[color] ? color.toLowerCase() : '#ddd' }}
-                >
-                </span>
+                />
               ))}
             </div>
           </div>
-         <div className="btn">
-         <div className="product-price">${selectedProduct.price.toFixed(2)}</div>
-          <div className="product-btn">
-            <button>Add to Cart</button>
+          <div className="btn">
+            <div className="product-price">${selectedProduct.price.toFixed(2)}</div>
+            <div className="product-btn">
+              <button>Add to Cart</button>
+            </div>
           </div>
-         </div>
           <div className="payment-details">
             <span>
               <img src="/Assets/securePay.svg" alt="" />
@@ -99,6 +119,27 @@ export default function Details() {
         </div>
       </div>
       <DescRevDisc product={selectedProduct} />
+      <div className="interested container">
+        <h2>You May Be Interested</h2>
+        <div className="product-cards1">
+          {suggestedProducts.map((product) => (
+            <Link to={`/details/${product.id}`} className="prdct-cart" key={product.id} data-aos="zoom-in">
+              <div className="prdct-img">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="prdct-desc">
+                <div className="prdct-left">
+                  <div className="prdct-name">{product.name}</div>
+                  <div className="prdct-category">{product.category}</div>
+                </div>
+                <div className="prdct-right">
+                  <div className="prdct-price">${product.price.toFixed(2)}</div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
       <Footer />
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
@@ -159,18 +159,20 @@ export default function Search() {
      {currentProducts.length > 0 ? (
         <div className="search-results1 container">
           {currentProducts.map((product) => (
-            <div className="search-result1" key={product.id}>
-              <img src={product.image} alt={product.name} />
-              <div className="search-result-details1">
-                <div className="left1">
-                  <p>{product.name}</p>
-                  <p>{product.category}</p>
-                </div>
-                <div className="right1">
-                  <p>$ {product.price}</p>
+            <Link to={`/product/${product.id}/details`} key={product.id}>
+              <div className="search-result1">
+                <img src={product.image} alt={product.name} />
+                <div className="search-result-details1">
+                  <div className="left1">
+                    <p>{product.name}</p>
+                    <p>{product.category}</p>
+                  </div>
+                  <div className="right1">
+                    <p>$ {product.price}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ) : (
@@ -197,6 +199,7 @@ export default function Search() {
     </div>
   );
 }
+
 const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage, nextPage, prevPage }) => {
   const pageNumbers = [];
   const totalPages = Math.ceil(totalProducts / productsPerPage);

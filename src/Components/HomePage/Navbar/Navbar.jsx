@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
 
@@ -39,13 +39,13 @@ export default function Navbar() {
 
   const closeLogin = () => {
     setLoginOpen(false);
-    // setRegisterOpen(true);
   };
 
   const changeModal = () => {
     setRegisterOpen(!registerOpen);
     setLoginOpen(!loginOpen);
   };
+
   const closeRegister = () => {
     setRegisterOpen(false);
   };
@@ -191,18 +191,20 @@ export default function Navbar() {
           {searchResults.length > 0 ? (
             <div className="search-results container">
               {searchResults.map((item) => (
-                <div className="search-result" key={item.id}>
-                  <img src={item.image} alt={item.name} />
-                  <div className="search-result-details">
-                    <div className="left">
-                      <p>{item.name}</p>
-                      <p>{item.category}</p>
-                    </div>
-                    <div className="right">
-                      <p>$ {item.price}</p>
+                <Link to={`/product/${item.id}/details`} key={item.id}>
+                  <div className="search-result">
+                    <img src={item.image} alt={item.name} />
+                    <div className="search-result-details">
+                      <div className="left">
+                        <p>{item.name}</p>
+                        <p>{item.category}</p>
+                      </div>
+                      <div className="right">
+                        <p>$ {item.price}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           ) : (
@@ -237,7 +239,13 @@ export default function Navbar() {
           )}
         </div>
       )}
-      {loginOpen && <Login toggleLogin={toggleLogin} changeModal={changeModal} closeLogin={closeLogin} />}
+      {loginOpen && (
+        <Login
+          toggleLogin={toggleLogin}
+          changeModal={changeModal}
+          closeLogin={closeLogin}
+        />
+      )}
       {registerOpen && <Register closeRegister={changeModal} />}
     </div>
   );

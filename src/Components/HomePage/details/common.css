@@ -1,3 +1,11 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+
+}
 .titles{
     display: flex;
     align-items: center;
@@ -22,10 +30,7 @@ line-height: 24px;
     color: black;
   }
   
-  .border {
-    border-top: 1px solid #ddd;
-    margin-top: 10px;
-  }
+ 
   
   .activespan {
 display: block;
@@ -35,4 +40,240 @@ display: block;
 
     transition: all 0.3s ease-in-out;
   }
+  .desc-rev-disc{
+    padding: 40px 0;
+  }
+  .details-desc{
+    padding: 25px 0;
+  }
+
   
+  .border {
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+   
+  }
+  .rating{
+    display: flex;
+    gap: 5px;
+  }
+  .create-date{
+    color: var(--Grayscale-600, #525252);
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px; /* 150% */
+  }
+  
+  .review {
+    display: flex;
+width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+ 
+  
+  
+  .likes-dislikes {
+    display: flex;
+    gap: 10px;
+  }
+  .likes-dislikes span{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+  }
+  .common-rev{
+    display: flex;
+    width: 100%;
+    gap: 80px;
+    padding: 20px 0;
+  }
+  .rev-left{
+    width: 30%;
+  }
+  .user-photos{
+    display: flex;
+    gap: 10px;
+  }
+.user-photos img{
+  width: 95px;
+height: 95px;
+border-radius: 8px;
+background: url(<path-to-image>) lightgray -44.155px 0px / 150.148% 100% no-repeat, #F5F5F5;
+}
+.write-rev{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.write{
+  display: flex;
+padding: 12px 24px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 32px;
+border: 1px solid var(--Grayscale-200, #E5E5E5);
+}
+.sortRev{
+display: flex;
+align-items: center;
+justify-content:center;
+  gap: 10px;
+}
+.sortRev select{
+  display: flex;
+padding: 12px 16px;
+justify-content: center;
+align-items: center;
+gap: 4px;
+border-radius: 24px;
+border: 1px solid var(--Grayscale-200, #E5E5E5);
+appearance: auto;
+
+}
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.topInp{
+ display: flex;
+ align-items: center;
+ justify-content:space-between;
+
+  gap: 16px;
+}
+.topInp input{
+  display: flex;
+  width: 413px;
+  padding: 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 24px;
+border: 1px solid var(--Grayscale-200, #E5E5E5);
+}
+.inputs textarea{
+  display: flex;
+
+height: 176px;
+padding: 16px;
+align-items: flex-start;
+gap: 8px;
+appearance: none;
+border-radius: 24px;
+border: 1px solid var(--Grayscale-200, #E5E5E5);
+}
+.form-actions{
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  gap: 10px;
+}
+.form-actions button:nth-of-type(1){
+  display: flex;
+padding: 16px 32px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 32px;
+border: 1px solid var(--Grayscale-200, #E5E5E5);
+background-color: white;
+}
+.form-actions button:nth-of-type(2){
+  border-radius: 24px;
+background: var(--Grayscale-100, #F5F5F5);
+display: flex;
+padding: 16px 40px;
+justify-content: center;
+align-items: center;
+border: none;
+outline: none;
+color: #A3A3A3;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.review-list{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.common-rev .product-rate{
+  display: flex;
+ flex-direction: column;
+}
+.common-rev .product-rate span{
+  color: var(--Grayscale-900, #171717);
+text-align: center;
+font-size: 48px;
+font-style: normal;
+font-weight: 400;
+line-height: 56px; 
+}
+
+.comment {
+  
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-rating {
+  color: gold;
+}
+
+.comment-text {
+  margin: 10px 0;
+}
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-footer  span{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.replies {
+  margin-left: 20px;
+}
+
+@media (max-width: 560px) {
+  .common-rev{
+    flex-direction: column;
+  }
+  .rev-left{
+    width: 100%;
+  }
+  .topInp{
+    flex-direction: column;
+  }
+  .rev-right{
+    width: 100%;
+  }
+}

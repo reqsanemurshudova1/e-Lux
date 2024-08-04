@@ -32,7 +32,8 @@
   padding: 60px 10px;
 
 }
-select {
+
+.gen-category select {
   border: none;
   outline: none;
   appearance: none;

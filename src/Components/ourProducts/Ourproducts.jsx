@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Ourproducts.css';
 
 export default function Ourproducts() {
@@ -54,12 +55,13 @@ export default function Ourproducts() {
       <div className='category'>
         <div className='gen-category'>
           <select className='gender' onChange={(e) => handleGenderChange(e.target.value)}>
+            <option value='All'>All</option>
             <option value='Women'>Women</option>
             <option value='Men'>Men</option>
             <option value='Kids'>Kids</option>
             <option value='Unisex'>Unisex</option>
           </select>
-          <img src='/Assets/arrow.svg' alt='' />
+          <img src='/Assets/arrow.svg' alt='arrow' />
         </div>
         <div className={`all ${selectedCategory === 'All' ? 'active' : ''}`} onClick={() => handleCategoryChange('All')}>All</div>
         <div className={`t-shirt ${selectedCategory === 'T-Shirt' ? 'active' : ''}`} onClick={() => handleCategoryChange('T-Shirt')}>T-Shirt</div>
@@ -68,22 +70,24 @@ export default function Ourproducts() {
         <div className={`accessories ${selectedCategory === 'Accessories' ? 'active' : ''}`} onClick={() => handleCategoryChange('Accessories')}>Accessories</div>
       </div>
 
-      <div className='product-cards1' >
+      <div className='product-cards1'>
         {filteredProducts.map((product) => (
-          <div className='prdct-cart' key={product.id}data-aos="zoom-in">
-            <div className='prdct-img'>
-              <img src={product.image} alt={product.name} />
-            </div>
-            <div className='prdct-desc'>
-              <div className='prdct-left'>
-                <div className='prdct-name'>{product.name}</div>
-                <div className='prdct-category'>{product.category}</div>
+          <Link to={`/product/${product.id}/details`} key={product.id}>
+            <div className='prdct-cart' data-aos="zoom-in">
+              <div className='prdct-img'>
+                <img src={product.image} alt={product.name} />
               </div>
-              <div className='prdct-right'>
-                <div className='prdct-price'>${product.price.toFixed(2)}</div>
+              <div className='prdct-desc'>
+                <div className='prdct-left'>
+                  <div className='prdct-name'>{product.name}</div>
+                  <div className='prdct-category'>{product.category}</div>
+                </div>
+                <div className='prdct-right'>
+                  <div className='prdct-price'>${product.price.toFixed(2)}</div>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
