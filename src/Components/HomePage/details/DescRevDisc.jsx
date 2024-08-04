@@ -33,7 +33,7 @@ export default function DescRevDisc({ product }) {
       <span className="activespan" style={{ transform: `translateX(${activeTab === 'description' ? '0%' : activeTab === 'reviews' ? '100%' : '200%'})` }}></span>
       {activeTab === 'description' && <DetailsDesc product={product} />}
       {activeTab === 'reviews' && <ReviewList reviews={product.reviews} rating={product.rating} />}
-      {activeTab === 'discussions' && <Discussions />}
+      {activeTab === 'discussions' && <Discussions rating={product.rating}  />}
     </div>
   );
 }
