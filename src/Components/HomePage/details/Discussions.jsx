@@ -1,12 +1,10 @@
-
 import React from 'react';
 import CommentsList from './CommenstList';
 
-
-const Discussions = () => {
+const Discussions = ({ comments, reviews, rating }) => {
     return (
         <div>
-            <CommentsList />
+            <CommentsList comments={comments} reviews={reviews} rating={rating} />
         </div>
     );
 };

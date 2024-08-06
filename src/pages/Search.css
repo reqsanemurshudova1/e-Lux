@@ -10,9 +10,14 @@
 
   .search-result1{
     color: #000;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
   }
   .search-result1 img {
-    width: 300px;
+width: 100%;
     height: 350px;
     border-radius: 10px;
     object-fit: cover;
@@ -22,6 +27,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 100%;
   }
   
   .search-result-details1 .left1 {
@@ -35,6 +41,7 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 24px;
+   
   }
   
   .search-result-details1 .left1 p:nth-of-type(2) {
@@ -45,6 +52,8 @@
   }
   
   .search-result-details1 .right1 p {
+    white-space: nowrap;
+   ;
     display: flex;
     padding: 8px 16px;
     justify-content: center;
@@ -132,7 +141,12 @@ align-items: center;
 justify-content:center;
 
 }
-
+.sortBy{
+  border: none;
+}
+.no-results{
+  width: 70%;
+}
 .pagination-item {
   margin: 0 5px;
 }

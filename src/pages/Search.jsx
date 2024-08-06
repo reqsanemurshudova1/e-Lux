@@ -139,7 +139,7 @@ export default function Search() {
         <div className="shortandfilter">
           <div className="short">
             <select
-              name="sortBy"
+              className="sortBy"
               onChange={(e) => handleFilterChange(e.target.name, e.target.value)}
               value={selectedFilter.sortBy}
             >
@@ -164,7 +164,7 @@ export default function Search() {
                 <img src={product.image} alt={product.name} />
                 <div className="search-result-details1">
                   <div className="left1">
-                    <p>{product.name}</p>
+                    <p >{product.name}</p>
                     <p>{product.category}</p>
                   </div>
                   <div className="right1">
