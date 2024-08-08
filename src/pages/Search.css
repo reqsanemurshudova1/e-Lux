@@ -142,7 +142,9 @@ justify-content:center;
 
 }
 .sortBy{
-  border: none;
+  border: 0;
+  outline: 0;
+  appearance: none;
 }
 .no-results{
   width: 70%;

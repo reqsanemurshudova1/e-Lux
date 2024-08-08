@@ -1,15 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom"; 
+import { useParams, Link } from "react-router-dom";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import DescRevDisc from "../Components/HomePage/details/DescRevDisc";
 import "./Details.css";
 
 export default function Details() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [mainImage, setMainImage] = useState(""); // Ana fotoğrafın durumunu ekleyin
+
+  const addToCart = (product) => {
+    if (!selectedSize || !selectedColor) {
+      alert("Please select both size and color before adding to cart.");
+      return;
+    }
+
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (p) =>
+        p.id === product.id &&
+        p.size === selectedSize &&
+        p.color === selectedColor
+    );
+
+    if (existingProductIndex > -1) {
+      updatedCart[existingProductIndex].quantity += 1;
+    } else {
+      updatedCart.push({
+        ...product,
+        size: selectedSize,
+        color: selectedColor,
+        quantity: 1,
+      });
+    }
+
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`${product.name} added to cart!`);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,6 +60,7 @@ export default function Details() {
             (p) => p.category === product.category && p.id !== product.id
           );
           setSuggestedProducts(suggestions);
+          setMainImage(product.image); // Ana fotoğrafı varsayılan olarak ayarlayın
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -33,6 +68,11 @@ export default function Details() {
     };
     fetchProducts();
   }, [id]);
+
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(savedCart);
+  }, []);
 
   if (!selectedProduct) return <p>Loading...</p>;
 
@@ -43,11 +83,17 @@ export default function Details() {
         <div className="product-details-img">
           <div className="desc-img">
             {selectedProduct.images.map((img, index) => (
-              <img key={index} src={img} alt={`Product detail ${index}`} />
+              <img
+                key={index}
+                src={img}
+                alt={`Product detail ${index}`}
+                className={`thumbnail ${img === mainImage ? "active" : ""}`} // Seçili olanı belirt
+                onClick={() => setMainImage(img)} // Küçük fotoğrafa tıklanınca ana fotoğrafı güncelle
+              />
             ))}
           </div>
           <div className="main-img">
-            <img src={selectedProduct.image} alt={selectedProduct.name} />
+            <img src={mainImage} alt={selectedProduct.name} />
           </div>
         </div>
         <div className="product-details-desc">
@@ -73,7 +119,14 @@ export default function Details() {
               {Object.keys(selectedProduct.sizesInStock).map((size) => (
                 <span
                   key={size}
-                  className={`size-option ${selectedProduct.sizesInStock[size] ? 'in-stock' : 'out-of-stock'}`}
+                  className={`size-option ${
+                    size === selectedSize ? "selected" : ""
+                  } ${
+                    selectedProduct.sizesInStock[size]
+                      ? "in-stock"
+                      : "out-of-stock"
+                  }`}
+                  onClick={() => setSelectedSize(size)}
                 >
                   {size}
                 </span>
@@ -86,16 +139,29 @@ export default function Details() {
               {Object.keys(selectedProduct.colors).map((color) => (
                 <span
                   key={color}
-                  className={`color-option ${selectedProduct.colors[color] ? 'in-stock' : 'out-of-stock'}`}
-                  style={{ backgroundColor: selectedProduct.colors[color] ? color.toLowerCase() : '#ddd' }}
+                  className={`color-option ${
+                    color === selectedColor ? "selected" : ""
+                  } ${
+                    selectedProduct.colors[color] ? "in-stock" : "out-of-stock"
+                  }`}
+                  style={{
+                    backgroundColor: selectedProduct.colors[color]
+                      ? color.toLowerCase()
+                      : "#ddd",
+                  }}
+                  onClick={() => setSelectedColor(color)}
                 />
               ))}
             </div>
           </div>
           <div className="btn">
-            <div className="product-price">${selectedProduct.price.toFixed(2)}</div>
+            <div className="product-price">
+              ${selectedProduct.price.toFixed(2)}
+            </div>
             <div className="product-btn">
-              <button>Add to Cart</button>
+              <button onClick={() => addToCart(selectedProduct)}>
+                Add to Cart
+              </button>
             </div>
           </div>
           <div className="payment-details">
@@ -123,7 +189,12 @@ export default function Details() {
         <h2>You May Be Interested</h2>
         <div className="product-cards1">
           {suggestedProducts.map((product) => (
-            <Link to={`/details/${product.id}`} className="prdct-cart" key={product.id} data-aos="zoom-in">
+            <Link
+              to={`/details/${product.id}`}
+              className="prdct-cart"
+              key={product.id}
+              data-aos="zoom-in"
+            >
               <div className="prdct-img">
                 <img src={product.image} alt={product.name} />
               </div>

@@ -29,3 +29,8 @@
   flex-shrink: 0;
 
  }
+ .sortBy{
+  border: 0;
+  outline: 0;
+  appearance: none;
+}

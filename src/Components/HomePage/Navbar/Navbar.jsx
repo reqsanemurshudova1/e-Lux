@@ -163,7 +163,7 @@ export default function Navbar() {
             </div>
           )}
           <div className="shop">
-            <img src="/Assets/bag-2.jpg" alt="Shop" />
+      <Link to='/mycart'>      <img src="/Assets/bag-2.jpg" alt="Shop" /></Link>
           </div>
           <button className="login-button" onClick={toggleLogin}>
             Login

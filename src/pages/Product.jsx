@@ -165,7 +165,7 @@ export default function Product() {
         <div className={`shortandfilter ${isFilterModalOpen ? "hidden" : ""}`}>
           <div className="short">
             <select
-              name="sortBy"
+              className="sortBy"
               onChange={(e) =>
                 handleFilterChange(e.target.name, e.target.value)
               }

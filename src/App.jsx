@@ -6,6 +6,8 @@ import Search from "./pages/Search";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./pages/Product";
 import Details from "./pages/Details";
+import MyCart from "./pages/MyCart";
+import CheckOut from "./pages/CheckOut";
 
 export default function App() {
   useEffect(() => {
@@ -23,7 +25,8 @@ export default function App() {
       <Route path="/details/:id" element={<Details/>} />
 
       <Route path="/" element={<Home />} />
-
+      <Route path="/mycart" element={<MyCart />} />
+      <Route path="/checkout" element={<CheckOut/>} />
       <Route path="/product/:id/details" element={<Details />} />
       <Route path="/product/:id/review" element={<Details />} />
       <Route path="/product/:id/discussion" element={<Details />} />
