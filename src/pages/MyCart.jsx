@@ -3,13 +3,13 @@ import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import { useState, useEffect } from "react";
 import "./Cart.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(savedCart);
@@ -21,7 +21,10 @@ export default function Cart() {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-
+  const handleCheckout = () => {
+    const selectedProducts = selectedItems.map(index => cart[index]);
+    navigate('/checkout', { state: { selectedProducts } });
+  };
   const incrementQuantity = (index) => {
     const updatedCart = [...cart];
     const newQuantity = updatedCart[index].quantity + 1;
@@ -162,9 +165,9 @@ export default function Cart() {
                   Total: $
                   {calculateTotal()}
                 </p>
-               <Link to='/checkout'> <button>
+               <button onClick={handleCheckout}>
                  Checkout Now
-                </button></Link>
+                </button>
               </div>
             </div>
           </>

@@ -8,6 +8,9 @@ import Product from "./pages/Product";
 import Details from "./pages/Details";
 import MyCart from "./pages/MyCart";
 import CheckOut from "./pages/CheckOut";
+import Payment from "./pages/Payment";
+import Blog from "./pages/Blog";
+import DetailBlog from "./pages/DetailBlog";
 
 export default function App() {
   useEffect(() => {
@@ -26,7 +29,10 @@ export default function App() {
 
       <Route path="/" element={<Home />} />
       <Route path="/mycart" element={<MyCart />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<DetailBlog />} />
       <Route path="/checkout" element={<CheckOut/>} />
+      <Route path="/payment" element={<Payment />} />
       <Route path="/product/:id/details" element={<Details />} />
       <Route path="/product/:id/review" element={<Details />} />
       <Route path="/product/:id/discussion" element={<Details />} />

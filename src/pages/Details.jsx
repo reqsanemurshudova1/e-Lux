@@ -13,7 +13,7 @@ export default function Details() {
   const [cart, setCart] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [mainImage, setMainImage] = useState(""); // Ana fotoğrafın durumunu ekleyin
+  const [mainImage, setMainImage] = useState(""); 
 
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
@@ -60,7 +60,7 @@ export default function Details() {
             (p) => p.category === product.category && p.id !== product.id
           );
           setSuggestedProducts(suggestions);
-          setMainImage(product.image); // Ana fotoğrafı varsayılan olarak ayarlayın
+          setMainImage(product.image); 
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -87,8 +87,8 @@ export default function Details() {
                 key={index}
                 src={img}
                 alt={`Product detail ${index}`}
-                className={`thumbnail ${img === mainImage ? "active" : ""}`} // Seçili olanı belirt
-                onClick={() => setMainImage(img)} // Küçük fotoğrafa tıklanınca ana fotoğrafı güncelle
+                className={`thumbnail ${img === mainImage ? "active" : ""}`} 
+                onClick={() => setMainImage(img)} 
               />
             ))}
           </div>

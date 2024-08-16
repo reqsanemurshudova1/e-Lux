@@ -1,0 +1,199 @@
+[
+    {
+      "id": 1,
+      "image":"https://images.unsplash.com/photo-1723675747885-84f60ccc4db8?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "7 Latest Fashion Trends You Need to Know This Year",
+      "seller": "by Zaire Dorwart",
+      "date": "8/2/2023",
+      "category": "Lifestyle",
+      "authorImage": "/Assets/avatar.jpg",
+      "authorName": "Jane Smith",
+      "authorArticles": "15"
+    },
+    {
+        "id": 2,
+        "image":"https://plus.unsplash.com/premium_photo-1664301524345-90a694774519?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2ludGVyJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D",
+        "title": "How to Properly Mix and Match Colors in Your Outfit",
+        "seller": "by Zaire Dorwart",
+        "date": "23/2/2023",
+        "category": "Lifestyle",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 3,
+       "image":"https://www.hindustantimes.com/ht-img/img/2024/03/13/550x309/mohamad-khosravi-tFaLxWkeEnA-unsplash_1710345337962_1710345358322.jpg",
+        "title": "Tips to Make Casual Style More Stylish",
+        "seller": "by Zaire Dorwart",
+        "date": "8/2/2023",
+        "category": "Fashion",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 4,
+        "image": "https://media.istockphoto.com/id/1291100364/photo/a-young-woman-out-shopping-in-the-city.webp?b=1&s=170667a&w=0&k=20&c=yfJj6_Pgt2beiBFeBBBnviBlOnkmZaTWXyVR3ZUs3zc=",
+        "title": "Fashion Inspiration from Famous Celebrities",
+        "seller": "by Zaire Dorwart",
+        "date": "23/2/2023",
+        "category": "Fashion",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 5,
+        "image": "https://media.istockphoto.com/id/1415133972/photo/sustainable-shopping.webp?b=1&s=170667a&w=0&k=20&c=quyES2rLc7FyikME_VznKOz3uPigZ5ZsM_5nuDUIs3s=",
+        "title": "Tips for Choosing Accessories that Match Your Outfit",
+        "seller": "by Zaire Dorwart",
+        "date": "8/2/2023",
+        "category": "Lifestyle",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 6,
+        "image": "https://media.istockphoto.com/id/1311080961/photo/beauty-portrait-of-afro-woman-girl-looking-at-camera.webp?b=1&s=170667a&w=0&k=20&c=6WWOingb4Ls4XGqpdZPGOenD4H6rHNtujJrfL7qaFMo=",
+        "title": "How to Combine Vintage Fashion with Current Trends",
+        "seller": "by Zaire Dorwart",
+        "date": "23/2/2023",
+        "category": "Lifestyle",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 7,
+        "image": "https://plus.unsplash.com/premium_photo-1664868839770-ef9a76e21ab6?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZWRpdG9yaWFsJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D",
+        "title": "Top Design Trends for the Modern Home",
+        "seller": "by Zaire Dorwart",
+        "date": "5/3/2023",
+        "category": "Design",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 8,
+        "image": "https://media.istockphoto.com/id/1475244066/photo/female-figures-in-stylish-knitting-pink-blue-set-sweater-pants-and-cardigans.webp?b=1&s=170667a&w=0&k=20&c=trGFF_KupZky9jgCm0clqrV_Y5AkaN7bPrlfqD6P6Pw=",
+        "title": "The Influence of Brend on Contemporary Fashion",
+        "seller": "by Zaire Dorwart",
+        "date": "15/3/2023",
+        "category": "Brend",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 9,
+        "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMHNhbGV8ZW58MHx8MHx8fDA%3D",
+        "title": "How to Elevate Your Look with Trendly Accessories",
+        "seller": "by Zaire Dorwart",
+        "date": "22/3/2023",
+        "category": "Trendly",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 10,
+        "image": "https://plus.unsplash.com/premium_photo-1664475598941-68654762c844?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMHN0eWxpc3R8ZW58MHx8MHx8fDA%3D",
+        "title": "Fashion Week Highlights: Top Designers to Watch",
+        "seller": "by Zaire Dorwart",
+        "date": "29/3/2023",
+        "category": "Fashion Week",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 11,
+        "image": "https://media.istockphoto.com/id/1922703877/photo/gen-z-teenager-poses-full-body-towards-camera-showing-attitude.webp?b=1&s=170667a&w=0&k=20&c=zjDmlELyXJug5UOsWLKNXI_WVyWOHOnvBzGbDGl9m5k=J",
+        "title": "Seasonal Trends: What's Hot This Summer",
+        "seller": "by Zaire Dorwart",
+        "date": "10/4/2023",
+        "category": "Trendly",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 12,
+        "image": "https://plus.unsplash.com/premium_photo-1714226832576-f4356d4ab92b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMHNhbGV8ZW58MHx8MHx8fDA%3D",
+        "title": "Exploring Minimalist Design in Modern Spaces",
+        "seller": "by Zaire Dorwart",
+        "date": "17/4/2023",
+        "category": "Design",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 13,
+        "image": "https://media.gettyimages.com/id/851074174/photo/milan-italy-jeremy-scott-and-models-are-seen-backstage-ahead-of-the-moschino-show-during-milan.jpg?s=612x612&w=gi&k=20&c=R2Gb0Dbxsh97tYp3C1z2xJCdptHzDtLUGJUMKhD1FNc=",
+        "title": "How to Build a Brend from Scratch",
+        "seller": "by Zaire Dorwart",
+        "date": "25/4/2023",
+        "category": "Brend",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 14,
+        "image": "https://www.contrado.co.uk/blog/wp-content/uploads/2017/09/Photo-by-Kris-Atomic-on-Unsplash.jpg",
+        "title": "Must-Have Pieces for Your Fashion Week Wardrobe",
+        "seller": "by Zaire Dorwart",
+        "date": "3/5/2023",
+        "category": "Fashion Week",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 15,
+        "image": "https://plus.unsplash.com/premium_photo-1713586574510-e21b6a15e918?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "title": "Balancing Bold Patterns and Neutrals in Your Outfit",
+        "seller": "by Zaire Dorwart",
+        "date": "12/5/2023",
+        "category": "Fashion",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 16,
+        "image": "https://plus.unsplash.com/premium_photo-1714226830923-03396831c4f0?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMHdhc3RlfGVufDB8fDB8fHww",
+        "title": "Designing with Sustainability in Mind",
+        "seller": "by Zaire Dorwart",
+        "date": "20/5/2023",
+        "category": "Design",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 17,
+        "image":"https://media.istockphoto.com/id/1922703877/photo/gen-z-teenager-poses-full-body-towards-camera-showing-attitude.webp?b=1&s=170667a&w=0&k=20&c=zjDmlELyXJug5UOsWLKNXI_WVyWOHOnvBzGbDGl9m5k=",
+        "title": "The Role of Trendly Elements in Modern Fashion",
+        "seller": "by Zaire Dorwart",
+        "date": "28/5/2023",
+        "category": "Trendly",  "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      },
+    {
+        "id": 18,
+       "image":"https://images.unsplash.com/photo-1723675747885-84f60ccc4db8?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "title": "Celebrity Brend Collaborations to Watch Out For",
+        "seller": "by Zaire Dorwart",
+        "date": "4/6/2023",
+        "category": "Brend",
+        "authorImage": "/Assets/avatar.jpg",
+        "authorName": "Jane Smith",
+        "authorArticles": "15"
+      }
+]
