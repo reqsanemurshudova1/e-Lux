@@ -11,6 +11,7 @@ import CheckOut from "./pages/CheckOut";
 import Payment from "./pages/Payment";
 import Blog from "./pages/Blog";
 import DetailBlog from "./pages/DetailBlog";
+import OrderTracking from "./pages/OrderTracking";
 
 export default function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/blog/:id" element={<DetailBlog />} />
       <Route path="/checkout" element={<CheckOut/>} />
       <Route path="/payment" element={<Payment />} />
+      <Route path="/order" element={<OrderTracking />} />
       <Route path="/product/:id/details" element={<Details />} />
       <Route path="/product/:id/review" element={<Details />} />
       <Route path="/product/:id/discussion" element={<Details />} />

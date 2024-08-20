@@ -110,7 +110,7 @@ const toggle=()=>{
           </div>
         </form>
 
-        <div className="orderSummary container">
+        <div className="orderSummary ">
           <div className="title">Order Summary</div>
           <div className="products">
             {selectedProducts.map((product, index) => (

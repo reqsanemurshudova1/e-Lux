@@ -88,6 +88,15 @@ justify-content:flex-start;
     color: #999;
     font-size: 12px;
   }
+     .menu,
+    .FAQ,
+    .connect,
+    .payment {
+      display: flex;
+      align-items: flex-start;
+      justify-content:flex-start;
+      flex-direction: column;
+    } 
   
   @media (max-width: 560px) {
     /* .menu,

@@ -77,7 +77,7 @@ export default function CheckOut() {
     <div>
       <Navbar />
       <div className="checkOut container">
-        <div className="form container">
+        <div className="form">
           <form onSubmit={handleSubmit}>
             <label htmlFor="">Select country</label>
             <select
@@ -251,7 +251,7 @@ export default function CheckOut() {
             </div>
           </div>
         </div>
-        <div className="orderSummary container">
+        <div className="orderSummary">
           <div className="title">Order Summary</div>
           <div className="products">
             {selectedProducts.map((product, index) => (
