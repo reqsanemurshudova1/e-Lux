@@ -64,7 +64,7 @@ export default function Blog() {
         <div className="blog-left">
           {currentBlogs.map((blog, index) => (
               <Link to={`/blog/${blog.id}`}>
-            <div key={index} className="blog">
+            <div key={index} className="blog" data-aos="zoom-in">
                
               <div className="blog-img">
                 <img src={blog.image} alt="blog" />

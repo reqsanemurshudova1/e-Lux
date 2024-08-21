@@ -85,7 +85,10 @@ background: url(<path-to-image>) lightgray 50% / cover no-repeat, #F5F5F5;
 .blog-right{
     width: 30%;
 }
+a{
+  color : black;
 
+}
   
   .searchBlog {
     margin-bottom: 20px;

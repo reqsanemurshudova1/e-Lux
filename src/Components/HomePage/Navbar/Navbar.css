@@ -178,7 +178,7 @@
     background: var(--Neutral-White, #fff);
   }
 
-  .burger-menu-items ul li a {
+  .burger-menu-items ul li a,span {
     color: black;
     display: flex;
     gap: 12px;

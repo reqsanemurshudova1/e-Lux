@@ -34,3 +34,8 @@
   outline: 0;
   appearance: none;
 }
+@media screen and (max-width: 960px) {
+  .short{
+    display: none;
+  }
+}

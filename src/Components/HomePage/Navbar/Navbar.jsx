@@ -117,7 +117,7 @@ export default function Navbar() {
                   <NavLink to="/product">Product</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/order-tracking">Order tracking</NavLink>
+                  <NavLink to="/order">Order tracking</NavLink>
                 </li>
                 <li>
                   <NavLink to="/blog">Blog</NavLink>
@@ -128,10 +128,14 @@ export default function Navbar() {
                 <li>
                   <NavLink to="/address">Address</NavLink>
                 </li>
-              </ul>
-              <span className="my-account" onClick={toggleLogin}>
+                <li>
+                <span className="my-account" onClick={toggleLogin}>
                 My Account
               </span>
+                </li>
+
+              </ul>
+           
             </div>
           )}
         </div>

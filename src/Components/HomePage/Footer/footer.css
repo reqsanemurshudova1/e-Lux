@@ -10,7 +10,10 @@
     max-width: 1300px;
     margin:0 auto;
   }
+  a{
+    color : #999;
   
+  }
   .footer {
    display: flex;
  padding: 60px 0;
