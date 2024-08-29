@@ -573,3 +573,12 @@ th, td {
   background-color: #f28c53;
   color: #fff;
 }
+@media screen and (max-width: 960px) {
+  .discount input{
+    width: 100%;
+  }
+  .pay button{
+    font-size: 14px;
+  }
+
+}
