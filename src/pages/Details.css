@@ -300,3 +300,19 @@
 .product-details-img .desc-img .thumbnail.active {
   border-color: #e28c13;
 }
+@media screen and (max-width: 960px) {
+  .product-details-img .desc-img .thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+  .product-details-img .desc-img .thumbnail img {
+    width: 80px;
+    height: 80px;
+  }
+
+
+ .product-details{
+  flex-direction: column;
+ }
+
+}

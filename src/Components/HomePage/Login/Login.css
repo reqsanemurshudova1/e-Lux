@@ -55,7 +55,7 @@
 .login .btn-login {
   color: #fff;
   display: flex;
-
+cursor: pointer;
   padding: 12px 16px;
   justify-content: center;
   align-items: center;
