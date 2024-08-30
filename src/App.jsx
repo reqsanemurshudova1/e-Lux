@@ -13,6 +13,7 @@ import Blog from "./pages/Blog";
 import DetailBlog from "./pages/DetailBlog";
 import OrderTracking from "./pages/OrderTracking";
 
+
 export default function App() {
   useEffect(() => {
     AOS.init({
@@ -38,7 +39,9 @@ export default function App() {
       <Route path="/product/:id/details" element={<Details />} />
       <Route path="/product/:id/review" element={<Details />} />
       <Route path="/product/:id/discussion" element={<Details />} />
-
+    
     </Routes>
+    
+  
   );
 }

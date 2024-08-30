@@ -19,6 +19,7 @@
       backdrop-filter: blur(4px);
     }
   .register{
+      width: 450px;
       display: flex;
   padding: 24px 32px 32px 32px;
   flex-direction: column;
@@ -27,7 +28,7 @@
   gap: 30px;
   position: absolute;
   
-
+margin-top: 50px;
   border-radius: 4px;
   border: 1px solid var(--Grayscale-200, #E5E5E5);
   background: #FFF;

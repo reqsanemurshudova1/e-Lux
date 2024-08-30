@@ -116,6 +116,7 @@ const FilterModal = ({
                     onChange={handleChange}
                   />
                   {category}
+                  
                 </label>
               ))}
             </div>

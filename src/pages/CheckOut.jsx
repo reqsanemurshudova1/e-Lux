@@ -4,7 +4,7 @@ import Footer from "../Components/HomePage/Footer/Footer";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { toast, Toaster } from "react-hot-toast";
 
 import { CheckoutContext } from "../context/CheckoutContext";
 import { useContext } from "react";
@@ -69,12 +69,18 @@ export default function CheckOut() {
       navigate("/payment");
     } else {
    
-      alert("Please fill out all the fields");
+      toast.error('Please fill in all fields');
+
     }
   };
 
   return (
+    
     <div>
+        <div><Toaster
+  position="top-center"
+  reverseOrder={true}
+/></div>
       <Navbar />
       <div className="checkOut container">
         <div className="form">
@@ -305,7 +311,9 @@ export default function CheckOut() {
         </div>
      
       </div>
+      
       <Footer />
+    
     </div>
   );
 }

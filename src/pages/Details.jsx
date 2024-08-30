@@ -4,6 +4,7 @@ import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import DescRevDisc from "../Components/HomePage/details/DescRevDisc";
 import "./Details.css";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Details() {
   const { id } = useParams();
@@ -17,7 +18,8 @@ export default function Details() {
 
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
-      alert("Please select both size and color before adding to cart.");
+    
+      toast.error('Please select size and color');
       return;
     }
 
@@ -42,7 +44,8 @@ export default function Details() {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    alert(`${product.name} added to cart!`);
+
+    toast.success('Product added to cart');
   };
 
   useEffect(() => {
@@ -78,6 +81,10 @@ export default function Details() {
 
   return (
     <div>
+    <div><Toaster
+position="top-center"
+reverseOrder={true}
+/></div>
       <Navbar />
       <div className="product-details container">
         <div className="product-details-img">
