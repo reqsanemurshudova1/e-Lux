@@ -8,7 +8,7 @@ import BlogRight from "../Components/BlogRight";
 
 export default function Blog() {
   const [blogData, setBlogData] = useState([]);
-  const [authors, setAuthors] = useState([]); // Authors için state ekliyoruz
+  const [authors, setAuthors] = useState([]); 
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage] = useState(6);
 
@@ -25,7 +25,7 @@ export default function Blog() {
 
     const fetchAuthors = async () => {
       try {
-        const response = await fetch("/authors.json"); // Authors için veri çekiyoruz
+        const response = await fetch("/authors.json"); 
         const data = await response.json();
         setAuthors(data);
       } catch (error) {
@@ -37,21 +37,16 @@ export default function Blog() {
     fetchAuthors();
   }, []);
 
-  if (!blogData.length) {
-    return <div>Loading...</div>;
-  }
 
-  // Get current blogs
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = blogData.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  // Change page
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(blogData.length / blogsPerPage)));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-  // Generate page numbers
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(blogData.length / blogsPerPage); i++) {
     pageNumbers.push(i);

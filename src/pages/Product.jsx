@@ -151,9 +151,7 @@ export default function Product() {
   const openFilterModal = () => setIsFilterModalOpen(true);
   const closeFilterModal = () => setIsFilterModalOpen(false);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+
 
   return (
     <div>

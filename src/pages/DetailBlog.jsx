@@ -13,11 +13,11 @@ export default function DetailBlog() {
   useEffect(() => {
     const fetchBlogDetail = async () => {
       try {
-        const response = await fetch(`/blog.json`); // Bütün blogları çekiyoruz
+        const response = await fetch(`/blog.json`); 
         const data = await response.json();
         const selectedBlog = data.find((b) => b.id === parseInt(id));
         setBlog(selectedBlog);
-        setBlogData(data); // Tüm blogları alıyoruz ve sağ tarafa gönderiyoruz
+        setBlogData(data);
       } catch (error) {
         console.error(error);
       }
@@ -26,10 +26,6 @@ export default function DetailBlog() {
     fetchBlogDetail();
   }, [id]);
 
-
-  if (!blog) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
