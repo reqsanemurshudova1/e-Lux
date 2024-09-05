@@ -45,6 +45,9 @@ line-height: 28px; /* 140% */
     cursor: pointer;
    
   }
+  .filter-panel .accordion-content label.selected {
+    color: orange;
+  }
   
   .filter-option {
     margin-bottom: 15px;
@@ -163,3 +166,15 @@ justify-content:center;
  justify-content: space-between;
 }
 
+
+
+.color.selected {
+  border: 2px solid #000; 
+}
+
+.no-results-message {
+  color: #ff0000;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+}

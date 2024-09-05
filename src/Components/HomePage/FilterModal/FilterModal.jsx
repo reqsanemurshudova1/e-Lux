@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./FilterModal.css";
 import 'antd/dist/reset.css';
 import { Slider } from 'antd';
 
 const colorNames = {
-  Red: "Red",
-  Black: "Black",
-  Blue: "Blue",
-  Green: "Green",
-  White: "White",
-  Purple: "Purple",
-  Orange: "Orange",
-  Pink: "Pink",
-  Yellow: "Yellow",
-  Olive: "Olive",
-  Cyan: "Cyan",
-  Brown: "Brown"
+  Red: "#FF0000",
+  Black: "#000000",
+  Blue: "#0000FF",
+  Green: "#008000",
+  White: "#FFFFFF",
+  Purple: "#800080",
+  Orange: "#FFA500",
+  Pink: "#FFC0CB",
+  Yellow: "#FFFF00",
+  Olive: "#808000",
+  Cyan: "#00FFFF",
+  Brown: "#A52A2A"
 };
 
 const FilterModal = ({
@@ -24,10 +24,28 @@ const FilterModal = ({
   onFilterChange,
   filterValues,
   onResetFilters,
+  items, 
 }) => {
   const [openAccordions, setOpenAccordions] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [priceRange, setPriceRange] = useState([20, 50]);
+  const [noResults, setNoResults] = useState(false);
+
+  useEffect(() => {
+    if (items) {
+
+      const filteredItems = items.filter(item => {
+        const matchesPrice = item.price >= priceRange[0] && item.price <= priceRange[1];
+        const matchesColor = selectedColors.length === 0 || selectedColors.includes(item.color);
+        const matchesCategory = !filterValues.category || filterValues.category.includes(item.category);
+        const matchesStyle = !filterValues.style || filterValues.style.includes(item.style);
+
+        return matchesPrice && matchesColor && matchesCategory && matchesStyle;
+      });
+
+      setNoResults(filteredItems.length === 0);
+    }
+  }, [selectedColors, priceRange, filterValues, items]);
 
   if (!isOpen) return null;
 
@@ -62,7 +80,7 @@ const FilterModal = ({
         ? prevColors.filter((c) => c !== hexColor)
         : [...prevColors, hexColor]
     );
-    onFilterChange("color", hexColor);
+    onFilterChange("color", selectedColors);
   };
 
   const handlePriceChange = (value) => {
@@ -88,50 +106,55 @@ const FilterModal = ({
         </button>
       </div>
       <div className="filter-accordion">
+        {[
+          {
+            key: "category",
+            title: "Kind of Product",
+            options: ["T-Shirt", "Coats", "Trousers", "Hoodies", "Jackets", "Shoes", "Socks", "Skirts"]
+          },
+          {
+            key: "style",
+            title: "Style",
+            options: ["Basic", "Casual", "Sport", "Classic", "Circular"]
+          }
+        ].map(({ key, title, options }) => (
+          <div className="accordion-item" key={key}>
+            <button
+              className="accordion-header"
+              aria-expanded={openAccordions.includes(key)}
+              onClick={() => handleAccordionClick(key)}
+            >
+              <span>{title}</span> {openAccordions.includes(key) ? "-" : "+"}
+            </button>
+            {openAccordions.includes(key) && (
+              <div className="accordion-content">
+                {options.map((option) => (
+                  <label key={option} className={`filter-option ${filterValues[key]?.includes(option) ? "selected" : ""}`}>
+                    <input
+                      type="checkbox"
+                      name={key}
+                      value={option}
+                      checked={filterValues[key]?.includes(option) || false}
+                      onChange={handleChange}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
         <div className="accordion-item">
           <button
             className="accordion-header"
-            onClick={() => handleAccordionClick("category")}
-          >
-           <span> Kind of Product </span>{openAccordions.includes("category") ? "-" : "+"}
-          </button>
-          {openAccordions.includes("category") && (
-            <div className="accordion-content">
-              {[
-                "T-Shirt",
-                "Coats",
-                "Trousers",
-                "Hoodies",
-                "Jackets",
-                "Shoes",
-                "Socks",
-                "Skirts",
-              ].map((category) => (
-                <label key={category}>
-                  <input
-                    type="checkbox"
-                    name="category"
-                    value={category}
-                    checked={filterValues.category?.includes(category) || false}
-                    onChange={handleChange}
-                  />
-                  {category}
-                  
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="accordion-item">
-          <button
-            className="accordion-header"
+            aria-expanded={openAccordions.includes("price")}
             onClick={() => handleAccordionClick("price")}
           >
-           <span>Price</span> {openAccordions.includes("price") ? "-" : "+"}
+            <span>Price</span> {openAccordions.includes("price") ? "-" : "+"}
           </button>
           {openAccordions.includes("price") && (
             <div className="accordion-content">
-              <div style={{ width: 330, margin: '0 auto', padding: '20px' }}>
+              <div className="slider-container">
                 <Slider
                   range
                   draggableTrack
@@ -150,18 +173,17 @@ const FilterModal = ({
         <div className="accordion-item">
           <button
             className="accordion-header"
+            aria-expanded={openAccordions.includes("color")}
             onClick={() => handleAccordionClick("color")}
           >
-           <span>Color</span> {openAccordions.includes("color") ? "-" : "+"}
+            <span>Color</span> {openAccordions.includes("color") ? "-" : "+"}
           </button>
           {openAccordions.includes("color") && (
             <div className="accordion-content color-grid">
               {Object.entries(colorNames).map(([name, hex]) => (
                 <div key={hex} className="color-wrapper">
                   <div
-                    className={`color ${
-                      selectedColors.includes(hex) ? "selected" : ""
-                    }`}
+                    className={`color ${selectedColors.includes(hex) ? "selected" : ""}`}
                     style={{ backgroundColor: hex }}
                     onClick={() => handleColorSelect(name)}
                   ></div>
@@ -171,33 +193,12 @@ const FilterModal = ({
             </div>
           )}
         </div>
-        <div className="accordion-item">
-          <button
-            className="accordion-header"
-            onClick={() => handleAccordionClick("style")}
-          >
-            <span>Style </span>{openAccordions.includes("style") ? "-" : "+"}
-          </button>
-          {openAccordions.includes("style") && (
-            <div className="accordion-content">
-              {["Basic", "Casual", "Sport", "Classic", "Circular"].map(
-                (style) => (
-                  <label key={style}>
-                    <input
-                      type="checkbox"
-                      name="style"
-                      value={style}
-                      checked={filterValues.style?.includes(style) || false}
-                      onChange={handleChange}
-                    />
-                    {style}
-                  </label>
-                )
-              )}
-            </div>
-          )}
-        </div>
       </div>
+      {noResults && (
+        <div className="no-results-message">
+          No results match the selected filters.
+        </div>
+      )}
     </div>
   );
 };
