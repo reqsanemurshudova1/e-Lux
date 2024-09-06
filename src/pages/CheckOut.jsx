@@ -65,6 +65,7 @@ export default function CheckOut() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    toast.dismiss();
     if (isFormValid()) {
       navigate("/payment");
     } else {

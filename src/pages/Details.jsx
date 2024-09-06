@@ -18,7 +18,7 @@ export default function Details() {
 
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
-    
+      toast.dismiss();
       toast.error('Please select size and color');
       return;
     }
@@ -44,7 +44,7 @@ export default function Details() {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
+    toast.dismiss();
     toast.success('Product added to cart');
   };
 
