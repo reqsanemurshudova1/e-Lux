@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import { useContext } from "react";
 import { CheckoutContext } from "../context/CheckoutContext";
 import { useState } from "react";
 import PaymentModal from "../Components/PaymentModal/PaymentModal";
+import axios from "axios";
 
 
 
@@ -26,12 +27,32 @@ const toggle=()=>{
       setModalOpen(false);
     };
 
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/payment-methods');
+        setData(response.data?.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <Navbar />
       <div className="paymentDiv container">
         <form className="paymentForm ">
           <span>Select Payment Method</span>
+
           <div className="selectPayment">
             <div className="payPal">
               <div className="left">

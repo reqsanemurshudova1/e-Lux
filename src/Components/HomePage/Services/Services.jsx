@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Services.css";
+import axios from "axios";
 
 const servicesData = [
   {
@@ -26,20 +27,40 @@ const servicesData = [
 ];
 
 export default function Services() {
+
+  const [itemData, setItemData] = useState([]);
+  const [mainData, setMainData] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/our-services');
+        setItemData(response.data?.data);
+        setMainData(response?.data?.ourServices[0]);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="services container">
       <div className="our-services">
-        <h1>Our Services</h1>
+        <h1>{mainData?.header ? mainData.header : 'Our Services'}</h1>
         <p>
-          We understand the importance of a seamless and enjoyable shopping
-          experience.
+          {mainData?.description ? mainData.description : 'We understand the importance of a seamless and enjoyable shopping\n' +
+              '          experience.'}
         </p>
       </div>
       <div className="service-cards">
-        {servicesData.map((service) => (
+        {itemData.map((service) => (
           <div className="card" key={service.id}>
             <img src={service.icon} alt="" />
-            <h3>{service.title}</h3>
+            <h3>{service.header}</h3>
             <p>{service.description}</p>
           </div>
         ))}
