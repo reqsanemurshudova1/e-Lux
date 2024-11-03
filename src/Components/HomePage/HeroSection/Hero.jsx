@@ -6,6 +6,7 @@ export default function Hero() {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,8 +22,6 @@ export default function Hero() {
 
     fetchData();
   }, []);
-
-  console.log(data);
   
 
   return (
