@@ -23,7 +23,8 @@ export default function BlogRight({ blogData }) {
         {blogData.slice(0, 4).map((blog, index) => (
           <div key={index} className="popular-blog-item">
             <div className="popular-blog-img">
-              <img src={blog.image} alt="blog" />
+            <img src={`http://localhost:8000/storage/${blog.image}`} alt="blog" />
+
             </div>
             <div className="popular-blog-desc">
               <div className="popular-blog-title">{blog.title}</div>
@@ -39,10 +40,10 @@ export default function BlogRight({ blogData }) {
         {blogData.slice(0, 4).map((author, index) => (
           <div key={index} className="popular-author-item">
             <div className="popular-author-img">
-              <img src={author.authorImage} alt="author" />
+              <img src={`http://localhost:8000/storage/${author.image}`} alt="author" />
             </div>
             <div className="popular-author-info">
-              <div className="popular-author-name">{author.authorName}</div>
+              <div className="popular-author-name">{author.author}</div>
               <div className="popular-author-articles">
                 {author.authorArticles} Articles
               </div>

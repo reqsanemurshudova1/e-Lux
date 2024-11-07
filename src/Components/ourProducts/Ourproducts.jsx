@@ -12,10 +12,21 @@ export default function Ourproducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/product.json");
-        let data = await response.json();
-        setProducts(data.products);
-        setFilteredProducts(data.products.slice(0, 3)); 
+        const response = await fetch("http://localhost:8000/api/products");
+        const data = await response.json();
+
+       
+        const transformedData = data.products.map(product => ({
+          id: product.id,
+          name: product.product_name,
+          price: product.product_price,
+          category: product.category ? product.category.category_name : 'Unknown',
+          image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg', 
+        }));
+
+        setProducts(transformedData);
+        setFilteredProducts(transformedData.slice(0, 3)); 
+
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
@@ -26,6 +37,7 @@ export default function Ourproducts() {
 
     fetchProducts();
   }, []);
+  
 
   useEffect(() => {
     const filtered = products.filter(product => 
