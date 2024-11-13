@@ -81,10 +81,7 @@ export default function Details() {
 
   return (
     <div>
-    <div><Toaster
-position="top-center"
-reverseOrder={true}
-/></div>
+      <div><Toaster position="top-center" reverseOrder={true} /></div>
       <Navbar />
       <div className="product-details container">
         <div className="product-details-img">
