@@ -13,6 +13,8 @@ export default function Navbar() {
   const [searchResults, setSearchResults] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Dropdown üçün state
 
   const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ export default function Navbar() {
       try {
         const response = await fetch("/product.json");
         const data = await response.json();
-        setProducts(data);
+        setProducts(data.products || data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -29,30 +31,20 @@ export default function Navbar() {
     fetchProducts();
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  const toggleLogin = () => {
-    setLoginOpen(!loginOpen);
-  };
+  const toggleLogin = () => setLoginOpen(!loginOpen);
 
-  const closeLogin = () => {
-    setLoginOpen(false);
-  };
+  const closeLogin = () => setLoginOpen(false);
 
   const changeModal = () => {
     setRegisterOpen(!registerOpen);
     setLoginOpen(!loginOpen);
   };
 
-  const closeRegister = () => {
-    setRegisterOpen(false);
-  };
+  const closeRegister = () => setRegisterOpen(false);
 
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-  };
+  const toggleSearch = () => setSearchOpen(!searchOpen);
 
   const closeSearch = () => {
     setSearchOpen(false);
@@ -65,7 +57,7 @@ export default function Navbar() {
     setSearchQuery(query);
 
     if (query.length > 0) {
-      const results = products.products?.filter((item) =>
+      const results = products.filter((item) =>
         item.name.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
@@ -75,28 +67,58 @@ export default function Navbar() {
   };
 
   const handleSearchKeyDown = (event) => {
-    if (event.key === "Enter") {
-      if (searchQuery.length > 0) {
-        if (!recentSearches.includes(searchQuery)) {
-          setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]);
-        }
-        navigate(`/search?query=${searchQuery}`);
-        closeSearch();
+    if (event.key === "Enter" && searchQuery.length > 0) {
+      if (!recentSearches.includes(searchQuery)) {
+        setRecentSearches([searchQuery, ...recentSearches.slice(0, 4)]);
       }
+      navigate(`/search?query=${searchQuery}`);
+      closeSearch();
     }
   };
 
-  const removeRecentSearch = (search) => {
+  const removeRecentSearch = (search) =>
     setRecentSearches(recentSearches.filter((item) => item !== search));
-  };
 
   const handleRecentSearchClick = (search) => {
     setSearchQuery(search);
-    const results = products.products.filter((item) =>
+    const results = products.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
     );
     setSearchResults(results);
   };
+
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    setUser(null);
+    setDropdownOpen(false); // Dropdownu bağla
+  };
+  const goToCart = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/cart", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        navigate("/mycart", {
+          state: { basketItems: data.basketItems, totalPrice: data.totalPrice },
+        });
+      } else if (response.status === 401) {
+        console.error("Unauthorized: Please log in");
+      } else if (response.status === 404) {
+        console.error("Endpoint not found");
+      } else {
+        console.error("An error occurred");
+      }
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    }
+  };
+  
 
   return (
     <div>
@@ -129,13 +151,11 @@ export default function Navbar() {
                   <NavLink to="/address">Address</NavLink>
                 </li>
                 <li>
-                <span className="my-account" onClick={toggleLogin}>
-                My Account
-              </span>
+                  <span className="my-account" onClick={toggleLogin}>
+                    My Account
+                  </span>
                 </li>
-
               </ul>
-           
             </div>
           )}
         </div>
@@ -163,17 +183,34 @@ export default function Navbar() {
           {!searchOpen && (
             <div className="search" onClick={toggleSearch}>
               <img src="/Assets/search.jpg" alt="Search" />
-              <input type="text" placeholder="Search.." />
             </div>
           )}
-          <div className="shop">
-      <Link to='/mycart'>      <img src="/Assets/bag-2.jpg" alt="Shop" /></Link>
+         <div className="shop" onClick={goToCart}>
+            <img src="/Assets/bag-2.jpg" alt="Shop" />
           </div>
-          <button className="login-button" onClick={toggleLogin}>
-            Login
-          </button>
+          {!user ? (
+            <button className="login-button" onClick={toggleLogin}>
+              Login
+            </button>
+          ) : (
+            <div className="user-dropdown">
+               <i className="fas fa-user-circle user-icon" onClick={toggleDropdown}></i>
+              {dropdownOpen && (
+                <div className="dropdown-menu">
+                  <button onClick={logout}>Logout</button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </nav>
+      {loginOpen && (
+        <Login
+          closeLogin={closeLogin}
+          changeModal={changeModal}
+          setUser={setUser}
+        />
+      )}
       {isOpen && <div className="overlay" onClick={toggleMenu}></div>}
       {searchOpen && (
         <div className="search-modal">
@@ -212,45 +249,11 @@ export default function Navbar() {
               ))}
             </div>
           ) : (
-            <div className="recent-searches container">
-              {recentSearches.length > 0 ? (
-                <div>
-                  <h4>Recent Searches:</h4>
-                  <ul>
-                    {recentSearches.map((search, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleRecentSearchClick(search)}
-                      >
-                        {search}{" "}
-                        <span
-                          className="remove-search"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeRecentSearch(search);
-                          }}
-                        >
-                          ×
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <div className="no-results">No recent searches</div>
-              )}
-            </div>
+            <div className="no-results">No results found.</div>
           )}
         </div>
       )}
-      {loginOpen && (
-        <Login
-          toggleLogin={toggleLogin}
-          changeModal={changeModal}
-          closeLogin={closeLogin}
-        />
-      )}
-      {registerOpen && <Register closeRegister={changeModal} />}
+      {registerOpen && <Register closeRegister={closeRegister} />}
     </div>
   );
 }

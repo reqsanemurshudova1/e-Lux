@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
@@ -14,12 +15,12 @@ export default function Details() {
   const [cart, setCart] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [mainImage, setMainImage] = useState(""); 
+  const [mainImage, setMainImage] = useState("");
 
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
       toast.dismiss();
-      toast.error('Please select size and color');
+      toast.error("Please select size and color");
       return;
     }
 
@@ -45,14 +46,17 @@ export default function Details() {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     toast.dismiss();
-    toast.success('Product added to cart');
+    toast.success("Product added to cart");
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/product.json");
+        const response = await fetch("http://localhost:8000/api/products");
+        if (!response.ok) throw new Error("Failed to fetch products");
+
         const data = await response.json();
+
         setProducts(data.products);
 
         const product = data.products.find((p) => p.id.toString() === id);
@@ -63,12 +67,16 @@ export default function Details() {
             (p) => p.category === product.category && p.id !== product.id
           );
           setSuggestedProducts(suggestions);
-          setMainImage(product.image); 
+          setMainImage(
+            product.image ? `http://localhost:8000/storage/${product.image}` : "/Assets/default.jpg"
+          );
         }
       } catch (error) {
         console.error("Error fetching products:", error);
+        toast.error("Failed to fetch product details.");
       }
     };
+
     fetchProducts();
   }, [id]);
 
@@ -81,18 +89,20 @@ export default function Details() {
 
   return (
     <div>
-      <div><Toaster position="top-center" reverseOrder={true} /></div>
+      <div>
+        <Toaster position="top-center" reverseOrder={true} />
+      </div>
       <Navbar />
       <div className="product-details container">
         <div className="product-details-img">
           <div className="desc-img">
-            {selectedProduct.images.map((img, index) => (
+            {selectedProduct.images?.map((img, index) => (
               <img
                 key={index}
-                src={img}
+                src={`http://localhost:8000/storage/${img}`}
                 alt={`Product detail ${index}`}
-                className={`thumbnail ${img === mainImage ? "active" : ""}`} 
-                onClick={() => setMainImage(img)} 
+                className={`thumbnail ${img === mainImage ? "active" : ""}`}
+                onClick={() => setMainImage(`http://localhost:8000/storage/${img}`)}
               />
             ))}
           </div>
@@ -101,7 +111,7 @@ export default function Details() {
           </div>
         </div>
         <div className="product-details-desc">
-          <h1 className="product-title">{selectedProduct.name}</h1>
+          <h1 className="product-title">{selectedProduct.product_name}</h1>
           <div className="product-rate">
             {[1, 2, 3, 4, 5].map((star) => (
               <span
@@ -117,10 +127,15 @@ export default function Details() {
             ))}
             {selectedProduct.rating}
           </div>
+          <div className="product-price">
+            {selectedProduct.product_price !== undefined
+              ? `$${selectedProduct.product_price.toFixed(2)}`
+              : "Price not available"}
+          </div>
           <div className="product-size">
             <div>Select Size:</div>
             <div className="size-options">
-              {Object.keys(selectedProduct.sizesInStock).map((size) => (
+              {Object.keys(selectedProduct.sizesInStock || {}).map((size) => (
                 <span
                   key={size}
                   className={`size-option ${
@@ -140,7 +155,7 @@ export default function Details() {
           <div className="product-color">
             <div>Select Color:</div>
             <div className="color-options">
-              {Object.keys(selectedProduct.colors).map((color) => (
+              {Object.keys(selectedProduct.colors || {}).map((color) => (
                 <span
                   key={color}
                   className={`color-option ${
@@ -159,9 +174,6 @@ export default function Details() {
             </div>
           </div>
           <div className="btn">
-            <div className="product-price">
-              ${selectedProduct.price.toFixed(2)}
-            </div>
             <div className="product-btn">
               <button onClick={() => addToCart(selectedProduct)}>
                 Add to Cart
@@ -185,7 +197,7 @@ export default function Details() {
               <img src="/Assets/sizeFit.svg" alt="" />
               Size & Fit
             </span>
-          </div>
+          </div> 
         </div>
       </div>
       <DescRevDisc product={selectedProduct} />
