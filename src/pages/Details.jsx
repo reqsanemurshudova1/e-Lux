@@ -8,15 +8,15 @@ import "./Details.css";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function Details() {
-  const { id } = useParams();
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [suggestedProducts, setSuggestedProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
-  const [mainImage, setMainImage] = useState("");
+  const { id } = useParams(); // URL'den ürün ID'sini al
+  const [selectedProduct, setSelectedProduct] = useState(null); // Seçilen ürün
+  const [suggestedProducts, setSuggestedProducts] = useState([]); // Önerilen ürünler
+  const [cart, setCart] = useState([]); // Sepet
+  const [selectedSize, setSelectedSize] = useState(""); // Seçilen beden
+  const [selectedColor, setSelectedColor] = useState(""); // Seçilen renk
+  const [mainImage, setMainImage] = useState(""); // Ana görüntü
 
+  // Sepete ürün ekleme işlemi
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
       toast.dismiss();
@@ -49,43 +49,48 @@ export default function Details() {
     toast.success("Product added to cart");
   };
 
+  // Ürün detaylarını getirme
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductDetails = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/products");
-        if (!response.ok) throw new Error("Failed to fetch products");
+        const response = await fetch(`http://localhost:8000/api/product-details/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch product details");
 
         const data = await response.json();
+        setSelectedProduct(data);
 
-        setProducts(data.products);
-
-        const product = data.products.find((p) => p.id.toString() === id);
-        setSelectedProduct(product);
-
-        if (product) {
-          const suggestions = data.products.filter(
-            (p) => p.category === product.category && p.id !== product.id
-          );
-          setSuggestedProducts(suggestions);
+        if (data) {
           setMainImage(
-            product.image ? `http://localhost:8000/storage/${product.image}` : "/Assets/default.jpg"
+            data.image ? `http://localhost:8000/storage/${data.image}` : "/Assets/default.jpg"
           );
+
+          // Aynı kategorideki diğer ürünleri öneri olarak filtrele
+          if (data.category) {
+            const responseAll = await fetch("http://localhost:8000/api/products");
+            const allProducts = await responseAll.json();
+            const suggestions = allProducts.products.filter(
+              (p) => p.category === data.category && p.id !== data.id
+            );
+            setSuggestedProducts(suggestions);
+          }
         }
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching product details:", error);
         toast.error("Failed to fetch product details.");
       }
     };
 
-    fetchProducts();
+    fetchProductDetails();
   }, [id]);
 
+  // Sayfa ilk açıldığında sepeti yükle
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(savedCart);
   }, []);
 
   if (!selectedProduct) return <p>Loading...</p>;
+
 
   return (
     <div>
