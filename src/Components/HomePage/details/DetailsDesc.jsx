@@ -1,19 +1,18 @@
-import React from "react";
-
 export default function DetailsDesc({ product }) {
- 
-  const details = product?.details || {};
+  if (!product?.products_description) return <p>Description not available</p>;
+
+  const { origin, material, care_instructions } = product.products_description;
 
   return (
     <div className="details-desc">
       <p>
-        <strong>Origin:</strong> {details.origin || "Unknown"}
+        <strong>Origin:</strong> {origin || "Unknown"}
       </p>
       <p>
-        <strong>Material:</strong> {details.material || "Not specified"}
+        <strong>Material:</strong> {material || "Not specified"}
       </p>
       <p>
-        <strong>Care Instructions:</strong> {details.careInstructions || "Not provided"}
+        <strong>Care Instructions:</strong> {care_instructions || "Not provided"}
       </p>
     </div>
   );

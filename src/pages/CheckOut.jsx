@@ -23,7 +23,6 @@ export default function CheckOut() {
   } = useContext(CheckoutContext);
   const navigate = useNavigate();
 
-  
   const [country, setCountry] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,25 +62,51 @@ export default function CheckOut() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     toast.dismiss();
     if (isFormValid()) {
-      navigate("/payment");
-    } else {
-   
-      toast.error('Please fill in all fields');
+      try {
+       
+        const response = await fetch("/api/shipping-address", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            country,
+            fullName,
+            email,
+            phoneNumber,
+            streetAddress,
+            city,
+            state,
+            postalCode,
+            shippingCost,
+            selectedProducts,
+          }),
+        });
 
+        if (response.ok) {
+          toast.success("Shipping details saved successfully!");
+          navigate("/payment");
+        } else {
+          toast.error("Failed to save shipping details.");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        toast.error("An error occurred. Please try again.");
+      }
+    } else {
+      toast.error("Please fill in all fields");
     }
   };
 
   return (
-    
     <div>
-        <div><Toaster
-  position="top-center"
-  reverseOrder={true}
-/></div>
+      <div>
+        <Toaster position="top-center" reverseOrder={true} />
+      </div>
       <Navbar />
       <div className="checkOut container">
         <div className="form">
@@ -151,7 +176,6 @@ export default function CheckOut() {
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             />
-        
           </form>
           <div className="payMethod">
             <div className="dhl">
