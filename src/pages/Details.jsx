@@ -17,37 +17,39 @@ export default function Details() {
   const [mainImage, setMainImage] = useState("");
 
 
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
     if (!selectedSize || !selectedColor) {
       toast.dismiss();
       toast.error("Please select size and color");
       return;
     }
+  
+    try {
+      const response = await fetch("http://localhost:8000/api/cart/store", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
 
-    const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex(
-      (p) =>
-        p.id === product.id &&
-        p.size === selectedSize &&
-        p.color === selectedColor
-    );
-
-    if (existingProductIndex > -1) {
-      updatedCart[existingProductIndex].quantity += 1;
-    } else {
-      updatedCart.push({
-        ...product,
-        size: selectedSize,
-        color: selectedColor,
-        quantity: 1,
+        },
+        body: JSON.stringify({
+          product_id: product.id, // Məhsulun ID-sini backend-ə göndəririk
+          size: selectedSize,
+          color: selectedColor,
+          quantity: 1, // Məhsulun sayı
+        }),
       });
+  
+      if (!response.ok) throw new Error("Failed to add product to cart");
+  
+      const data = await response.json();
+      toast.success(data.message || "Product added to cart successfully");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      toast.error("Failed to add product to cart.");
     }
-
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    toast.dismiss();
-    toast.success("Product added to cart");
   };
+  
 
  
   useEffect(() => {
@@ -209,15 +211,15 @@ export default function Details() {
               data-aos="zoom-in"
             >
               <div className="prdct-img">
-                <img src={product.image} alt={product.name} />
+                <img src={product.image} alt={product.product_name} />
               </div>
               <div className="prdct-desc">
                 <div className="prdct-left">
-                  <div className="prdct-name">{product.name}</div>
+                  <div className="prdct-name">{product.product_name}</div>
                   <div className="prdct-category">{product.category}</div>
                 </div>
                 <div className="prdct-right">
-                  <div className="prdct-price">${product.price.toFixed(2)}</div>
+                  <div className="prdct-price">${product.product_price.toFixed(2)}</div>
                 </div>
               </div>
             </Link>

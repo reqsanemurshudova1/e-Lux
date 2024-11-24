@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import "./Cart.css";
-
+import { useNavigate } from "react-router-dom";
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -10,13 +10,16 @@ export default function Cart() {
 
   useEffect(() => {
     fetchCart();
+    // console.log(cart);
+    
   }, []);
+  const navigate = useNavigate();
+
 
   const fetchCart = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/cart", {
         headers: {
-          // aa etmisiz_)))))) daha doğrusu gpt edib həə? kasjdsftebiki
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       });
@@ -64,7 +67,7 @@ export default function Cart() {
       });
 
       if (response.ok) {
-        fetchCart(); // Sepeti güncelle
+        fetchCart();
       } else {
         console.error("Failed to remove product from cart");
       }
@@ -89,12 +92,19 @@ export default function Cart() {
       setSelectedItems([...selectedItems, index]);
     }
   };
+  const handleCheckout = () => {
+    
+      navigate("/checkout");
+    
+  };
 
   const calculateTotal = () => {
     return selectedItems
       .reduce(
         (total, index) =>
-          total + cart[index].product.price * cart[index].stock_count,
+          total +
+          (cart[index]?.product?.product_price || 0) *
+            (cart[index]?.stock_count || 1),
         0
       )
       .toFixed(2);
@@ -106,31 +116,99 @@ export default function Cart() {
       <div className="cart container">
         <h2>My Cart</h2>
         {cart.length > 0 ? (
-          <div>
-            <div className="cartContent">
-              <ul>
-                {cart.map((item, index) => (
-                  <li key={item.id}>
-                    <img src={item.product.image} alt={item.product.name} />
-                    <p>{item.product.name}</p>
-                    <p>Price: ${item.product.price}</p>
-                    <p>Quantity: {item.stock_count}</p>
-                    <button onClick={() => addToCart(item.product.id)}>
-                      +
-                    </button>
-                    <button onClick={() => removeFromCart(item.product.id)}>
-                      -
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div>
-                <h3>Total: ${calculateTotal()}</h3>
+          <div className="cartContent">
+            <ul className="cart-items">
+              <div className="check">
+                <label className="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={isAllSelected}
+                    onChange={handleSelectAll}
+                  />
+                  <div className="checkbox-box"></div>
+                </label>
+                <div className="all">Select All</div>
+                <div className="cart-Title">
+                  <h3>Product</h3>
+                  <h3>Price</h3>
+                  <h3>Quantity</h3>
+                </div>
               </div>
+
+              {cart.map((item, index) => (
+                <li key={item.id} className="cart-item">
+                  <label className="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.includes(index)}
+                      onChange={() => handleSelectItem(index)}
+                    />
+                    <div className="checkbox-box"></div>
+                  </label>
+                  <div className="cart-item-details">
+                    <div className="left">
+                      <img
+                        src={`http://localhost:8000/storage/${item.product.image}`}
+                        alt={item.product.product_name}
+                        width="50"
+                      />
+                      <div className="content">
+                        <div className="cart-item-name">
+                          {item.product.product_name}
+                        </div>
+                        <div className="cart-item-size">
+                          Size: {item.product.selected_size || "N/A"}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="center">
+                      <div className="cart-item-quantity">
+                        <button
+                          className="quantity-button"
+                          onClick={() => removeFromCart(item.product.id)}
+                        >
+                          -
+                        </button>
+                        <p className="quantity-display">
+                          <span>{item.stock_count}</span>
+                        </p>
+                        <button
+                          className="quantity-button"
+                          onClick={() => addToCart(item.product.id)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="right">
+                    <div className="cart-item-price">
+  ${ (item.product.product_price * item.stock_count).toFixed(2) }
+</div>
+
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="orderSum">
+              <h3>Order Summary</h3>
+              <p>
+                Subtotal: $<span>{calculateTotal()}</span>
+              </p>
+              <p>
+                Total: $<span>{calculateTotal()}</span>
+              </p>
+              <button className="checkout-button"  onClick={handleCheckout} >Checkout Now</button>
             </div>
           </div>
         ) : (
-          <p>Your cart is empty</p>
+          <div className="empty-cart">
+            <img src="/Assets/shopBag.svg" alt="Empty Cart" />
+            <span>Oops! Your cart is empty</span>
+            <button>
+              <a href="/product">Shop Now</a>
+            </button>
+          </div>
         )}
       </div>
       <Footer />
