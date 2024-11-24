@@ -8,15 +8,15 @@ import "./Details.css";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function Details() {
-  const { id } = useParams(); // URL'den ürün ID'sini al
-  const [selectedProduct, setSelectedProduct] = useState(null); // Seçilen ürün
-  const [suggestedProducts, setSuggestedProducts] = useState([]); // Önerilen ürünler
-  const [cart, setCart] = useState([]); // Sepet
-  const [selectedSize, setSelectedSize] = useState(""); // Seçilen beden
-  const [selectedColor, setSelectedColor] = useState(""); // Seçilen renk
-  const [mainImage, setMainImage] = useState(""); // Ana görüntü
+  const { id } = useParams(); 
+  const [selectedProduct, setSelectedProduct] = useState(null); 
+  const [suggestedProducts, setSuggestedProducts] = useState([]); 
+  const [cart, setCart] = useState([]); 
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState(""); 
+  const [mainImage, setMainImage] = useState("");
 
-  // Sepete ürün ekleme işlemi
+
   const addToCart = (product) => {
     if (!selectedSize || !selectedColor) {
       toast.dismiss();
@@ -49,7 +49,7 @@ export default function Details() {
     toast.success("Product added to cart");
   };
 
-  // Ürün detaylarını getirme
+ 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -64,7 +64,7 @@ export default function Details() {
             data.image ? `http://localhost:8000/storage/${data.image}` : "/Assets/default.jpg"
           );
 
-          // Aynı kategorideki diğer ürünleri öneri olarak filtrele
+         
           if (data.category) {
             const responseAll = await fetch("http://localhost:8000/api/products");
             const allProducts = await responseAll.json();
@@ -83,7 +83,6 @@ export default function Details() {
     fetchProductDetails();
   }, [id]);
 
-  // Sayfa ilk açıldığında sepeti yükle
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(savedCart);
@@ -140,43 +139,36 @@ export default function Details() {
           <div className="product-size">
             <div>Select Size:</div>
             <div className="size-options">
-              {Object.keys(selectedProduct.sizesInStock || {}).map((size) => (
-                <span
-                  key={size}
-                  className={`size-option ${
-                    size === selectedSize ? "selected" : ""
-                  } ${
-                    selectedProduct.sizesInStock[size]
-                      ? "in-stock"
-                      : "out-of-stock"
-                  }`}
-                  onClick={() => setSelectedSize(size)}
-                >
-                  {size}
-                </span>
-              ))}
-            </div>
+  {(selectedProduct.product_size || []).map((size) => (
+    <span
+      key={size}
+      className={`size-option ${size === selectedSize ? "selected" : ""}`}
+      onClick={() => setSelectedSize(size)}
+    >
+      {size}
+    </span>
+  ))}
+</div>
+
+
           </div>
           <div className="product-color">
             <div>Select Color:</div>
             <div className="color-options">
-              {Object.keys(selectedProduct.colors || {}).map((color) => (
-                <span
-                  key={color}
-                  className={`color-option ${
-                    color === selectedColor ? "selected" : ""
-                  } ${
-                    selectedProduct.colors[color] ? "in-stock" : "out-of-stock"
-                  }`}
-                  style={{
-                    backgroundColor: selectedProduct.colors[color]
-                      ? color.toLowerCase()
-                      : "#ddd",
-                  }}
-                  onClick={() => setSelectedColor(color)}
-                />
-              ))}
-            </div>
+  {(selectedProduct.product_color || []).map((color) => (
+    <span
+      key={color}
+      className={`color-option ${
+        color === selectedColor ? "selected" : ""
+      }`}
+      style={{
+        backgroundColor: color.toLowerCase(),
+      }}
+      onClick={() => setSelectedColor(color)}
+    />
+  ))}
+</div>
+
           </div>
           <div className="btn">
             <div className="product-btn">
