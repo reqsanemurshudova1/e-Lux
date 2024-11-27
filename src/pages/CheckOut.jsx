@@ -30,14 +30,17 @@ export default function CheckOut() {
     state: "",
     postalCode: "",
   });
+  console.log(selectedProducts);
+
 
   useEffect(() => {
     if (location.state?.selectedProducts) {
       setSelectedProducts(location.state.selectedProducts);
     }
     const total = location.state?.selectedProducts
-      .reduce((total, product) => total + product.price * product.quantity, 0)
-      .toFixed(2);
+    ?.reduce((total, product) => total + product.product_price * product.quantity, 0)
+    .toFixed(2) || 0;
+  
     setProductTotal(total);
     setTotalCost((parseFloat(total) + shippingCost).toFixed(2));
   }, [
@@ -69,16 +72,17 @@ export default function CheckOut() {
           },
           body: JSON.stringify({
             ...formData,
-            shippingCost,
+            shippingCost: parseFloat(shippingCost),
             selectedProducts,
           }),
         });
 
+        const result = await response.json();
         if (response.ok) {
-          toast.success("Shipping details saved successfully!");
+          toast.success(result.message || "Shipping details saved successfully!");
           navigate("/payment");
         } else {
-          toast.error("Failed to save shipping details.");
+          toast.error(result.message || "Failed to save shipping details.");
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -171,8 +175,50 @@ export default function CheckOut() {
             />
           </form>
           <div className="payMethod">
-            {/* DHL and FedEx Options */}
-            {/* Shipping cost settings */}
+            <div className="dhl">
+              <div className="left">
+                <div className="logo">
+                  {/* DHL logo SVG */}
+                </div>
+                <div className="text">
+                  <span>DHL</span>
+                  <span>3 business days</span>
+                </div>
+              </div>
+              <div className="right">
+                <span>FREE</span>
+                <label className="custom-checkbox">
+                  <input
+                    type="radio"
+                    name="shipping"
+                    onChange={() => setShippingCost(0)}
+                  />
+                  <div className="checkbox-box"></div>
+                </label>
+              </div>
+            </div>
+            <div className="fedex">
+              <div className="left">
+                <div className="logo">
+                  {/* Fedex logo SVG */}
+                </div>
+                <div className="text">
+                  <span>Fedex</span>
+                  <span>Next day</span>
+                </div>
+              </div>
+              <div className="right">
+                <span>$0.88</span>
+                <label className="custom-checkbox">
+                  <input
+                    type="radio"
+                    name="shipping"
+                    onChange={() => setShippingCost(0.88)}
+                  />
+                  <div className="checkbox-box"></div>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <div className="orderSummary">
@@ -187,11 +233,11 @@ export default function CheckOut() {
                 </div>
                 <div className="right">
                   <div className="infoProduct">
-                    <span className="title">{product.name}</span>
-                    <span className="size">Beiges: {product.size}</span>
+                    <span className="title">{product.product_name}</span>
+                    <span className="size">Beiges: {product.product_size}</span>
                   </div>
                   <div className="priceCheck">
-                    <span className="bold">${product.price.toFixed(2)}</span>
+                    <span className="bold">${product.product_price.toFixed(2)}</span>
                     <span>x{product.quantity}</span>
                   </div>
                 </div>
