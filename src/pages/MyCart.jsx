@@ -3,18 +3,23 @@ import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(
+    JSON.parse(localStorage.getItem("selectedItems")) || []
+  );
 
   useEffect(() => {
     fetchCart();
-    // console.log(cart);
-    
   }, []);
-  const navigate = useNavigate();
 
+  useEffect(() => {
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+  }, [selectedItems]);
+
+  const navigate = useNavigate();
 
   const fetchCart = async () => {
     try {
@@ -93,10 +98,26 @@ export default function Cart() {
     }
   };
   const handleCheckout = () => {
-    
-      navigate("/checkout");
-    
+    if (selectedItems.length === 0) {
+      console.error("No items selected for checkout");
+      return;
+    }
+  
+    const selectedProductsDetails = selectedItems
+      .filter((index) => cart[index]?.product)
+      .map((index) => ({
+        id: cart[index].product.id,
+        product_name: cart[index].product.product_name,
+        product_price: cart[index].product.product_price,
+        quantity: cart[index].stock_count,
+        image: `http://localhost:8000/storage/${cart[index].product.image}`,
+        product_size: cart[index].selected_size || "N/A",
+        product_color: cart[index].selected_color || "N/A",
+      }));
+  
+    navigate("/checkout", { state: { selectedProducts: selectedProductsDetails } });
   };
+  
 
   const calculateTotal = () => {
     return selectedItems
@@ -157,7 +178,9 @@ export default function Cart() {
                           {item.product.product_name}
                         </div>
                         <div className="cart-item-size">
-                          Size: {item.product.selected_size || "N/A"}
+                          Size: {item.selected_size || "N/A"}
+                          <br />
+                          Color: {item.selected_color || "N/A"}
                         </div>
                       </div>
                     </div>
@@ -181,10 +204,9 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="right">
-                    <div className="cart-item-price">
-  ${ (item.product.product_price * item.stock_count).toFixed(2) }
-</div>
-
+                      <div className="cart-item-price">
+                        ${(item.product.product_price * item.stock_count).toFixed(2)}
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -198,7 +220,9 @@ export default function Cart() {
               <p>
                 Total: $<span>{calculateTotal()}</span>
               </p>
-              <button className="checkout-button"  onClick={handleCheckout} >Checkout Now</button>
+              <button className="checkout-button" onClick={handleCheckout}>
+                Checkout Now
+              </button>
             </div>
           </div>
         ) : (

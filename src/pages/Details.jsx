@@ -12,11 +12,16 @@ export default function Details() {
   const [selectedProduct, setSelectedProduct] = useState(null); 
   const [suggestedProducts, setSuggestedProducts] = useState([]); 
   const [cart, setCart] = useState([]); 
-  const [selectedSize, setSelectedSize] = useState("");
+  //const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState(""); 
   const [mainImage, setMainImage] = useState("");
 
+  const [selectedSize, setSelectedSize] = useState(null);  // Default to null until a size is selected
 
+  const handleSizeSelect = (size) => {
+      setSelectedSize(size);  // Set the selected size when clicked
+      console.log("Selected Size:", size);  // Log to verify if it's updating correctly
+  };
   const addToCart = async (product) => {
     if (!selectedSize || !selectedColor) {
       toast.dismiss();
@@ -34,8 +39,9 @@ export default function Details() {
         },
         body: JSON.stringify({
           product_id: product.id, // Məhsulun ID-sini backend-ə göndəririk
-          size: selectedSize,
-          color: selectedColor,
+          //size: selectedSize,
+          selected_size: selectedSize,
+          selected_color: selectedColor,
           quantity: 1, // Məhsulun sayı
         }),
       });
@@ -133,11 +139,13 @@ export default function Details() {
             ))}
             {selectedProduct.rating}
           </div>
+
           <div className="product-price">
             {selectedProduct.product_price !== undefined
               ? `$${selectedProduct.product_price.toFixed(2)}`
               : "Price not available"}
           </div>
+          
           <div className="product-size">
             <div>Select Size:</div>
             <div className="size-options">
