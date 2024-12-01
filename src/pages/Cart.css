@@ -503,6 +503,10 @@ align-items: center;
 justify-content:center;
   gap: 5px;
 }
+.payPal .left span img{
+  width: 40px;
+  height: 40px;
+}
 .paymentForm input{
   width: 100%;
   padding: 16px;

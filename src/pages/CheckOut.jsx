@@ -76,11 +76,20 @@ export default function CheckOut() {
             selectedProducts,
           }),
         });
-
+  
         const result = await response.json();
         if (response.ok) {
           toast.success(result.message || "Shipping details saved successfully!");
-          navigate("/payment");
+  
+          // Payment sayfasına veri gönder
+          navigate("/payment", {
+            state: {
+              selectedProducts,
+              shippingCost,
+              productTotal,
+              totalCost,
+            },
+          });
         } else {
           toast.error(result.message || "Failed to save shipping details.");
         }
@@ -92,6 +101,7 @@ export default function CheckOut() {
       toast.error("Please fill in all fields");
     }
   };
+  
 
   return (
     <div>
@@ -224,25 +234,26 @@ export default function CheckOut() {
         <div className="orderSummary">
           <div className="title">Order Summary</div>
           <div className="products">
-            {selectedProducts.map((product, index) => (
-              <div className="product" key={index}>
-                <div className="left">
-                  <div className="img-container">
-                    <img src={product.image} alt={product.name} />
-                  </div>
-                </div>
-                <div className="right">
-                  <div className="infoProduct">
-                    <span className="title">{product.product_name}</span>
-                    <span className="size">Beiges: {product.product_size}</span>
-                  </div>
-                  <div className="priceCheck">
-                    <span className="bold">${product.product_price.toFixed(2)}</span>
-                    <span>x{product.quantity}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {selectedProducts && selectedProducts.map((product, index) => (
+  <div className="product" key={index}>
+    <div className="left">
+      <div className="img-container">
+        <img src={`http://localhost:8000/storage/${product.product_image || ""}`} alt={product.product_name || "Product"} />
+      </div>
+    </div>
+    <div className="right">
+      <div className="infoProduct">
+        <span className="title">{product.product_name || "N/A"}</span>
+        <span className="size">Beiges: {product.product_size || "N/A"}</span>
+      </div>
+      <div className="priceCheck">
+        <span className="bold">${(product.product_price || 0).toFixed(2)}</span>
+        <span>x{product.quantity || 0}</span>
+      </div>
+    </div>
+  </div>
+))}
+
           </div>
           <div className="payText">
             <div className="discount">
