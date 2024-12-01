@@ -26,6 +26,7 @@ export default function Cart() {
       const response = await fetch("http://localhost:8000/api/cart", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+
         },
       });
       if (response.ok) {
@@ -40,12 +41,20 @@ export default function Cart() {
   };
 
   const addToCart = async (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product.id === productId
+          ? { ...item, stock_count: item.stock_count + 1 }
+          : item
+      )
+    );
     try {
       const response = await fetch("http://localhost:8000/api/cart/store", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+
         },
         body: JSON.stringify({ product_id: productId }),
       });
@@ -59,8 +68,27 @@ export default function Cart() {
       console.error("Error adding to cart:", error);
     }
   };
+  const generateUniqueKey = (item) =>
+    `${item.product.id}_${item.selected_size || "default"}_${
+      item.selected_color || "default"
+    }`;
+  
 
-  const removeFromCart = async (productId) => {
+  const removeFromCart = async (productId, size, color) => {
+    // Dərhal UI-ni yeniləyin
+    const uniqueKey = `${productId}_${size || "default"}_${color || "default"}`;
+    setCart((prevCart) =>
+      prevCart.filter(
+        (item) =>
+          generateUniqueKey(item) !== uniqueKey ||
+          (item.stock_count > 1 && {
+            ...item,
+            stock_count: item.stock_count - 1,
+          })
+      )
+    );
+  
+    // API çağırışı
     try {
       const response = await fetch("http://localhost:8000/api/cart/remove", {
         method: "POST",
@@ -68,11 +96,15 @@ export default function Cart() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
-        body: JSON.stringify({ product_id: productId }),
+        body: JSON.stringify({
+          product_id: productId,
+          selected_size: size,
+          selected_color: color,
+        }),
       });
-
+  
       if (response.ok) {
-        fetchCart();
+        fetchCart(); // Məlumatları yenilə
       } else {
         console.error("Failed to remove product from cart");
       }
@@ -80,6 +112,7 @@ export default function Cart() {
       console.error("Error removing from cart:", error);
     }
   };
+  
 
   const handleSelectAll = () => {
     if (isAllSelected) {
@@ -97,6 +130,7 @@ export default function Cart() {
       setSelectedItems([...selectedItems, index]);
     }
   };
+
   const handleCheckout = () => {
     if (selectedItems.length === 0) {
       console.error("No items selected for checkout");
@@ -110,14 +144,13 @@ export default function Cart() {
         product_name: cart[index].product.product_name,
         product_price: cart[index].product.product_price,
         quantity: cart[index].stock_count,
-        image: `http://localhost:8000/storage/${cart[index].product.image}`,
+        product_image: cart[index].product.image,
         product_size: cart[index].selected_size || "N/A",
         product_color: cart[index].selected_color || "N/A",
       }));
   
     navigate("/checkout", { state: { selectedProducts: selectedProductsDetails } });
   };
-  
 
   const calculateTotal = () => {
     return selectedItems
@@ -188,7 +221,7 @@ export default function Cart() {
                       <div className="cart-item-quantity">
                         <button
                           className="quantity-button"
-                          onClick={() => removeFromCart(item.product.id)}
+                          onClick={() => removeFromCart(item.product.id, item.selected_size, item.selected_color)}
                         >
                           -
                         </button>

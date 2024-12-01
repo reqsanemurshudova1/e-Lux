@@ -118,6 +118,8 @@ export default function Navbar() {
       console.error("Error fetching cart:", error);
     }
   };
+
+
   
 
   return (
