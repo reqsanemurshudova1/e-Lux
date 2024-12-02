@@ -5,7 +5,7 @@ import { useContext } from "react";
 import "./Modal.css";
 
 export default function PaymentModal() {
-    const { selectedProducts, productTotal, shippingCost, totalCost } =
+    const { selectedProducts, productTotal, shippingCost, totalCost,onClose } =
     useContext(CheckoutContext); 
   return (
     <div className='payment-modal'> 
@@ -53,11 +53,11 @@ export default function PaymentModal() {
            </div>
            <div className="right">
              <div className="infoProduct">
-               <span className="title">{product.name}</span>
-               <span className="size">Beiges:{product.size}</span>
+               <span className="title">{product.product_name}</span>
+               <span className="size">Beiges:{product.product_size}</span>
              </div>
              <div className="priceCheck">
-               <span className="bold">${product.price.toFixed(2)}</span>
+               <span className="bold">${product.product_price.toFixed(2)}</span>
                <span>x{product.quantity}</span>
              </div>
            </div>
