@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
+import axios from "axios";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,19 @@ export default function Navbar() {
     };
     fetchProducts();
   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+     
+      axios
+        .get("http://localhost:8000/api/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => setUser({ name: response.data.name }))
+        .catch((err) => console.error("Failed to fetch user info:", err));
+    }
+  }, []);
+  
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -95,6 +109,12 @@ export default function Navbar() {
     setDropdownOpen(false); // Dropdownu bağla
   };
   const goToCart = async () => {
+    if (!user) {
+      alert("Please log in to view your cart.");
+      toggleLogin(); // Login modalını açar
+      return;
+    }
+  
     try {
       const response = await fetch("http://localhost:8000/api/cart", {
         headers: {
@@ -118,6 +138,7 @@ export default function Navbar() {
       console.error("Error fetching cart:", error);
     }
   };
+  
 
 
   
