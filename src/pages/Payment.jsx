@@ -42,14 +42,12 @@ export default function Payment() {
     };
     fetchPaymentMethods();
   }, []);
-
   const handlePaymentClick = async () => {
-
     if (!selectedPaymentMethod) {
       alert("Please select a payment method");
       return;
     }
-
+  
     const payload = {
       paymentMethodId: selectedPaymentMethod,
       card_details: selectedPaymentMethod === 1 ? card_details : null,
@@ -61,13 +59,17 @@ export default function Payment() {
         quantity: product.quantity,
       })),
     };
-  console.log("Payload:", payload);
+  
+    console.log("Payload:", payload);
+    
     try {
       setLoading(true);
       const response = await axios.post("http://localhost:8000/api/process-payment", payload);
+      console.log("Response from backend:", response.data); 
+      
       if (response.data.success) {
-
-        setModalOpen(true); // Modalı aç
+        alert("Payment successful!");
+        setModalOpen(true); 
       }
     } catch (error) {
       console.error("Payment error:", error.response?.data || error.message);
@@ -76,6 +78,7 @@ export default function Payment() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div>
