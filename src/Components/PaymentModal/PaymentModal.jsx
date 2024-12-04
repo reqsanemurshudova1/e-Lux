@@ -5,7 +5,7 @@ import { useContext } from "react";
 import "./Modal.css";
 
 export default function PaymentModal() {
-    const { selectedProducts, productTotal, shippingCost, totalCost,onClose } =
+    const { selectedProducts, productTotal, shippingCost, totalCost ,selectedPaymentMethod} =
     useContext(CheckoutContext); 
   return (
     <div className='payment-modal'> 
@@ -48,7 +48,7 @@ export default function PaymentModal() {
            <div className="product" key={index}>
            <div className="left">
              <div className="img-container">
-               <img src={product.image} alt={product.name} />
+               <img src={`http://localhost:8000/storage/${product.product_image}`}alt={product.product_name} />
              </div>
            </div>
            <div className="right">

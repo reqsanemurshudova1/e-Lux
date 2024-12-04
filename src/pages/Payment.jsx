@@ -60,16 +60,24 @@ export default function Payment() {
       })),
     };
   
-    console.log("Payload:", payload);
+ 
     
     try {
       setLoading(true);
       const response = await axios.post("http://localhost:8000/api/process-payment", payload);
-      console.log("Response from backend:", response.data); 
+   ;
+      // console.log(setModalOpen(true));
       
-      if (response.data.success) {
-        alert("Payment successful!");
+      
+      if (response.data.status) {
+      
         setModalOpen(true); 
+    
+        
+      
+        
+        
+        
       }
     } catch (error) {
       console.error("Payment error:", error.response?.data || error.message);
@@ -211,6 +219,7 @@ export default function Payment() {
           shippingCost={shippingCost}
           productTotal={productTotal}
           totalCost={totalCost}
+          selectedPaymentMethod={selectedPaymentMethod}
           onClose={closeModal}
         />
       )}
