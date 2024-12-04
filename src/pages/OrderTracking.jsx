@@ -1,31 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/HomePage/Navbar/Navbar';
 import Footer from '../Components/HomePage/Footer/Footer';
 import './Cart.css';
-const order = {
-  id: 1,
-  date: "Thursday 13, 2022",
-  refNumber: "1234567890",
-  products: [
-    {
-      name: "Product 1",
-      image: "/Assets/T-Shirt.png",
-      price: 29.99,
-      color: "Red",
-      size: "M"
-    },
-    {
-      name: "Product 2",
-      image: "/Assets/dress.png",
-      price: 39.99,
-      color: "Blue",
-      size: "L"
-    }
-  ],
-  
-};
 
 export default function OrderTracking() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/orders', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+          },
+        });
+        const data = await response.json();
+        if (data.success) {
+          setOrders(data.data);
+        } else {
+          console.error('Error fetching orders:', data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -42,18 +45,22 @@ export default function OrderTracking() {
             </tr>
           </thead>
           <tbody>
-            {order.products.map((product, index) => (
+            {orders.map((order, index) => (
               <tr key={index}>
                 <td className="product-info">
-                  <img src={product.image} alt={product.name} />
-                  <div>
-                    <p>{product.name}</p>
-                    <p>Size <span>{product.size}</span></p>
-                  </div>
+                  {order.order_details.map((product, idx) => (
+                    <div key={idx}>
+                      <img src={product.image} alt={product.product_name} />
+                      <div>
+                        <p>{product.product_name}</p>
+                        <p>Size <span>{product.product_size}</span></p>
+                      </div>
+                    </div>
+                  ))}
                 </td>
-                <td>{order.date}</td>
-                <td>{order.refNumber}</td>
-                <td>${product.price}</td>
+                <td>{order.created_at}</td>
+                <td>{order.uid}</td>
+                <td>${order.total}</td>
                 <td>
                   <button className="track-order-button">Track order</button>
                 </td>
