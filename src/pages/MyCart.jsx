@@ -168,7 +168,7 @@ export default function Cart() {
     <div>
       <Navbar />
       <div className="cart container">
-        <h2>My Cart</h2>
+        <h2>Mənim səbətim</h2>
         {cart.length > 0 ? (
           <div className="cartContent">
             <ul className="cart-items">
@@ -181,11 +181,11 @@ export default function Cart() {
                   />
                   <div className="checkbox-box"></div>
                 </label>
-                <div className="all">Select All</div>
+                <div className="all">Hamısını seç</div>
                 <div className="cart-Title">
-                  <h3>Product</h3>
-                  <h3>Price</h3>
-                  <h3>Quantity</h3>
+                  <h3>Məhsul</h3>
+                  <h3>Qiymət</h3>
+                  <h3>Sayı</h3>
                 </div>
               </div>
 
@@ -211,9 +211,9 @@ export default function Cart() {
                           {item.product.product_name}
                         </div>
                         <div className="cart-item-size">
-                          Size: {item.selected_size || "N/A"}
+                          Ölçü: {item.selected_size || "N/A"}
                           <br />
-                          Color: {item.selected_color || "N/A"}
+                          Rəng: {item.selected_color || "N/A"}
                         </div>
                       </div>
                     </div>
@@ -246,26 +246,28 @@ export default function Cart() {
               ))}
             </ul>
             <div className="orderSum">
-              <h3>Order Summary</h3>
-              <p>
-                Subtotal: $<span>{calculateTotal()}</span>
-              </p>
-              <p>
-                Total: $<span>{calculateTotal()}</span>
-              </p>
-              <button className="checkout-button" onClick={handleCheckout}>
-                Checkout Now
-              </button>
-            </div>
+  <h3>Sifariş Xülasəsi</h3>
+  <p>
+    Alt cəm: $<span>{calculateTotal()}</span>
+  </p>
+  <p>
+    Ümumi: $<span>{calculateTotal()}</span>
+  </p>
+  <button className="checkout-button" onClick={handleCheckout}>
+    İndi Ödəniş Et
+  </button>
+</div>
+
           </div>
         ) : (
           <div className="empty-cart">
-            <img src="/Assets/shopBag.svg" alt="Empty Cart" />
-            <span>Oops! Your cart is empty</span>
-            <button>
-              <a href="/product">Shop Now</a>
-            </button>
-          </div>
+          <img src="/Assets/shopBag.svg" alt="Boş Səbət" />
+          <span>Eyy! Səbətiniz boşdur</span>
+          <button>
+            <a href="/product">İndi Alış-Veriş Edin</a>
+          </button>
+        </div>
+        
         )}
       </div>
       <Footer />

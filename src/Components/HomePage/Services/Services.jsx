@@ -48,23 +48,23 @@ export default function Services() {
     fetchData();
   }, []);
   return (
-    <div className="services container">
-      <div className="our-services">
-        <h1>{mainData?.header ? mainData.header : 'Our Services'}</h1>
-        <p>
-          {mainData?.description ? mainData.description : 'We understand the importance of a seamless and enjoyable shopping\n' +
-              '          experience.'}
-        </p>
+  <div className="services container">
+  <div className="our-services">
+    <h1>{mainData?.header ? mainData.header : 'Xidmətlərimiz'}</h1>
+    <p>
+      {mainData?.description ? mainData.description : 'Biz mükəmməl və zövqlü alış-veriş təcrübəsinin vacibliyini anlayırıq.'}
+    </p>
+  </div>
+  <div className="service-cards">
+    {itemData.map((service) => (
+      <div className="card" key={service.id}>
+        <img src={service.icon} alt="" />
+        <h3>{service.header}</h3>
+        <p>{service.description}</p>
       </div>
-      <div className="service-cards">
-        {itemData.map((service) => (
-          <div className="card" key={service.id}>
-            <img src={service.icon} alt="" />
-            <h3>{service.header}</h3>
-            <p>{service.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   );
 }

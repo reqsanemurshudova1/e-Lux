@@ -4,29 +4,30 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
 const comments = [
   {
-    text: "I recently purchased the most beautiful dress from this brand and I couldn't be happier with my purchase! The dress is made of high-quality materials and fits like a glove. The color is so vibrant and the cut is extremely flattering.",
+    text: "Bu markadan ən gözəl paltarı yeni aldım və alışımda heç bir peşmançılığım yoxdur! Paltar yüksək keyfiyyətli materiallardan hazırlanıb və əla uyğun gəlir. Rəngi çox canlıdır və kəsimi çox təsir edicidir.",
     author: "James Lipshutz",
     imgSrc: "./Assets/quote.jpg"
   },
   {
-    text: "I absolutely love my new shoes! They are so comfortable and stylish at the same time. The quality is amazing and they have held up really well after multiple wears. I especially love the attention to detail in the design - the little touches really make them stand out.",
+    text: "Yeni ayaqqabılarımı tamamilə sevirəm! Həm çox rahatdır, həm də şıx görünürlər. Keyfiyyəti inanılmazdır və bir neçə dəfə geyildikdən sonra hələ də yaxşı vəziyyətdədir. Xüsusilə dizayndakı detallara diqqət etməyimi çox bəyənirəm - kiçik toxunuşlar onları fərqləndirir.",
     author: "Giana Dokidis",
     imgSrc: "./Assets/quote.jpg"
   },
   {
-    text: "I've been using my new handbag for a few weeks now and I'm absolutely in love with it! The size is perfect - it's big enough to hold all of my essentials but not so big that it's cumbersome to carry around.",
+    text: "Yeni çantamı bir neçə həftədir istifadə edirəm və ona tamamilə aşiqəm! Ölçüsü mükəmməldir - bütün vacib əşyalarımı daşıyacaq qədər böyükdür, amma daşımaqda çətinlik yaratacaq qədər böyük deyil.",
     author: "Jordyn Botosh",
     imgSrc: "./Assets/quote.jpg"
   },
   {
-    text: "I absolutely love my new shoes! They are so comfortable and stylish at the same time. The quality is amazing and they have held up really well after multiple wears. I especially love the attention to detail in the design - the little touches really make them stand out.",
+    text: "Yeni ayaqqabılarımı tamamilə sevirəm! Həm çox rahatdır, həm də şıx görünürlər. Keyfiyyəti inanılmazdır və bir neçə dəfə geyildikdən sonra hələ də yaxşı vəziyyətdədir. Xüsusilə dizayndakı detallara diqqət etməyimi çox bəyənirəm - kiçik toxunuşlar onları fərqləndirir.",
     author: "Giana Dokidis",
     imgSrc: "./Assets/quote.jpg"
   },
   {
-    text: "I've been using my new handbag for a few weeks now and I'm absolutely in love with it! The size is perfect - it's big enough to hold all of my essentials but not so big that it's cumbersome to carry around.",
+    text: "Yeni çantamı bir neçə həftədir istifadə edirəm və ona tamamilə aşiqəm! Ölçüsü mükəmməldir - bütün vacib əşyalarımı daşıyacaq qədər böyükdür, amma daşımaqda çətinlik yaratacaq qədər böyük deyil.",
     author: "Jordyn Botosh",
     imgSrc: "./Assets/quote.jpg"
   },
@@ -34,11 +35,10 @@ const comments = [
 
 export default function Comments() {
   return (
-
     <div className='comments container'>
        <div className="head">
-        <div className="title">What our clients have to say!</div>
-        <div className="content">80+ Molestie hendrerit amet sapien volutpat.</div>
+        <div className="title">Müştərilərimizin nə dediyini oxuyun!</div>
+        <div className="content">80+ müxtəlif məhsullar ilə geniş seçim imkanı.</div>
       </div>
          <Swiper
         slidesPerView={3}
@@ -84,13 +84,7 @@ export default function Comments() {
           </SwiperSlide>
         ))}
 
-
       </Swiper>
-     
-      
-
-      
-      
     </div>
   );
 }

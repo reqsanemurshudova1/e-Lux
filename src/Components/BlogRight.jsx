@@ -4,10 +4,10 @@ export default function BlogRight({ blogData }) {
   return (
     <div className="blog-right">
       <div className="searchBlog">
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Axtar" />
       </div>
       <div className="category-list">
-        <h2>Categories</h2>
+        <h2>Kategoriyalar</h2>
         <ul>
           <li>Lifestyle</li>
           <li>Promo</li>
@@ -19,7 +19,7 @@ export default function BlogRight({ blogData }) {
         </ul>
       </div>
       <div className="popular-blog">
-        <div className="popular-blog-title">Popular Article</div>
+        <div className="popular-blog-title">Məhşur bloglar</div>
         {blogData.slice(0, 4).map((blog, index) => (
           <div key={index} className="popular-blog-item">
             <div className="popular-blog-img">
@@ -36,7 +36,7 @@ export default function BlogRight({ blogData }) {
         ))}
       </div>
       <div className="popular-author">
-        <div className="popular-author-title">Popular Author</div>
+        <div className="popular-author-title">Məhşur müəlliflər</div>
         {blogData.slice(0, 4).map((author, index) => (
           <div key={index} className="popular-author-item">
             <div className="popular-author-img">
@@ -48,7 +48,7 @@ export default function BlogRight({ blogData }) {
                 {author.authorArticles} Articles
               </div>
             </div>
-            <button className="follow-button">Follow</button>
+            <button className="follow-button">İzlə</button>
           </div>
         ))}
       </div>

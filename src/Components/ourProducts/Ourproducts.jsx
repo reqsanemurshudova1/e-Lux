@@ -63,7 +63,7 @@ export default function Ourproducts() {
 
   return (
     <div className='ourproducts container'>
-      <div className='productTitle'>Our Products</div>
+      <div className='productTitle'>Bizim məhsullar</div>
       <div className='category'>
         <div className='gen-category'>
           <select className='gender' onChange={(e) => handleGenderChange(e.target.value)}>
@@ -104,7 +104,7 @@ export default function Ourproducts() {
       </div>
 
       <div className="prdct-btn">
-        <button onClick={handleSeeAllProducts}>See All Products</button>
+        <button onClick={handleSeeAllProducts}>Bütün məhsullar </button>
       </div>
     </div>
   );
