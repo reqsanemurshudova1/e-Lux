@@ -11,37 +11,33 @@ export default function Footer() {
             <span>LUX</span>
           </div>
           <div className="text">
-            Finding your fashion has never been easier. Browse the best
-            selection of famous fashion brands that suit your style and
-            preferences.
-          </div>
-        </div>
+          Moda dünyasında ən yaxşı brendlərin kolleksiyasını kəşf edərək, öz üslubunuza və zövqünüzə uyğun ən mükəmməl parçaları tapmaq heç vaxt bu qədər asan olmamışdı.  </div> </div>
         <div className="menu">
-          <div className="title">Menu</div>
+          <div className="title">Menyu</div>
           <div className="text">
             <ul>
-              <li>Men</li>
-              <li>Women</li>
-              <li><Link to="/order">Order Tracking </Link></li>
+              <li>Kişilər</li>
+              <li>Qadınlar</li>
+              <li><Link to="/order">Sifariş İzləmə</Link></li>
               <li>Blog</li>
             </ul>
           </div>
         </div>
         <div className="FAQ">
-          <div className="title">About</div>
+          <div className="title">Haqqında</div>
           <div className="text">
             <ul>
-              <li>FAQ</li>
-              <li>Privacy Policy</li>
-              <li>Term of Conditsions</li>
+              <li>Tez-tez verilən suallar (FAQ)</li>
+              <li>Gizlilik Siyasəti</li>
+              <li>Şərtlər və Qaydalar</li>
             </ul>
           </div>
         </div>
         <div className="connect">
-          <div className="title">Connect</div>
+          <div className="title">Əlaqə</div>
           <div className="text">
             <ul>
-              <li>Contact us</li>
+              <li>Bizimlə əlaqə</li>
               <li>Instagram</li>
               <li>Facebook</li>
               <li>Twitter</li>
@@ -49,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="payment">
-          <div className="title">Payment Method</div>
+          <div className="title">Ödəniş Metodu</div>
           <div className="card-images">
             <ul>
               <li>
@@ -69,7 +65,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="copy">© 2022 Company Name® Global Inc.</div>
+      <div className="copy">© 2024 E_Luxı® Global Inc.</div>
     </div>
   );
 }

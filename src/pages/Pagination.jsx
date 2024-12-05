@@ -9,7 +9,7 @@ const Pagination = ({ pageNumbers, currentPage, paginate, nextPage, prevPage }) 
       <ul className="pagination-list">
         <li className={`pagination-item ${currentPage === 1 ? 'disabled' : ''}`}>
           <a onClick={prevPage} href="#!" className="pagination-link1">
-            <img src="./Assets/left.svg" alt="Previous" /> Previous
+            <img src="./Assets/left.svg" alt="Previous" /> Əvvəlki
           </a>
         </li>
         {pageNumbers.map(number => (
@@ -23,7 +23,7 @@ const Pagination = ({ pageNumbers, currentPage, paginate, nextPage, prevPage }) 
         ))}
         <li className={`pagination-item ${currentPage === pageNumbers.length ? 'disabled' : ''}`}>
           <a onClick={nextPage} href="#!" className="pagination-link1">
-            Next <img src="./Assets/right.svg" alt="Next" />
+          Növbəti<img src="./Assets/right.svg" alt="Next" />
           </a>
         </li>
       </ul>

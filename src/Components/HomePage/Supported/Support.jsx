@@ -34,7 +34,7 @@ export default function Support() {
     return (
     <div className='support container'>
       <div className="support-title">
-        We Are Supported By
+      Bizə Dəstək Olan Brendlər
       </div>
       <div className="support-logos">
         {data.map((logo, index) => (
