@@ -128,12 +128,12 @@ const FilterModal = ({
             </button>
             {openAccordions.includes(key) && (
               <div className="accordion-content">
-                {options.map((option) => (
+                {options.map((option,index) => (
                   <label key={option} className={`filter-option ${filterValues[key]?.includes(option) ? "selected" : ""}`}>
                     <input
                       type="checkbox"
                       name={key}
-                      value={option}
+                      value={index}
                       checked={filterValues[key]?.includes(option) || false}
                       onChange={handleChange}
                     />

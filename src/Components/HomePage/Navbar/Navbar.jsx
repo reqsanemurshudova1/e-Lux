@@ -22,7 +22,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/product.json");
+        const response = await fetch("http://localhost:8000/api/products");
         const data = await response.json();
         setProducts(data.products || data);
       } catch (error) {
@@ -43,7 +43,6 @@ export default function Navbar() {
         .catch((err) => console.error("Failed to fetch user info:", err));
     }
   }, []);
-  
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -72,7 +71,7 @@ export default function Navbar() {
 
     if (query.length > 0) {
       const results = products.filter((item) =>
-        item.name.toLowerCase().includes(query.toLowerCase())
+        item.product_name.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
     } else {
@@ -260,11 +259,11 @@ export default function Navbar() {
                     <img src={item.image} alt={item.name} />
                     <div className="search-result-details">
                       <div className="left">
-                        <p>{item.name}</p>
-                        <p>{item.category}</p>
+                        <p>{item.product_name}</p>
+                        <p>{item.fit}</p>
                       </div>
                       <div className="right">
-                        <p>$ {item.price}</p>
+                        <p>$ {item.product_price}</p>
                       </div>
                     </div>
                   </div>

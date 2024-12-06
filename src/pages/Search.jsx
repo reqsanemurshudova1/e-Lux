@@ -26,8 +26,9 @@ export default function Search() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/product.json");
+        const response = await fetch("http://localhost:8000/api/products");
         const data = await response.json();
+        console.log(data)
         setProducts(data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -39,7 +40,7 @@ export default function Search() {
   useEffect(() => {
     if (query) {
       const results = products.filter(product =>
-        product.name.toLowerCase().includes(query.toLowerCase())
+        product.product_name.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredProducts(results);
     } else {
@@ -161,14 +162,14 @@ export default function Search() {
           {currentProducts.map((product) => (
             <Link to={`/product/${product.id}/details`} key={product.id}>
               <div className="search-result1">
-                <img src={product.image} alt={product.name} />
+                <img src={product.image} alt={product.product_name} />
                 <div className="search-result-details1">
                   <div className="left1">
-                    <p >{product.name}</p>
-                    <p>{product.category}</p>
+                    <p >{product.product_name}</p>
+                    <p>{product.fabric}</p>
                   </div>
                   <div className="right1">
-                    <p>$ {product.price}</p>
+                    <p>$ {product.product_price}</p>
                   </div>
                 </div>
               </div>
