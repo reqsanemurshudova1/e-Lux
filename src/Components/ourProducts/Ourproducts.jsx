@@ -5,47 +5,73 @@ import './Ourproducts.css';
 export default function Ourproducts() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(0);
   const [selectedGender, setSelectedGender] = useState('All');
   const [showAllProducts, setShowAllProducts] = useState(false);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/api/products");
-        const data = await response.json();
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/products");
+      const data = await response.json();
 
-       
-        const transformedData = data.products.map(product => ({
-          id: product.id,
-          name: product.product_name,
-          price: product.product_price,
-          category: product.category ? product.category.category_name : 'Unknown',
-          image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg', 
-        }));
 
-        setProducts(transformedData);
-        setFilteredProducts(transformedData.slice(0, 3)); 
+      const transformedData = data.products.map(product => ({
+        id: product.id,
+        name: product.product_name,
+        price: product.product_price,
+        category: product.category ? product.category.category_name : 'Unknown',
+        image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+      }));
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch products');
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
+      setProducts(transformedData);
+      setFilteredProducts(transformedData.slice(0, 3));
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
   }, []);
-  
 
   useEffect(() => {
-    const filtered = products.filter(product => 
-      (selectedCategory === 'All' || product.category === selectedCategory) &&
-      (selectedGender === 'All' || product.gender === selectedGender)
-    );
-    setFilteredProducts(showAllProducts ? filtered : filtered.slice(0, 3));
-  }, [selectedCategory, selectedGender, products, showAllProducts]);
+    const fetchProductsForCategory = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/product/category/" + selectedCategory);
+        const data = await response.json();
+
+        if (data.products) {
+          const transformedData = data.products.map(product => ({
+            id: product.id,
+            name: product.product_name,
+            price: product.product_price,
+            category: product.category ? product.category.category_name : 'Unknown',
+            image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+          }));
+
+          setProducts(transformedData);
+          setFilteredProducts(transformedData)
+        } else {
+          setProducts([]);
+          setFilteredProducts([])
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    console.log(selectedCategory)
+    if (selectedCategory != 0) {
+      fetchProductsForCategory();
+    } else {
+      fetchProducts()
+    }
+
+  }, [selectedCategory]);
+
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -67,19 +93,19 @@ export default function Ourproducts() {
       <div className='category'>
         <div className='gen-category'>
           <select className='gender' onChange={(e) => handleGenderChange(e.target.value)}>
-            <option value='All'>All</option>
-            <option value='Women'>Women</option>
-            <option value='Men'>Men</option>
-            <option value='Kids'>Kids</option>
-            <option value='Unisex'>Unisex</option>
+            <option value='0'>All</option>
+            <option value='1'>Women</option>
+            <option value='2'>Men</option>
+            <option value='3'>Kids</option>
+            <option value='4'>Unisex</option>
           </select>
           <img src='/Assets/arrow.svg' alt='arrow' />
         </div>
-        <div className={`all ${selectedCategory === 'All' ? 'active' : ''}`} onClick={() => handleCategoryChange('All')}>All</div>
-        <div className={`t-shirt ${selectedCategory === 'T-Shirt' ? 'active' : ''}`} onClick={() => handleCategoryChange('T-Shirt')}>T-Shirt</div>
-        <div className={`shirt ${selectedCategory === 'Shirt' ? 'active' : ''}`} onClick={() => handleCategoryChange('Shirt')}>Shirt</div>
-        <div className={`pants ${selectedCategory === 'Pants' ? 'active' : ''}`} onClick={() => handleCategoryChange('Pants')}>Pants</div>
-        <div className={`accessories ${selectedCategory === 'Accessories' ? 'active' : ''}`} onClick={() => handleCategoryChange('Accessories')}>Accessories</div>
+        <div className={`all ${selectedCategory === '0' ? 'active' : ''}`} onClick={() => handleCategoryChange('0')}>All</div>
+        <div className={`t-shirt ${selectedCategory === '1' ? 'active' : ''}`} onClick={() => handleCategoryChange('1')}>T-Shirt</div>
+        <div className={`shirt ${selectedCategory === '2' ? 'active' : ''}`} onClick={() => handleCategoryChange('2')}>Shirt</div>
+        <div className={`pants ${selectedCategory === '3' ? 'active' : ''}`} onClick={() => handleCategoryChange('3')}>Pants</div>
+        <div className={`accessories ${selectedCategory === '4' ? 'active' : ''}`} onClick={() => handleCategoryChange('4')}>Accessories</div>
       </div>
 
       <div className='product-cards1'>
