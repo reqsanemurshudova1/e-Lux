@@ -6,6 +6,7 @@ import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
 import FilterModal from "../Components/HomePage/FilterModal/FilterModal";
 import Pagination from "../pages/Pagination/";
 import "./Product.css";
+import axios from "axios";
 
 export default function Product() {
     const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ export default function Product() {
     const [selectedCategory, setSelectedCategory] = useState(0);
     const [selectedGender, setSelectedGender] = useState('All');
     const [showAllProducts, setShowAllProducts] = useState(false);
+    const [filters, setFilters] = useState({})
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false); // Filter modal state
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12);
@@ -21,6 +23,30 @@ export default function Product() {
     for (let i = 1; i <= Math.ceil(filteredProducts.length / productsPerPage); i++) {
         pageNumbers.push(i);
     }
+
+    const filterProducts = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/api/filter-products', filters);
+            if(response.data.products && response.data.products !== undefined) {
+                const transformedData = response.data.products.map(product => ({
+                    id: product.id,
+                    name: product.product_name,
+                    price: product.product_price,
+                    category: product.category ? product.category.category_name : 'Unknown',
+                    image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+                }));
+                setProducts(transformedData);
+                setFilteredProducts(transformedData);
+            }
+            else{
+                setProducts([]);
+                setFilteredProducts([]);
+            }
+        } catch (error) {
+            console.error(error.response?.data?.message || 'Error filtering products');
+        }
+    };
+
 
     const openFilterModal = () => setIsFilterModalOpen(true);
     const closeFilterModal = () => setIsFilterModalOpen(false);
@@ -31,6 +57,12 @@ export default function Product() {
             setSelectedCategory(value);
         } else if (name === "gender") {
             setSelectedGender(value);
+        }
+        else{
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                [name]: value
+            }));
         }
     };
 
@@ -62,6 +94,13 @@ export default function Product() {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    useEffect(() => {
+
+        if(filters){
+            filterProducts();
+        }
+    }, [filters]);
 
 
     useEffect(() => {
