@@ -110,10 +110,10 @@ export default function Details() {
             {selectedProduct.images?.map((img, index) => (
               <img
                 key={index}
-                src={`http://localhost:8000/storage/${img}`}
+                src={`http://localhost:8000/storage/${other_photos}`}
                 alt={`Product detail ${index}`}
                 className={`thumbnail ${img === mainImage ? "active" : ""}`}
-                onClick={() => setMainImage(`http://localhost:8000/storage/${img}`)}
+                onClick={() => setMainImage(`http://localhost:8000/storage/${other_photos}`)}
               />
             ))}
           </div>
