@@ -111,79 +111,80 @@ export default function CheckOut() {
       <Navbar />
       <div className="checkOut container">
         <div className="form">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="country">Select country</label>
-            <select
-              name="country"
-              id="country"
-              value={formData.country}
-              onChange={handleInputChange}
-            >
-              <option value="">Select country</option>
-              <option value="Azerbaycan">Azerbaycan</option>
-              <option value="Turkiye">Türkiye</option>
-              <option value="Almanya">Almanya</option>
-            </select>
+        <form onSubmit={handleSubmit}>
+  <label htmlFor="country">Ölkəni seçin</label>
+  <select
+    name="country"
+    id="country"
+    value={formData.country}
+    onChange={handleInputChange}
+  >
+    <option value="">Ölkəni seçin</option>
+    <option value="Azerbaycan">Azərbaycan</option>
+    <option value="Turkiye">Türkiyə</option>
+    <option value="Almanya">Almaniya</option>
+  </select>
 
-            <label>Shipping Address</label>
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Full Name"
-              value={formData.fullName}
-              onChange={handleInputChange}
-            />
-            <div className="info">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-              <input
-                type="text"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <input
-              type="text"
-              name="streetAddress"
-              placeholder="Enter street name and house number"
-              value={formData.streetAddress}
-              onChange={handleInputChange}
-            />
-            <div className="city-info">
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleInputChange}
-              />
-              <select
-                name="state"
-                id="state"
-                value={formData.state}
-                onChange={handleInputChange}
-              >
-                <option value="">State</option>
-                <option value="State1">State1</option>
-                <option value="State2">State2</option>
-                <option value="State3">State3</option>
-              </select>
-            </div>
-            <input
-              type="text"
-              name="postalCode"
-              placeholder="Postal code"
-              value={formData.postalCode}
-              onChange={handleInputChange}
-            />
-          </form>
+  <label>Çatdırılma ünvanı</label>
+  <input
+    type="text"
+    name="fullName"
+    placeholder="Tam adınızı daxil edin"
+    value={formData.fullName}
+    onChange={handleInputChange}
+  />
+  <div className="info">
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      value={formData.email}
+      onChange={handleInputChange}
+    />
+    <input
+      type="text"
+      name="phoneNumber"
+      placeholder="Telefon nömrəsi"
+      value={formData.phoneNumber}
+      onChange={handleInputChange}
+    />
+  </div>
+  <input
+    type="text"
+    name="streetAddress"
+    placeholder="Küçənin adı və ev nömrəsini daxil edin"
+    value={formData.streetAddress}
+    onChange={handleInputChange}
+  />
+  <div className="city-info">
+    <input
+      type="text"
+      name="city"
+      placeholder="Şəhər"
+      value={formData.city}
+      onChange={handleInputChange}
+    />
+    <select
+      name="state"
+      id="state"
+      value={formData.state}
+      onChange={handleInputChange}
+    >
+      <option value="">Bölgə</option>
+      <option value="State1">Bölgə1</option>
+      <option value="State2">Bölgə2</option>
+      <option value="State3">Bölgə3</option>
+    </select>
+  </div>
+  <input
+    type="text"
+    name="postalCode"
+    placeholder="Poçt kodu"
+    value={formData.postalCode}
+    onChange={handleInputChange}
+  />
+</form>
+
           <div className="payMethod">
             <div className="dhl">
               <div className="left">
@@ -232,57 +233,57 @@ export default function CheckOut() {
           </div>
         </div>
         <div className="orderSummary">
-          <div className="title">Order Summary</div>
-          <div className="products">
-          {selectedProducts && selectedProducts.map((product, index) => (
-  <div className="product" key={index}>
-    <div className="left">
-      <div className="img-container">
-        <img src={`http://localhost:8000/storage/${product.product_image || ""}`} alt={product.product_name || "Product"} />
-      </div>
-    </div>
-    <div className="right">
-      <div className="infoProduct">
-        <span className="title">{product.product_name || "N/A"}</span>
-        <span className="size">Beiges: {product.product_size || "N/A"}</span>
-      </div>
-      <div className="priceCheck">
-        <span className="bold">${(product.product_price || 0).toFixed(2)}</span>
-        <span>x{product.quantity || 0}</span>
-      </div>
-    </div>
-  </div>
-))}
-
-          </div>
-          <div className="payText">
-            <div className="discount">
-              <label>Discount code</label>
-              <input type="text" />
-            </div>
-            <div className="Subtotal">
-              <span className="grayText">SubTotal</span>
-              <span className="bold">${productTotal}</span>
-            </div>
-            <div className="disc">
-              <span className="grayText">Discount:</span>
-              <span className="bold">$0</span>
-            </div>
-            <div className="shipMeth">
-              <span className="grayText">Shipping cost</span>
-              <span className="bold">${shippingCost.toFixed(2)}</span>
-            </div>
-            <div className="total">
-              <span className="grayText">Total</span>
-              <span className="bold">${totalCost}</span>
-            </div>
-            <div className="pay">
-              <Link to="/payment">
-                <button onClick={handleSubmit}>Continue To Payment</button>
-              </Link>
-            </div>
+  <div className="title">Sifariş Xülasəsi</div>
+  <div className="products">
+    {selectedProducts && selectedProducts.map((product, index) => (
+      <div className="product" key={index}>
+        <div className="left">
+          <div className="img-container">
+            <img src={`http://localhost:8000/storage/${product.product_image || ""}`} alt={product.product_name || "Məhsul"} />
           </div>
         </div>
+        <div className="right">
+          <div className="infoProduct">
+            <span className="title">{product.product_name || "N/A"}</span>
+            <span className="size">Ölçü: {product.product_size || "N/A"}</span>
+          </div>
+          <div className="priceCheck">
+            <span className="bold">${(product.product_price || 0).toFixed(2)}</span>
+            <span>x{product.quantity || 0}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div className="payText">
+    <div className="discount">
+      <label>Endirim Kodu</label>
+      <input type="text" />
+    </div>
+    <div className="Subtotal">
+      <span className="grayText">Cəmi Məbləğ</span>
+      <span className="bold">${productTotal}</span>
+    </div>
+    <div className="disc">
+      <span className="grayText">Endirim:</span>
+      <span className="bold">$0</span>
+    </div>
+    <div className="shipMeth">
+      <span className="grayText">Çatdırılma Haqqı</span>
+      <span className="bold">${shippingCost.toFixed(2)}</span>
+    </div>
+    <div className="total">
+      <span className="grayText">Ümumi Məbləğ</span>
+      <span className="bold">${totalCost}</span>
+    </div>
+    <div className="pay">
+      <Link to="/payment">
+        <button onClick={handleSubmit}>Ödənişə Davam Et</button>
+      </Link>
+    </div>
+  </div>
+</div>
+
       </div>
       <Footer />
     </div>

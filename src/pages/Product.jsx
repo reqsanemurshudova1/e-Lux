@@ -171,15 +171,15 @@ export default function Product() {
         <div>
             <Navbar/>
             <div className="filter container">
-                <h1 className="search-heading container">All Products ({products.length})</h1>
+                <h1 className="search-heading container">Bütün məhsullar ({products.length})</h1>
                 <div className="shortandfilter">
                     <div className="short">
                         <select className="sortBy" onChange={(e) => handleCategoryChange(e.target.value)}>
-                            <option value="0">All Categories</option>
+                            <option value="0">Bütün kategoriyalar</option>
                             <option value="1">T-Shirt</option>
-                            <option value="2">Shirt</option>
-                            <option value="3">Pants</option>
-                            <option value="4">Accessories</option>
+                            <option value="2">Köynək</option>
+                            <option value="3">Şalvar</option>
+                            <option value="4">Aksesuar</option>
                         </select>
                         <img src="./Assets/Sort.svg" alt="Sort"/>
                     </div>

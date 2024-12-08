@@ -14,8 +14,6 @@ export default function Login({ closeLogin, changeModal, setUser }) {
     setLoading(true);
 
     try {
-      // await axios.get("http://localhost:8000/api/login",);
-
       const response = await axios.post("http://localhost:8000/api/login", {
         email,
         password,
@@ -26,13 +24,11 @@ export default function Login({ closeLogin, changeModal, setUser }) {
 
         setUser({ name: response.data.user.name });
 
-        // alert("Login successful!");
-
         closeLogin();
       }
     } catch (err) {
       console.error(err.response?.data || err.message);
-      setError(err.response?.data?.error || "An unexpected error occurred.");
+      setError(err.response?.data?.error || "Gözlənilməz bir xəta baş verdi.");
     } finally {
       setLoading(false);
     }
@@ -44,24 +40,24 @@ export default function Login({ closeLogin, changeModal, setUser }) {
         <img
           className="close-icon"
           src="/Assets/close-icon.svg"
-          alt="close"
+          alt="bağla"
           onClick={closeLogin}
         />
-        <h1>Login</h1>
+        <h1>Giriş</h1>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleLogin}>
-          <label>Email</label>
+          <label>E-poçt</label>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="E-poçt"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label>Password</label>
+          <label>Şifrə</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Şifrə"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -70,34 +66,34 @@ export default function Login({ closeLogin, changeModal, setUser }) {
             <label className="custom-checkbox">
               <input type="checkbox" />
               <div className="checkbox-box"></div>
-              <span>Remember me</span>
+              <span>Məni yadda saxla</span>
             </label>
             <div className="forgot">
-              <a href="#">Forgot Password?</a>
+              <a href="#">Şifrəni unutmusunuz?</a>
             </div>
           </div>
           <button className="btn-login" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Giriş edilir..." : "Giriş"}
           </button>
         </form>
         <p>
-          Don't have an account?{" "}
+          Hesabınız yoxdur?{" "}
           <a
             href="#"
             onClick={() => {
               changeModal();
             }}
           >
-            Register
+            Qeydiyyat
           </a>
         </p>
-        <p>or sign in with</p>
+        <p>və ya aşağıdakı üsullarla daxil olun</p>
         <div className="social-buttons">
           <button>
-            <img src="/Assets/google.svg" alt="" /> Google
+            <img src="/Assets/google.svg" alt="" /> Google ilə
           </button>
           <button>
-            <img src="/Assets/facebook.svg" alt="" /> Facebook
+            <img src="/Assets/facebook.svg" alt="" /> Facebook ilə
           </button>
         </div>
       </div>

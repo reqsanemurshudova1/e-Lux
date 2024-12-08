@@ -6,18 +6,21 @@ import './Cart.css';
 export default function OrderTracking() {
   const [orders, setOrders] = useState([]);
 
+ 
   useEffect(() => {
+
     const fetchOrders = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/orders', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 
           },
         });
         const data = await response.json();
         if (data.success) {
           setOrders(data.data);
+          // console.log(orders);
         } else {
           console.error('Error fetching orders:', data.message);
         }
@@ -50,10 +53,10 @@ export default function OrderTracking() {
                 <td className="product-info">
                   {order.order_details.map((product, idx) => (
                     <div key={idx}>
-                      <img src={product.image} alt={product.product_name} />
+                      <img src={`http://localhost:8000/storage/${product.image}`} alt={product.product_name} />
                       <div>
                         <p>{product.product_name}</p>
-                        <p>Size <span>{product.product_size}</span></p>
+                        <p>Size <span>{product.size}</span></p>
                       </div>
                     </div>
                   ))}

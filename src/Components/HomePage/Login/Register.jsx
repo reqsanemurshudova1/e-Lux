@@ -18,7 +18,7 @@ export default function Register({ closeRegister, openLogin }) {
 
     // Şifrə və təsdiq şifrəsini yoxlayın
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('Şifrələr uyğun gəlmir.');
       return;
     }
 
@@ -31,13 +31,13 @@ export default function Register({ closeRegister, openLogin }) {
         password_confirmation: confirmPassword, // Laravel bunu yoxlayır
       });
 
-      setSuccess('Registration successful! You can now log in.');
+      setSuccess('Qeydiyyat uğurla tamamlandı! İndi daxil ola bilərsiniz.');
       setTimeout(() => {
         closeRegister();
         openLogin();
       }, 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred.');
+      setError(err.response?.data?.message || 'Xəta baş verdi.');
     } finally {
       setLoading(false);
     }
@@ -49,51 +49,51 @@ export default function Register({ closeRegister, openLogin }) {
         <img
           className="close-icon"
           src="/Assets/close-icon.svg"
-          alt="close"
+          alt="bağla"
           onClick={closeRegister}
         />
-        <h1>Register</h1>
+        <h1>Qeydiyyat</h1>
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
         <form onSubmit={handleRegister}>
-          <label>Fullname</label>
+          <label>Ad və Soyad</label>
           <input
             type="text"
-            placeholder="Enter your name"
+            placeholder="Adınızı daxil edin"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <label>Email</label>
+          <label>E-poçt</label>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="E-poçt"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label>Password</label>
+          <label>Şifrə</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Şifrə"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label>Confirm Password</label>
+          <label>Şifrəni təsdiq edin</label>
           <input
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Şifrəni təsdiq edin"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
           <button className="btn-register" type="submit" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? 'Qeydiyyat edilir...' : 'Qeydiyyat'}
           </button>
         </form>
         <p>
-          Already have an account?{' '}
+          Artıq hesabınız var?{' '}
           <a
             href="#"
             onClick={() => {
@@ -101,16 +101,18 @@ export default function Register({ closeRegister, openLogin }) {
               openLogin();
             }}
           >
-            Login
+            Daxil olun
           </a>
+          <br />
+          və ya aşağıdakı üsullarla qeydiyyatdan keçin
         </p>
-        <p>or sign up with</p>
+     
         <div className="social-buttons">
           <button>
-            <img src="/Assets/google.svg" alt="" /> Google
+            <img src="/Assets/google.svg" alt="" /> Google ilə
           </button>
           <button>
-            <img src="/Assets/facebook.svg" alt="" /> Facebook
+            <img src="/Assets/facebook.svg" alt="" /> Facebook ilə
           </button>
         </div>
       </div>

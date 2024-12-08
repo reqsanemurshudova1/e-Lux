@@ -37,14 +37,14 @@ export default function Payment() {
         );
         setData(response.data?.data || []);
       } catch (error) {
-        console.error("Error fetching payment methods:", error);
+        console.error("Ödəniş üsullarını əldə edərkən xəta baş verdi:", error);
       }
     };
     fetchPaymentMethods();
   }, []);
   const handlePaymentClick = async () => {
     if (!selectedPaymentMethod) {
-      alert("Please select a payment method");
+      alert("Zəhmət olmasa ödəniş üsulunu seçin");
       return;
     }
 
@@ -57,18 +57,13 @@ export default function Payment() {
         name: product.product_name,
         price: product.product_price,
         quantity: product.quantity,
+        size: product.product_size,
+        image: product.product_image,
       })),
     };
 
     try {
       setLoading(true);
-      // const response = await axios.post(
-      //   "http://localhost:8000/api/process-payment",
-      //   {
-
-      //     data: payload,
-      //   }
-      // );
       const response = await fetch(
         "http://localhost:8000/api/process-payment",
         {
@@ -82,16 +77,12 @@ export default function Payment() {
       );
 
       const data = await response.json();
-      // console.log(data);
-
-      // console.log(setModalOpen(true));
 
       if ((data.status = "success")) {
         setModalOpen(true);
       }
     } catch (error) {
-      console.error("Payment error:", error.response?.data || error.message);
-      // alert("Payment failed. Please try again.");
+      console.error("Ödəniş xətası:", error.response?.data || error.message);
     } finally {
       setLoading(false);
     }
@@ -102,7 +93,7 @@ export default function Payment() {
       <Navbar />
       <div className="paymentDiv container">
         <form className="paymentForm">
-          <span>Select Payment Method</span>
+          <span>Ödəniş üsulunu seçin</span>
           <div className="selectPayment">
             {data.map((method) => (
               <div className="payPal" key={method.id}>
@@ -129,10 +120,10 @@ export default function Payment() {
             ))}
           </div>
 
-          <span>Credit Card Details</span>
+          <span>Kredit Kart Detalları</span>
           <input
             type="text"
-            placeholder="Cardholder Name"
+            placeholder="Kart Sahibinin Adı"
             value={card_details.cardholderName}
             onChange={(e) =>
               setcardDetails({
@@ -143,7 +134,7 @@ export default function Payment() {
           />
           <input
             type="text"
-            placeholder="Card Number"
+            placeholder="Kart Nömrəsi"
             value={card_details.cardNumber}
             onChange={(e) =>
               setcardDetails({ ...card_details, cardNumber: e.target.value })
@@ -171,7 +162,7 @@ export default function Payment() {
             />
             <input
               type="text"
-              placeholder="Postal Code"
+              placeholder="Poçt Kodu"
               value={card_details.postalCode}
               onChange={(e) =>
                 setcardDetails({ ...card_details, postalCode: e.target.value })
@@ -181,7 +172,7 @@ export default function Payment() {
         </form>
 
         <div className="orderSummary">
-          <div className="title">Order Summary</div>
+          <div className="title">Sifariş xülasəsi</div>
           <div className="products">
             {selectedProducts.map((product, index) => (
               <div className="product" key={index}>
@@ -196,7 +187,7 @@ export default function Payment() {
                 <div className="right">
                   <div className="infoProduct">
                     <span className="title">{product.product_name}</span>
-                    <span className="size">Beiges: {product.product_size}</span>
+                    <span className="size">Ölçü: {product.product_size}</span>
                   </div>
                   <div className="priceCheck">
                     <span className="bold">
@@ -210,20 +201,20 @@ export default function Payment() {
           </div>
           <div className="payText">
             <div className="Subtotal">
-              <span className="grayText">Subtotal</span>
+              <span className="grayText">Aralıq cəm</span>
               <span className="bold">${productTotal}</span>
             </div>
             <div className="shipMeth">
-              <span className="grayText">Shipping cost</span>
+              <span className="grayText">Çatdırılma xərci</span>
               <span className="bold">${shippingCost.toFixed(2)}</span>
             </div>
             <div className="total">
-              <span className="grayText">Total</span>
+              <span className="grayText">Ümumi</span>
               <span className="bold">${totalCost}</span>
             </div>
             <div className="pay">
               <button onClick={handlePaymentClick} disabled={loading}>
-                {loading ? "Processing..." : "Continue To Payment"}
+                {loading ? "Emal olunur..." : "Ödənişə Davam Edin"}
               </button>
             </div>
           </div>
@@ -233,7 +224,7 @@ export default function Payment() {
       {isModalOpen && <div className="overlay" onClick={toggle}></div>}
       {isModalOpen && (
         <PaymentModal
-          // response={response || {}}
+        
           selectedProducts={selectedProducts}
           shippingCost={shippingCost}
           productTotal={productTotal}

@@ -25,10 +25,11 @@
   flex-direction: column;
   z-index: 100;
   justify-content: center;
-  gap: 30px;
+  gap: 15px;
   position: absolute;
   
 margin-top: 50px;
+
   border-radius: 4px;
   border: 1px solid var(--Grayscale-200, #E5E5E5);
   background: #FFF;

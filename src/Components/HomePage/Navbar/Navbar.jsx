@@ -184,16 +184,16 @@ export default function Navbar() {
         <div className="nav-left">
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/">Ana Səhifə</NavLink>
             </li>
             <li>
-              <NavLink to="/product">Product</NavLink>
+              <NavLink to="/product">Məhsullar</NavLink>
             </li>
             <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>
             <li>
-              <NavLink to="/contact">Contact Us</NavLink>
+              <NavLink to="/contact">Əlaqə</NavLink>
             </li>
           </ul>
         </div>
@@ -212,14 +212,14 @@ export default function Navbar() {
           </div>
           {!user ? (
             <button className="login-button" onClick={toggleLogin}>
-              Login
+              Giriş
             </button>
           ) : (
             <div className="user-dropdown">
                <i className="fas fa-user-circle user-icon" onClick={toggleDropdown}></i>
               {dropdownOpen && (
                 <div className="dropdown-menu">
-                  <button onClick={logout}>Logout</button>
+                  <button onClick={logout}>Hesabdan çıx</button>
                 </div>
               )}
             </div>
