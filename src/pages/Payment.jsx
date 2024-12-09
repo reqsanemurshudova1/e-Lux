@@ -19,6 +19,7 @@ export default function Payment() {
   };
 
   const [data, setData] = useState([]);
+  const [order, setOrder] = useState({});
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [card_details, setcardDetails] = useState({
     cardholderName: "",
@@ -80,6 +81,7 @@ export default function Payment() {
 
       if ((data.status = "success")) {
         setModalOpen(true);
+        setOrder(data?.order);
       }
     } catch (error) {
       console.error("Ödəniş xətası:", error.response?.data || error.message);
@@ -223,8 +225,9 @@ export default function Payment() {
       <Footer />
       {isModalOpen && <div className="overlay" onClick={toggle}></div>}
       {isModalOpen && (
-        <PaymentModal
         
+        <PaymentModal
+          order={order}
           selectedProducts={selectedProducts}
           shippingCost={shippingCost}
           productTotal={productTotal}

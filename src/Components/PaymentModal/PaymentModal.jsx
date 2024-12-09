@@ -1,98 +1,110 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { CheckoutContext } from '../../context/CheckoutContext';
+import React from "react";
+import { Link } from "react-router-dom";
+import { CheckoutContext } from "../../context/CheckoutContext";
 import { useContext } from "react";
 import "./Modal.css";
 import { useState, useEffect } from "react";
 
+export default function PaymentModal({ order }) {
+  // const [orders, setOrders] = useState({});
 
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "http://localhost:8000/api/orders/order_info",
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+  //           },
+  //         }
+  //       );
+  //       const data = await response.json();
+  //       if (data.success) {
+  //         setOrders(data?.data || {});
+  //         // console.log(orders);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
 
-export default function PaymentModal() {
-  const [orders, setOrders] = useState({});
+  //   fetchOrders();
+  // }, []);
 
- 
-  useEffect(() => {
-
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/orders/order_info', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 
-          },
-        });
-        const data = await response.json();
-        if (data.success) {
-          setOrders(data?.data || {});
-          // console.log(orders);
-        } 
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchOrders();
-  }, []);
-
-
-
-  
-
-    const { selectedProducts, productTotal, shippingCost, totalCost ,selectedPaymentMethod} =
-    useContext(CheckoutContext); 
+  const {
+    selectedProducts,
+    productTotal,
+    shippingCost,
+    totalCost,
+    selectedPaymentMethod,
+  } = useContext(CheckoutContext);
   return (
-    <div className='payment-modal'> 
+    <div className="payment-modal">
       <div className="modal-header">
         <img src="./Assets/succes.svg" alt="Uğurla" />
         <h2>Ödəniş Uğurla Tamamlandı</h2>
-        <p>Təşəkkür edirik! Sifariş təsdiqi customer@gmail.com ünvanına göndərildi</p>
+        <p>
+          Təşəkkür edirik! Sifariş təsdiqi customer@gmail.com ünvanına
+          göndərildi
+        </p>
         <span className="total-label">Ümumi Ödəniş</span>
         <h2 className="total-amount">$ {totalCost}</h2>
       </div>
-      <div className="order-summary-container">   
-  <div className="form-inf">
-  <div className="top-info">
-         <div className="ref-inf">
-         <span>İstinad Nömrəsi</span>
-          <span>{orders?.uid}</span>
-         </div>
-         <div className="date-inf">
-         <span>Əməliyyat Tarixi</span>
-          <span>12/12/2022</span>
-         </div>
-          </div> 
+      <div className="order-summary-container">
+        <div className="form-inf">
+          <div className="top-info">
+            <div className="ref-inf">
+              <span>İstinad Nömrəsi</span>
+              <span>{order?.uid}</span>
+            </div>
+            <div className="date-inf">
+              <span>Əməliyyat Tarixi</span>
+              <span>
+                {order?.created_at.split("T")[0]}
+              </span>
+            </div>
+          </div>
           <div className="bottom-info">
-         <div className="ref-inf">
-         <span>Çatdırılma Metodu</span>
-          <span>123456789</span>
-         </div>
-         <div className="date-inf">
-         <span>Ödəniş Metodu</span>
-          <span>12/12/2022</span>
-         </div>
-          </div> 
-  </div>
+            <div className="ref-inf">
+              <span>Çatdırılma Adresi</span>
+              <span>
+                {order?.address}
+              </span>
+            </div>
+            <div className="date-inf">
+              <span>Ödəniş Metodu</span>
+              <span>{order?.payment_type}</span>
+            </div>
+          </div>
+        </div>
 
         <div className="summary-title">Sizin Sifarişiniz</div>
         <div className="product-list">
           {selectedProducts.map((product, index) => (
-           <div className="product" key={index}>
-           <div className="left">
-             <div className="img-container">
-               <img src={`http://localhost:8000/storage/${product.product_image}`} alt={product.product_name} />
-             </div>
-           </div>
-           <div className="right">
-             <div className="infoProduct">
-               <span className="title">{product.product_name}</span>
-               <span className="size">Ölçü: {product.product_size}</span>
-             </div>
-             <div className="priceCheck">
-               <span className="bold">${product.product_price.toFixed(2)}</span>
-               <span>x{product.quantity}</span>
-             </div>
-           </div>
-         </div>
+            <div className="product" key={index}>
+              <div className="left">
+                <div className="img-container">
+                  <img
+                    src={`http://localhost:8000/storage/${product.product_image}`}
+                    alt={product.product_name}
+                  />
+                </div>
+              </div>
+              <div className="right">
+                <div className="infoProduct">
+                  <span className="title">{product.product_name}</span>
+                  <span className="size">Ölçü: {product.product_size}</span>
+                </div>
+                <div className="priceCheck">
+                  <span className="bold">
+                    ${product.product_price.toFixed(2)}
+                  </span>
+                  <span>x{product.quantity}</span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
         <div className="payment-summary">
@@ -114,7 +126,9 @@ export default function PaymentModal() {
           </div>
           <div className="action-buttons">
             <Link to="/product">
-              <button className="continue-shopping">Alış-verişə Davam Et</button>
+              <button className="continue-shopping">
+                Alış-verişə Davam Et
+              </button>
             </Link>
             <button className="download-receipt">Qəbzi Yüklə</button>
           </div>

@@ -5,7 +5,13 @@ import './Cart.css';
 
 export default function OrderTracking() {
   const [orders, setOrders] = useState([]);
-
+  const statusLabels = {
+    0: 'Pending',
+    1: 'Processing',
+    2: 'Shipped',
+    3: 'Delivered',
+    4: 'Cancelled',
+  };
  
   useEffect(() => {
 
@@ -65,7 +71,9 @@ export default function OrderTracking() {
                 <td>{order.uid}</td>
                 <td>${order.total}</td>
                 <td>
-                  <button className="track-order-button">Track order</button>
+                <button className="track-order-button">
+                    {statusLabels[order.status] || 'Unknown'}
+                  </button>
                 </td>
               </tr>
             ))}
