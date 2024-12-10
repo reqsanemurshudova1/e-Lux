@@ -3,7 +3,7 @@ import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import { CheckoutContext } from "../context/CheckoutContext";
 import PaymentModal from "../Components/PaymentModal/PaymentModal";
-
+import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 
 export default function Payment() {
@@ -38,14 +38,14 @@ export default function Payment() {
         );
         setData(response.data?.data || []);
       } catch (error) {
-        console.error("Ödəniş üsullarını əldə edərkən xəta baş verdi:", error);
+        toast.error("Ödəniş üsullarını əldə edərkən xəta baş verdi")
       }
     };
     fetchPaymentMethods();
   }, []);
   const handlePaymentClick = async () => {
     if (!selectedPaymentMethod) {
-      alert("Zəhmət olmasa ödəniş üsulunu seçin");
+      toast.error("Ödəniş metodunu seçin");
       return;
     }
 
@@ -80,6 +80,7 @@ export default function Payment() {
       const data = await response.json();
 
       if ((data.status = "success")) {
+        toast.success("Ödəniş uğurla tamamlandı");
         setModalOpen(true);
         setOrder(data?.order);
       }
@@ -92,6 +93,9 @@ export default function Payment() {
 
   return (
     <div>
+       <div>
+        <Toaster position="top-center" reverseOrder={true} />
+      </div>
       <Navbar />
       <div className="paymentDiv container">
         <form className="paymentForm">

@@ -26,7 +26,6 @@ export default function Cart() {
       const response = await fetch("http://localhost:8000/api/cart", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-
         },
       });
       if (response.ok) {
@@ -40,23 +39,28 @@ export default function Cart() {
     }
   };
 
-  const addToCart = async (productId) => {
+  const generateUniqueKey = (productId, size, color) =>
+    `${productId}_${size || "default"}_${color || "default"}`;
+
+  const addToCart = async (productId, size, color) => {
+    const uniqueKey = generateUniqueKey(productId, size, color);
+
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.product.id === productId
+        generateUniqueKey(item.product.id, item.selected_size, item.selected_color) === uniqueKey
           ? { ...item, stock_count: item.stock_count + 1 }
           : item
       )
     );
+
     try {
       const response = await fetch("http://localhost:8000/api/cart/store", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-
         },
-        body: JSON.stringify({ product_id: productId }),
+        body: JSON.stringify({ product_id: productId, selected_size: size, selected_color: color }),
       });
 
       if (response.ok) {
@@ -68,27 +72,22 @@ export default function Cart() {
       console.error("Error adding to cart:", error);
     }
   };
-  const generateUniqueKey = (item) =>
-    `${item.product.id}_${item.selected_size || "default"}_${
-      item.selected_color || "default"
-    }`;
-  
 
   const removeFromCart = async (productId, size, color) => {
-    // Dərhal UI-ni yeniləyin
-    const uniqueKey = `${productId}_${size || "default"}_${color || "default"}`;
+    const uniqueKey = generateUniqueKey(productId, size, color);
+  
     setCart((prevCart) =>
-      prevCart.filter(
-        (item) =>
-          generateUniqueKey(item) !== uniqueKey ||
-          (item.stock_count > 1 && {
-            ...item,
-            stock_count: item.stock_count - 1,
-          })
-      )
+      prevCart
+        .map((item) =>
+          generateUniqueKey(item.product.id, item.selected_size, item.selected_color) === uniqueKey
+            ? item.stock_count > 1
+              ? { ...item, stock_count: item.stock_count - 1 }
+              : null
+            : item
+        )
+        .filter(Boolean) // Null dəyərləri filterləyirik.
     );
   
-    // API çağırışı
     try {
       const response = await fetch("http://localhost:8000/api/cart/remove", {
         method: "POST",
@@ -104,7 +103,7 @@ export default function Cart() {
       });
   
       if (response.ok) {
-        fetchCart(); // Məlumatları yenilə
+        fetchCart();
       } else {
         console.error("Failed to remove product from cart");
       }
@@ -136,7 +135,7 @@ export default function Cart() {
       console.error("No items selected for checkout");
       return;
     }
-  
+
     const selectedProductsDetails = selectedItems
       .filter((index) => cart[index]?.product)
       .map((index) => ({
@@ -148,7 +147,7 @@ export default function Cart() {
         product_size: cart[index].selected_size || "N/A",
         product_color: cart[index].selected_color || "N/A",
       }));
-  
+
     navigate("/checkout", { state: { selectedProducts: selectedProductsDetails } });
   };
 
@@ -190,7 +189,10 @@ export default function Cart() {
               </div>
 
               {cart.map((item, index) => (
-                <li key={item.id} className="cart-item">
+                <li
+                  key={generateUniqueKey(item.product.id, item.selected_size, item.selected_color)}
+                  className="cart-item"
+                >
                   <label className="custom-checkbox">
                     <input
                       type="checkbox"
@@ -221,7 +223,13 @@ export default function Cart() {
                       <div className="cart-item-quantity">
                         <button
                           className="quantity-button"
-                          onClick={() => removeFromCart(item.product.id, item.selected_size, item.selected_color)}
+                          onClick={() =>
+                            removeFromCart(
+                              item.product.id,
+                              item.selected_size,
+                              item.selected_color
+                            )
+                          }
                         >
                           -
                         </button>
@@ -230,7 +238,13 @@ export default function Cart() {
                         </p>
                         <button
                           className="quantity-button"
-                          onClick={() => addToCart(item.product.id)}
+                          onClick={() =>
+                            addToCart(
+                              item.product.id,
+                              item.selected_size,
+                              item.selected_color
+                            )
+                          }
                         >
                           +
                         </button>
@@ -238,7 +252,9 @@ export default function Cart() {
                     </div>
                     <div className="right">
                       <div className="cart-item-price">
-                        ${(item.product.product_price * item.stock_count).toFixed(2)}
+                        ${(
+                          item.product.product_price * item.stock_count
+                        ).toFixed(2)}
                       </div>
                     </div>
                   </div>
@@ -246,28 +262,26 @@ export default function Cart() {
               ))}
             </ul>
             <div className="orderSum">
-  <h3>Sifariş Xülasəsi</h3>
-  <p>
-    Alt cəm: $<span>{calculateTotal()}</span>
-  </p>
-  <p>
-    Ümumi: $<span>{calculateTotal()}</span>
-  </p>
-  <button className="checkout-button" onClick={handleCheckout}>
-    İndi Ödəniş Et
-  </button>
-</div>
-
+              <h3>Sifariş Xülasəsi</h3>
+              <p>
+                Alt cəm: $<span>{calculateTotal()}</span>
+              </p>
+              <p>
+                Ümumi: $<span>{calculateTotal()}</span>
+              </p>
+              <button className="checkout-button" onClick={handleCheckout}>
+                İndi Ödəniş Et
+              </button>
+            </div>
           </div>
         ) : (
           <div className="empty-cart">
-          <img src="/Assets/shopBag.svg" alt="Boş Səbət" />
-          <span>Eyy! Səbətiniz boşdur</span>
-          <button>
-            <a href="/product">İndi Alış-Veriş Edin</a>
-          </button>
-        </div>
-        
+            <img src="/Assets/shopBag.svg" alt="Boş Səbət" />
+            <span>Eyy! Səbətiniz boşdur</span>
+            <button>
+              <a href="/product">İndi Alış-Veriş Edin</a>
+            </button>
+          </div>
         )}
       </div>
       <Footer />

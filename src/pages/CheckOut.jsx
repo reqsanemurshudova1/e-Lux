@@ -81,7 +81,6 @@ export default function CheckOut() {
         if (response.ok) {
           toast.success(result.message || "Shipping details saved successfully!");
   
-          // Payment sayfasına veri gönder
           navigate("/payment", {
             state: {
               selectedProducts,
