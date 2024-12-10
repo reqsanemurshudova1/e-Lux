@@ -84,8 +84,10 @@ export default function Ourproducts() {
   };
 
   const handleSeeAllProducts = () => {
+    setFilteredProducts(products); 
     setShowAllProducts(true); 
   };
+  
 
   return (
     <div className='ourproducts container'>
@@ -93,19 +95,19 @@ export default function Ourproducts() {
       <div className='category'>
         <div className='gen-category'>
           <select className='gender' onChange={(e) => handleGenderChange(e.target.value)}>
-            <option value='0'>All</option>
-            <option value='1'>Women</option>
-            <option value='2'>Men</option>
-            <option value='3'>Kids</option>
+            <option value='0'>Bütün məhsullar</option>
+            <option value='1'>Qadın</option>
+            <option value='2'>Kişi</option>
+            <option value='3'>Uşaq</option>
             <option value='4'>Unisex</option>
           </select>
           <img src='/Assets/arrow.svg' alt='arrow' />
         </div>
-        <div className={`all ${selectedCategory === '0' ? 'active' : ''}`} onClick={() => handleCategoryChange('0')}>All</div>
+        <div className={`bütün məhsullar ${selectedCategory === '0' ? 'active' : ''}`} onClick={() => handleCategoryChange('0')}>Bütün məhsullar</div>
         <div className={`t-shirt ${selectedCategory === '1' ? 'active' : ''}`} onClick={() => handleCategoryChange('1')}>T-Shirt</div>
-        <div className={`shirt ${selectedCategory === '2' ? 'active' : ''}`} onClick={() => handleCategoryChange('2')}>Shirt</div>
-        <div className={`pants ${selectedCategory === '3' ? 'active' : ''}`} onClick={() => handleCategoryChange('3')}>Pants</div>
-        <div className={`accessories ${selectedCategory === '4' ? 'active' : ''}`} onClick={() => handleCategoryChange('4')}>Accessories</div>
+        <div className={`köynək ${selectedCategory === '2' ? 'active' : ''}`} onClick={() => handleCategoryChange('2')}>Köynək</div>
+        <div className={`şalvar ${selectedCategory === '3' ? 'active' : ''}`} onClick={() => handleCategoryChange('3')}>Şalvar</div>
+        <div className={`aksesuar ${selectedCategory === '4' ? 'active' : ''}`} onClick={() => handleCategoryChange('4')}>Aksesuar</div>
       </div>
 
       <div className='product-cards1'>

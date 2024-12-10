@@ -39,7 +39,7 @@ export default function Support() {
       <div className="support-logos">
         {data.map((logo, index) => (
           <div className="card-logo" key={index}>
-            <img src={`http://e_lux_backend.test/storage/${logo.img}`} alt={logo.title}
+            <img src={`http://localhost:8000/storage/${logo.img}`} alt={logo.title}
             />
           </div>
         ))}

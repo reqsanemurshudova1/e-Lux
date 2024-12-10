@@ -91,6 +91,23 @@ export default function Details() {
   }, []);
 
   if (!selectedProduct) return <p>Yüklənir...</p>;
+// const fetchSuggestedProducts = async (id) => {
+//   try {
+//     const response = await fetch(`http://localhost:8000/api/products/suggestions/${id}`);
+//     if (!response.ok) throw new Error("Oxşar məhsullar əldə edilə bilmədi");
+
+//     const data = await response.json();
+//     setSuggestedProducts(data.suggestedProducts || []);
+//   } catch (error) {
+//     console.error("Oxşar məhsullar yüklənərkən xəta baş verdi:", error);
+//     toast.error("Oxşar məhsullar əldə edilə bilmədi.");
+//   }
+// };
+
+// useEffect(() => {
+//   fetchProductDetails();
+//   fetchSuggestedProducts(id);
+// }, [id]);
 
   return (
     <div>
@@ -136,7 +153,7 @@ export default function Details() {
 
           <div className="product-price">
             {selectedProduct.product_price !== undefined
-              ? `${selectedProduct.product_price.toFixed(2)} AZN`
+              ? `${selectedProduct.product_price.toFixed(2)} $`
               : "Qiymət mövcud deyil"}
           </div>
           
@@ -218,7 +235,7 @@ export default function Details() {
                   <div className="prdct-category">{product.category}</div>
                 </div>
                 <div className="prdct-right">
-                  <div className="prdct-price">{product.product_price.toFixed(2)} AZN</div>
+                  <div className="prdct-price">{product.product_price.toFixed(2)} $</div>
                 </div>
               </div>
             </Link>

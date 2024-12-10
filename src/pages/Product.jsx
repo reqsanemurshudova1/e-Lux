@@ -15,7 +15,7 @@ export default function Product() {
     const [selectedGender, setSelectedGender] = useState('All');
     const [showAllProducts, setShowAllProducts] = useState(false);
     const [filters, setFilters] = useState({})
-    const [isFilterModalOpen, setIsFilterModalOpen] = useState(false); // Filter modal state
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12);
 
