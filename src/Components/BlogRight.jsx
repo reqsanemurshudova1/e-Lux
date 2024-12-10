@@ -9,13 +9,13 @@ export default function BlogRight({ blogData }) {
       <div className="category-list">
         <h2>Kategoriyalar</h2>
         <ul>
-          <li>Lifestyle</li>
+          <li>Həyat tərzi</li>
           <li>Promo</li>
-          <li>Travel</li>
-          <li>Design</li>
-          <li>Business</li>
-          <li>Fashion</li>
-          <li>Brand</li>
+          <li>Səyahət</li>
+          <li>Dizayn</li>
+          <li>Biznes</li>
+          <li>Dəb</li>
+          <li>Brend</li>
         </ul>
       </div>
       <div className="popular-blog">
@@ -40,7 +40,7 @@ export default function BlogRight({ blogData }) {
         {blogData.slice(0, 4).map((author, index) => (
           <div key={index} className="popular-author-item">
             <div className="popular-author-img">
-              <img src={`http://localhost:8000/storage/${author.image}`} alt="author" />
+              <img src={`http://localhost:8000/storage/${author.author_image}`} alt="author" />
             </div>
             <div className="popular-author-info">
               <div className="popular-author-name">{author.author}</div>
