@@ -256,7 +256,7 @@ export default function Navbar() {
               {searchResults.map((item) => (
                 <Link to={`/product/${item.id}/details`} key={item.id}>
                   <div className="search-result">
-                    <img src={item.image} alt={item.name} />
+                    <img src={`http://localhost:8000/storage/${item.image}`} alt={item.name} />
                     <div className="search-result-details">
                       <div className="left">
                         <p>{item.product_name}</p>
