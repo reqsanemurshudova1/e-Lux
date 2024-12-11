@@ -62,20 +62,17 @@ export default function Details() {
         const data = await response.json();
         setSelectedProduct(data);
 
-        if (data) {
-          setMainImage(
-            data.image ? `http://localhost:8000/storage/${data.image}` : "/Assets/default.jpg"
-          );
-
-          if (data.category) {
-            const responseAll = await fetch("http://localhost:8000/api/products");
-            const allProducts = await responseAll.json();
-            const suggestions = allProducts.products.filter(
-              (p) => p.category === data.category && p.id !== data.id
-            );
-            setSuggestedProducts(suggestions);
-          }
+        if (data.category_id) {
+          const suggestedResponse = await fetch(`http://localhost:8000/api/products/suggestions/${id}`);
+          if (!suggestedResponse.ok) throw new Error("Oxşar məhsullar əldə edilə bilmədi");
+  
+          const suggestedData = await suggestedResponse.json();
+          setSuggestedProducts(suggestedData.suggestedProducts || []);
         }
+  
+        setMainImage(
+          data.image ? `http://localhost:8000/storage/${data.image}` : "/Assets/default.jpg"
+        );
       } catch (error) {
         console.error("Məhsul detalları yüklənərkən xəta baş verdi:", error);
         toast.error("Məhsul detalları əldə edilə bilmədi.");
@@ -91,23 +88,7 @@ export default function Details() {
   }, []);
 
   if (!selectedProduct) return <p>Yüklənir...</p>;
-// const fetchSuggestedProducts = async (id) => {
-//   try {
-//     const response = await fetch(`http://localhost:8000/api/products/suggestions/${id}`);
-//     if (!response.ok) throw new Error("Oxşar məhsullar əldə edilə bilmədi");
 
-//     const data = await response.json();
-//     setSuggestedProducts(data.suggestedProducts || []);
-//   } catch (error) {
-//     console.error("Oxşar məhsullar yüklənərkən xəta baş verdi:", error);
-//     toast.error("Oxşar məhsullar əldə edilə bilmədi.");
-//   }
-// };
-
-// useEffect(() => {
-//   fetchProductDetails();
-//   fetchSuggestedProducts(id);
-// }, [id]);
 
   return (
     <div>
@@ -227,7 +208,8 @@ export default function Details() {
               data-aos="zoom-in"
             >
               <div className="prdct-img">
-                <img src={product.image} alt={product.product_name} />
+              <img src={`http://localhost:8000/storage/${product.image}`} alt={product.product_name} />
+              
               </div>
               <div className="prdct-desc">
                 <div className="prdct-left">
