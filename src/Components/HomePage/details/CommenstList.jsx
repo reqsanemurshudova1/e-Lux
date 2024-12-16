@@ -1,10 +1,31 @@
 import React from "react";
 import Comment from "./Comment";
 import ReviewSummary from "./ReviewSummary";
+import { useParams } from "react-router-dom";
+import {useState, useEffect} from "react";
 
 const CommentsList = ({ comments = [], reviews = [], rating }) => {
   const totalReviews = reviews.length;
   const userPhotos = reviews.map(review => review.userPhotos);
+
+  const {id}=useParams();
+  // const [reviews, setReviews]=useState([]);
+  // const fetchReviews=async()=>{
+  //   const response = await fetch("http://localhost:8000/api/product-reviews/"+id, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     }
+  //   });
+  //   const results = await response.json() ;
+  //   setReviews(results.data || []);
+  // }
+
+  // // useEffect(()=>{
+  // //   fetchReviews();
+  // // }, []);
+  // console.log(reviews);
 
   return (
     <div className="common-rev">

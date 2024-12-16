@@ -14,6 +14,35 @@ export default function Details() {
   const [selectedColor, setSelectedColor] = useState(""); 
   const [mainImage, setMainImage] = useState("");
 
+
+
+
+  const [reviews, setReviews]=useState([]);
+  const fetchReviews=async()=>{
+    const response = await fetch("http://localhost:8000/api/product-reviews/"+id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const results = await response.json() ;
+    setReviews(results.data || []);
+    console.log(reviews);
+    
+  }
+
+  useEffect(()=>{ 
+    fetchReviews();
+    console.log(reviews);
+  }, []);
+ 
+  console.log(id);
+
+
+
+
+
   const [selectedSize, setSelectedSize] = useState(null);  
 
   const handleSizeSelect = (size) => {
