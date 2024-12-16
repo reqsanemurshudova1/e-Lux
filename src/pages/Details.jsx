@@ -7,11 +7,11 @@ import "./Details.css";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function Details() {
-  const { id } = useParams(); 
-  const [selectedProduct, setSelectedProduct] = useState(null); 
-  const [suggestedProducts, setSuggestedProducts] = useState([]); 
-  const [cart, setCart] = useState([]); 
-  const [selectedColor, setSelectedColor] = useState(""); 
+  const { id } = useParams();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [selectedColor, setSelectedColor] = useState("");
   const [mainImage, setMainImage] = useState("");
 
 
@@ -43,11 +43,11 @@ export default function Details() {
 
 
 
-  const [selectedSize, setSelectedSize] = useState(null);  
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeSelect = (size) => {
-      setSelectedSize(size);  
-      console.log("Seçilmiş Ölçü:", size);  
+    setSelectedSize(size);
+    console.log("Seçilmiş Ölçü:", size);
   };
 
   const addToCart = async (product) => {
@@ -56,7 +56,7 @@ export default function Details() {
       toast.error("Zəhmət olmasa ölçü və rəngi seçin");
       return;
     }
-  
+
     try {
       const response = await fetch("http://localhost:8000/api/cart/store", {
         method: "POST",
@@ -71,9 +71,9 @@ export default function Details() {
           quantity: 1,
         }),
       });
-  
+
       if (!response.ok) throw new Error("Məhsul səbətə əlavə edilə bilmədi");
-  
+
       const data = await response.json();
       toast.success(data.message || "Məhsul uğurla səbətə əlavə edildi");
     } catch (error) {
@@ -81,26 +81,34 @@ export default function Details() {
       toast.error("Məhsul səbətə əlavə edilə bilmədi.");
     }
   };
-  
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/product-details/${id}`);
-        if (!response.ok) throw new Error("Məhsul detalları əldə edilə bilmədi");
+        const response = await fetch(
+          `http://localhost:8000/api/product-details/${id}`
+        );
+        if (!response.ok)
+          throw new Error("Məhsul detalları əldə edilə bilmədi");
 
         const data = await response.json();
         setSelectedProduct(data);
 
         if (data.category_id) {
-          const suggestedResponse = await fetch(`http://localhost:8000/api/products/suggestions/${id}`);
-          if (!suggestedResponse.ok) throw new Error("Oxşar məhsullar əldə edilə bilmədi");
-  
+          const suggestedResponse = await fetch(
+            `http://localhost:8000/api/products/suggestions/${id}`
+          );
+          if (!suggestedResponse.ok)
+            throw new Error("Oxşar məhsullar əldə edilə bilmədi");
+
           const suggestedData = await suggestedResponse.json();
           setSuggestedProducts(suggestedData.suggestedProducts || []);
         }
-  
+
         setMainImage(
-          data.image ? `http://localhost:8000/storage/${data.image}` : "/Assets/default.jpg"
+          data.image
+            ? `http://localhost:8000/storage/${data.image}`
+            : "/Assets/default.jpg"
         );
       } catch (error) {
         console.error("Məhsul detalları yüklənərkən xəta baş verdi:", error);
@@ -118,7 +126,6 @@ export default function Details() {
 
   if (!selectedProduct) return <p>Yüklənir...</p>;
 
-
   return (
     <div>
       <div>
@@ -127,17 +134,19 @@ export default function Details() {
       <Navbar />
       <div className="product-details container">
         <div className="product-details-img">
-        <div className="desc-img">
-          {(selectedProduct.other_photos || []).map((photo, index) => (
-            <img
-              key={index}
-              src={`http://localhost:8000/storage/${photo}`}
-              alt={`Məhsul şəkli ${index}`}
-              className={`thumbnail ${photo === mainImage ? "active" : ""}`}
-              onClick={() => setMainImage(`http://localhost:8000/storage/${photo}`)} 
-            />
-          ))}
-        </div>
+          <div className="desc-img">
+            {(selectedProduct.other_photos || []).map((photo, index) => (
+              <img
+                key={index}
+                src={`http://localhost:8000/storage/${photo}`}
+                alt={`Məhsul şəkli ${index}`}
+                className={`thumbnail ${photo === mainImage ? "active" : ""}`}
+                onClick={() =>
+                  setMainImage(`http://localhost:8000/storage/${photo}`)
+                }
+              />
+            ))}
+          </div>
 
           <div className="main-img">
             <img src={mainImage} alt={selectedProduct.name} />
@@ -166,14 +175,16 @@ export default function Details() {
               ? `${selectedProduct.product_price.toFixed(2)} $`
               : "Qiymət mövcud deyil"}
           </div>
-          
+
           <div className="product-size">
             <div>Ölçünü seçin:</div>
             <div className="size-options">
               {(selectedProduct.product_size || []).map((size) => (
                 <span
                   key={size}
-                  className={`size-option ${size === selectedSize ? "selected" : ""}`}
+                  className={`size-option ${
+                    size === selectedSize ? "selected" : ""
+                  }`}
                   onClick={() => setSelectedSize(size)}
                 >
                   {size}
@@ -222,7 +233,7 @@ export default function Details() {
               <img src="/Assets/sizeFit.svg" alt="" />
               Ölçü və Uyğunluq
             </span>
-          </div> 
+          </div>
         </div>
       </div>
       <DescRevDisc product={selectedProduct} />
@@ -237,8 +248,10 @@ export default function Details() {
               data-aos="zoom-in"
             >
               <div className="prdct-img">
-              <img src={`http://localhost:8000/storage/${product.image}`} alt={product.product_name} />
-              
+                <img
+                  src={`http://localhost:8000/storage/${product.image}`}
+                  alt={product.product_name}
+                />
               </div>
               <div className="prdct-desc">
                 <div className="prdct-left">
@@ -246,7 +259,9 @@ export default function Details() {
                   <div className="prdct-category">{product.category}</div>
                 </div>
                 <div className="prdct-right">
-                  <div className="prdct-price">{product.product_price.toFixed(2)} $</div>
+                  <div className="prdct-price">
+                    {product.product_price.toFixed(2)} $
+                  </div>
                 </div>
               </div>
             </Link>
