@@ -1,9 +1,9 @@
 import React from 'react';
-
+import profilePhoto from "/public/Assets/avatar.jpg"
 const Review = ({ review }) => {
   const renderStars = () => {
     const stars = [];
-    for (let i = 0; i < review.rating; i++) {
+    for (let i = 0; i < review.common_review; i++) {
       stars.push(
         <svg
           key={i}
@@ -27,12 +27,12 @@ const Review = ({ review }) => {
    
     
       <div className="review">
-        <img src={review.userImage} alt={`${review.name}'s profile`} className="profile-image" />
+        <img src={review.profile_photo || profilePhoto} alt={`${review.profile_name}'s profile`} className="profile-image" />
         <div className="review-content">
-          <h3>{review.name}</h3>
+          <h3>{review.profile_name}</h3>
           <div className="rating">
             {renderStars()}
-            <span className="create-date">{review.created}</span>
+            <span className="create-date">{review.created_at}</span>
           </div>
           <p>{review.comment}</p>
           <div className="likes-dislikes">
@@ -55,4 +55,4 @@ const Review = ({ review }) => {
   );
 };
 
-export default Review;
+export default Review ;

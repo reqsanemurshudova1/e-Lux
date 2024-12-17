@@ -23,10 +23,9 @@ const WriteModal = ({ isOpen, onClose }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          profile_name: "Test User",
           product_id: id, // replace with the actual product ID
-          rating: rating,
-          name: name,
+          common_review: rating,
+          profile_name: name,
           email: email,
           comment: comment,
         }),
@@ -81,4 +80,4 @@ const WriteModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default WriteModal;
+export default WriteModal;
