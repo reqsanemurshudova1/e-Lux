@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import DetailsDesc from "./DetailsDesc";
 import ReviewList from "./ReviewList";
 import Comment from "./Comment";
@@ -6,9 +6,25 @@ import "./common.css";
 
 export default function DescRevDisc({ product }) {
   const [activeTab, setActiveTab] = useState("description");
+    const [reviews, setReviews] = useState([])
 
-  const reviews = product.reviews || []; // Varsayılan olarak boş dizi
-  const comments = product.comments || []; // Varsayılan olarak boş dizi
+    const fetchReviews = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/api/product-reviews");
+            const data = await response.json();
+            console.log(data.data)
+            setReviews(data.data);
+            return data.data || [];
+
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
+    useEffect(() => {
+        fetchReviews();
+    }, []);
+
+  const comments = product.comments || []; 
 
   return (
     <div className="desc-rev-disc container">
@@ -52,6 +68,6 @@ export default function DescRevDisc({ product }) {
           )}
         </div>
       )}
-    </div>
-  );
+    </div>
+  );
 }

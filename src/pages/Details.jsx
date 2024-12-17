@@ -25,6 +25,7 @@ export default function Details() {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
+      
     });
     const results = await response.json() ;
     setReviews(results.data || []);
