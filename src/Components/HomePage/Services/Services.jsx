@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./Services.css";
 import axios from "axios";
 
@@ -27,16 +27,17 @@ const servicesData = [
 ];
 
 export default function Services() {
-
   const [itemData, setItemData] = useState([]);
-  const [mainData, setMainData] = useState('');
+  const [mainData, setMainData] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/our-services');
+        const response = await axios.get(
+          "http://localhost:8000/api/our-services"
+        );
         setItemData(response.data?.data);
         setMainData(response?.data?.ourServices[0]);
       } catch (error) {
@@ -48,24 +49,25 @@ export default function Services() {
     fetchData();
   }, []);
   return (
-  <div className="services container">
-  <div className="our-services">
-    <h1>{mainData?.header ? mainData.header : 'Xidmətlərimiz'}</h1>
-    <p>
-      {mainData?.description ? mainData.description : 'Biz mükəmməl və zövqlü alış-veriş təcrübəsinin vacibliyini anlayırıq.'}
-    </p>
-  </div>
-  <div className="service-cards">
-    {itemData.map((service) => (
-      <div className="card" key={service.id}>
-        {/* <img src={service.icon} alt="" /> */}
-        <i class={service.icon}></i>
-        <h3>{service.header}</h3>
-        <p>{service.description}</p>
+    <div className="services container">
+      <div className="our-services">
+        <h1>{mainData?.header ? mainData.header : "Xidmətlərimiz"}</h1>
+        <p>
+          {mainData?.description
+            ? mainData.description
+            : "Biz mükəmməl və zövqlü alış-veriş təcrübəsinin vacibliyini anlayırıq."}
+        </p>
       </div>
-    ))}
-  </div>
-</div>
-
+      <div className="service-cards">
+        {itemData.map((service) => (
+          <div className="card" key={service.id}>
+            {/* <img src={service.icon} alt="" /> */}
+            <i class={service?.icon}></i>
+            <h3>{service.header}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
