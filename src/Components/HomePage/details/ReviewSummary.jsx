@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReviewSummary = ({ rating, totalReviews, userPhotos }) => {
+const ReviewSummary = ({ rating, totalReviews, userPhotos, }) => {
   return (
     <div className="review-summary">
       <div className="product-rate">
@@ -23,7 +23,7 @@ const ReviewSummary = ({ rating, totalReviews, userPhotos }) => {
       <p>Based on {totalReviews} reviews</p>
       <div className="user-photos">
         {userPhotos.map((photo, index) => (
-          <img key={index} src={photo} alt={`User ${index + 1}'s profile`} />
+          <img key={index} src={`http://localhost:8000/storage/${photo}`} alt={`User ${index + 1}'s profile`} />
         ))}
       </div>
     </div>

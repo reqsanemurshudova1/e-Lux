@@ -6,32 +6,7 @@ import "./Modal.css";
 import { useState, useEffect } from "react";
 
 export default function PaymentModal({ order }) {
-  // const [orders, setOrders] = useState({});
-
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "http://localhost:8000/api/orders/order_info",
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-  //           },
-  //         }
-  //       );
-  //       const data = await response.json();
-  //       if (data.success) {
-  //         setOrders(data?.data || {});
-  //         // console.log(orders);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-
-  //   fetchOrders();
-  // }, []);
+ 
 
   const {
     selectedProducts,

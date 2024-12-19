@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../Components/HomePage/Navbar/Navbar";
 import Footer from "../Components/HomePage/Footer/Footer";
 import Subscribe from "../Components/HomePage/Subscribe/Subscribe";
@@ -12,10 +12,11 @@ export default function Product() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(0);
-    const [selectedGender, setSelectedGender] = useState('All');
+    const [selectedGender, setSelectedGender] = useState("All");
     const [showAllProducts, setShowAllProducts] = useState(false);
-    const [filters, setFilters] = useState({})
+    const [filters, setFilters] = useState({});
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+    const [isCategoryVisible, setIsCategoryVisible] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12);
 
@@ -26,42 +27,45 @@ export default function Product() {
 
     const filterProducts = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/filter-products', filters);
-            if(response.data.products && response.data.products !== undefined) {
-                const transformedData = response.data.products.map(product => ({
+            const response = await axios.post("http://localhost:8000/api/filter-products", filters);
+            if (response.data.products && response.data.products !== undefined) {
+                const transformedData = response.data.products.map((product) => ({
                     id: product.id,
                     name: product.product_name,
                     price: product.product_price,
-                    category: product.category ? product.category.category_name : 'Unknown',
-                    image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+                    category: product.category ? product.category.category_name : "Unknown",
+                    image: product.image ? `http://localhost:8000/storage/${product.image}` : "/Assets/default.jpg",
                 }));
                 setProducts(transformedData);
                 setFilteredProducts(transformedData);
-            }
-            else{
+            } else {
                 setProducts([]);
                 setFilteredProducts([]);
             }
         } catch (error) {
-            console.error(error.response?.data?.message || 'Error filtering products');
+            console.error(error.response?.data?.message || "Error filtering products");
         }
     };
 
+    const openFilterModal = () => {
+        setIsFilterModalOpen(true);
+        setIsCategoryVisible(false); // Kategorileri gizle
+    };
 
-    const openFilterModal = () => setIsFilterModalOpen(true);
-    const closeFilterModal = () => setIsFilterModalOpen(false);
+    const closeFilterModal = () => {
+        setIsFilterModalOpen(false);
+        setIsCategoryVisible(true); // Kategorileri göster
+    };
 
     const handleFilterChange = (name, value) => {
-
         if (name === "category") {
             setSelectedCategory(value);
         } else if (name === "gender") {
             setSelectedGender(value);
-        }
-        else{
-            setFilters(prevFilters => ({
+        } else {
+            setFilters((prevFilters) => ({
                 ...prevFilters,
-                [name]: value
+                [name]: value,
             }));
         }
     };
@@ -71,17 +75,18 @@ export default function Product() {
         setSelectedGender("All");
         setShowAllProducts(false);
     };
+
     const fetchProducts = async () => {
         try {
             const response = await fetch("http://localhost:8000/api/products");
             const data = await response.json();
 
-            const transformedData = data.products.map(product => ({
+            const transformedData = data.products.map((product) => ({
                 id: product.id,
                 name: product.product_name,
                 price: product.product_price,
-                category: product.category ? product.category.category_name : 'Unknown',
-                image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+                category: product.category ? product.category.category_name : "Unknown",
+                image: product.image ? `http://localhost:8000/storage/${product.image}` : "/Assets/default.jpg",
             }));
 
             setProducts(transformedData);
@@ -96,47 +101,44 @@ export default function Product() {
     }, []);
 
     useEffect(() => {
-
-        if(filters){
+        if (filters) {
             filterProducts();
         }
     }, [filters]);
 
-
     useEffect(() => {
         const fetchProductsForCategory = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/product/category/" + selectedCategory);
+                const response = await fetch(
+                    "http://localhost:8000/api/product/category/" + selectedCategory
+                );
                 const data = await response.json();
 
                 if (data.products) {
-                    const transformedData = data.products.map(product => ({
+                    const transformedData = data.products.map((product) => ({
                         id: product.id,
                         name: product.product_name,
                         price: product.product_price,
-                        category: product.category ? product.category.category_name : 'Unknown',
-                        image: product.image ? `http://localhost:8000/storage/${product.image}` : '/Assets/default.jpg',
+                        category: product.category ? product.category.category_name : "Unknown",
+                        image: product.image ? `http://localhost:8000/storage/${product.image}` : "/Assets/default.jpg",
                     }));
 
                     setProducts(transformedData);
-                    setFilteredProducts(transformedData)
+                    setFilteredProducts(transformedData);
                 } else {
                     setProducts([]);
-                    setFilteredProducts([])
+                    setFilteredProducts([]);
                 }
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
         };
-        console.log(selectedCategory)
-        if (selectedCategory != 0) {
+        if (selectedCategory !== 0) {
             fetchProductsForCategory();
         } else {
-            fetchProducts()
+            fetchProducts();
         }
-
     }, [selectedCategory]);
-
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
@@ -151,7 +153,6 @@ export default function Product() {
     const handleSeeAllProducts = () => {
         setShowAllProducts(true);
     };
-
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -169,52 +170,63 @@ export default function Product() {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <div className="filter container">
                 <h1 className="search-heading container">Bütün məhsullar ({products.length})</h1>
                 <div className="shortandfilter">
-                    <div className="short">
-                        <select className="sortBy" onChange={(e) => handleCategoryChange(e.target.value)}>
-                            <option value="0">Bütün kategoriyalar</option>
-                            <option value="1">T-Shirt</option>
-                            <option value="2">Köynək</option>
-                            <option value="3">Şalvar</option>
-                            <option value="4">Aksesuar</option>
-                        </select>
-                        <img src="./Assets/Sort.svg" alt="Sort"/>
-                    </div>
+                    {isCategoryVisible && (
+                        <div className="short">
+                            <select
+                                className="sortBy"
+                                onChange={(e) => handleCategoryChange(e.target.value)}
+                            >
+                                <option value="0">Bütün kategoriyalar</option>
+                                <option value="1">T-Shirt</option>
+                                <option value="2">Köynək</option>
+                                <option value="3">Şalvar</option>
+                                <option value="4">Aksesuar</option>
+                            </select>
+                            <img src="./Assets/Sort.svg" alt="Sort" />
+                        </div>
+                    )}
                     <div className="filter1" onClick={openFilterModal}>
-                        Filter <img src="./Assets/Filter.svg" alt="Filter"/>
+                        Filter <img src="./Assets/Filter.svg" alt="Filter" />
                     </div>
                 </div>
             </div>
 
             <div className="productAndFilter container">
                 <div className="product-result">
-                    {filteredProducts.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage).map((product) => (
-                        <Link to={`/product/${product.id}/details`} key={product.id} className="prdct-cart"
-                              data-aos="zoom-in">
-                            <div className="prdct-img">
-                                <img src={product.image} alt={product.name}/>
-                            </div>
-                            <div className="prdct-desc">
-                                <div className="prdct-left">
-                                    <div className="prdct-name">{product.name}</div>
-                                    <div className="prdct-category">{product.category}</div>
+                    {filteredProducts
+                        .slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage)
+                        .map((product) => (
+                            <Link
+                                to={`/product/${product.id}/details`}
+                                key={product.id}
+                                className="prdct-cart"
+                                data-aos="zoom-in"
+                            >
+                                <div className="prdct-img">
+                                    <img src={product.image} alt={product.name} />
                                 </div>
-                                <div className="prdct-right">
-                                    <div className="prdct-price">${product.price.toFixed(2)}</div>
+                                <div className="prdct-desc">
+                                    <div className="prdct-left">
+                                        <div className="prdct-name">{product.name}</div>
+                                        <div className="prdct-category">{product.category}</div>
+                                    </div>
+                                    <div className="prdct-right">
+                                        <div className="prdct-price">${product.price.toFixed(2)}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        ))}
                 </div>
 
                 <FilterModal
                     isOpen={isFilterModalOpen}
                     onClose={closeFilterModal}
                     onFilterChange={handleFilterChange}
-                    filterValues={{selectedCategory, selectedGender}}
+                    filterValues={{ selectedCategory, selectedGender }}
                     onResetFilters={handleResetFilters}
                 />
             </div>
@@ -227,8 +239,8 @@ export default function Product() {
                 prevPage={prevPage}
             />
 
-            <Subscribe/>
-            <Footer/>
+            <Subscribe />
+            <Footer />
         </div>
     );
 }

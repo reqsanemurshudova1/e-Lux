@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DetailsDesc from "./DetailsDesc";
 import ReviewList from "./ReviewList";
 import Comment from "./Comment";
@@ -6,25 +6,28 @@ import "./common.css";
 
 export default function DescRevDisc({ product }) {
   const [activeTab, setActiveTab] = useState("description");
-    const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState([]);
 
-    const fetchReviews = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/api/product-reviews");
-            const data = await response.json();
-            console.log(data.data)
-            setReviews(data.data);
-            return data.data || [];
+  const fetchReviews = async () => {
+    try {
+      // product.id'yi kullanarak URL'yi oluştur
+      const response = await fetch(`http://localhost:8000/api/product-reviews/${product.id}`);
+      const data = await response.json();
+      console.log(data.data);
+      setReviews(data.data);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
 
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
-    useEffect(() => {
-        fetchReviews();
-    }, []);
+  // product.id değiştiğinde yorumları çekmek için useEffect'i kullan
+  useEffect(() => {
+    if (product.id) {
+      fetchReviews();
+    }
+  }, [product.id]); // product.id'yi dependency array'e ekledik
 
-  const comments = product.comments || []; 
+  const comments = product.comments || [];
 
   return (
     <div className="desc-rev-disc container">
@@ -53,7 +56,11 @@ export default function DescRevDisc({ product }) {
         className="activespan"
         style={{
           transform: `translateX(${
-            activeTab === "description" ? "0%" : activeTab === "reviews" ? "100%" : "200%"
+            activeTab === "description"
+              ? "0%"
+              : activeTab === "reviews"
+              ? "100%"
+              : "200%"
           })`,
         }}
       ></span>
@@ -68,6 +75,6 @@ export default function DescRevDisc({ product }) {
           )}
         </div>
       )}
-    </div>
-  );
+    </div>
+  );
 }
