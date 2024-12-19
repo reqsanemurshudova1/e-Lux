@@ -33,7 +33,6 @@ const FilterModal = ({
 
   useEffect(() => {
     if (items) {
-
       const filteredItems = items.filter(item => {
         const matchesPrice = item.price >= priceRange[0] && item.price <= priceRange[1];
         const matchesColor = selectedColors.length === 0 || selectedColors.includes(item.color);
@@ -100,22 +99,22 @@ const FilterModal = ({
         <button className="filter-panel-close" onClick={onClose}>
           X
         </button>
-        <h2>Filter</h2>
+        <h2>Filtrlə</h2>
         <button className="filter-reset" onClick={handleReset}>
-          Reset Filters
+          sıfırla
         </button>
       </div>
       <div className="filter-accordion">
         {[
           {
             key: "category",
-            title: "Kind of Product",
-            options: ["T-Shirt", "Coats", "Trousers", "Hoodies", "Jackets", "Shoes", "Socks", "Skirts"]
+            title: "Məhsul Növləri",
+            options: ["T-Shirt", "Palto", "Şalvar", "Hoodi", "Gödəkcə", "Ayaqqabı", "Corab", "Ətək"]
           },
           {
             key: "style",
-            title: "Style",
-            options: ["Basic", "Casual", "Sport", "Classic", "Circular"]
+            title: "Stil",
+            options: ["Sadə", "Gündəlik", "İdman", "Klassik", "Dairəvi"]
           }
         ].map(({ key, title, options }) => (
           <div className="accordion-item" key={key}>
@@ -150,7 +149,7 @@ const FilterModal = ({
             aria-expanded={openAccordions.includes("price")}
             onClick={() => handleAccordionClick("price")}
           >
-            <span>Price</span> {openAccordions.includes("price") ? "-" : "+"}
+            <span>Qiymət</span> {openAccordions.includes("price") ? "-" : "+"}
           </button>
           {openAccordions.includes("price") && (
             <div className="accordion-content">
@@ -176,7 +175,7 @@ const FilterModal = ({
             aria-expanded={openAccordions.includes("color")}
             onClick={() => handleAccordionClick("color")}
           >
-            <span>Color</span> {openAccordions.includes("color") ? "-" : "+"}
+            <span>Rəng</span> {openAccordions.includes("color") ? "-" : "+"}
           </button>
           {openAccordions.includes("color") && (
             <div className="accordion-content color-grid">
@@ -196,7 +195,7 @@ const FilterModal = ({
       </div>
       {noResults && (
         <div className="no-results-message">
-          No results match the selected filters.
+          Seçilmiş filtrlərə uyğun nəticə tapılmadı.
         </div>
       )}
     </div>

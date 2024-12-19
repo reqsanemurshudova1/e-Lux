@@ -6,7 +6,8 @@ import ReviewSummary from './ReviewSummary';
 const ReviewList = ({ reviews, rating }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const totalReviews = reviews.length;
-  const userPhotos = reviews.map(review => review.userPhotos);
+
+  const userPhotos = reviews.map(review => review.profile_photo).filter(photo => photo);
 
   return (
     <div className="common-rev">
