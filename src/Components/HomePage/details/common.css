@@ -183,7 +183,8 @@ border: 1px solid var(--Grayscale-200, #E5E5E5);
   justify-content:flex-end;
   gap: 10px;
 }
-.form-actions button:nth-of-type(1){
+.form-actions button:nth-of-type(1)
+, .form-actions button:nth-of-type(2){
   display: flex;
 padding: 16px 32px;
 justify-content: center;
@@ -192,17 +193,13 @@ gap: 8px;
 border-radius: 32px;
 border: 1px solid var(--Grayscale-200, #E5E5E5);
 background-color: white;
+
+
 }
-.form-actions button:nth-of-type(2){
-  border-radius: 24px;
-background: var(--Grayscale-100, #F5F5F5);
-display: flex;
-padding: 16px 40px;
-justify-content: center;
-align-items: center;
-border: none;
-outline: none;
-color: #A3A3A3;
+.form-actions button:nth-of-type(1):hover
+, .form-actions button:nth-of-type(2):hover{
+  cursor: pointer;
+  background-color: orange;
 }
 form{
   display: flex;

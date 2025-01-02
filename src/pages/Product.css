@@ -1,6 +1,10 @@
 .product-result {
+  /* flex: 1;
+
+  padding: 20px;
+  overflow-y: auto; */
     display: flex;
-   
+   min-width: 70%;
     flex-wrap: wrap;
     justify-content: center;
     gap:30px;
@@ -8,6 +12,7 @@
     margin-bottom: 30px;
     
   }
+
 .pro-filt{
     display: flex;
     align-items: center;

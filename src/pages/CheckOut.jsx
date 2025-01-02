@@ -30,7 +30,7 @@ export default function CheckOut() {
     state: "",
     postalCode: "",
   });
-  console.log(selectedProducts);
+  // console.log(selectedProducts);
 
 
   useEffect(() => {
@@ -257,7 +257,7 @@ export default function CheckOut() {
   <div className="payText">
     <div className="discount">
       <label>Endirim Kodu</label>
-      <input type="text" />
+      <input type="text" className="discountInput" />
     </div>
     <div className="Subtotal">
       <span className="grayText">Cəmi Məbləğ</span>

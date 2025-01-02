@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import RatingReview from './RatingReview';
 import { useParams } from 'react-router-dom';
-import ReviewSummary from './ReviewSummary'; 
 
-const WriteModal = ({ isOpen, onClose, onReviewSubmit }) => { 
+const WriteModal = ({ isOpen, onClose, onReviewSubmit }) => {
   const [rating, setRating] = useState(0);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +40,8 @@ const WriteModal = ({ isOpen, onClose, onReviewSubmit }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        onReviewSubmit(data.data.profile_photo); 
+        // Sayfa yenileme işlemi
+        window.location.reload(); // Sayfa yenilenecek
       })
       .catch((err) => console.error(err));
   };

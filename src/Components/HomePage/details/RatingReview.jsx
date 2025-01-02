@@ -5,7 +5,7 @@ function RatingReview({ rating, setRating }) {
     <div>
       {[1, 2, 3, 4, 5].map((star, index) => (
         <span
-          key={index} // Benzersiz bir key ekleniyor
+          key={index} 
           className='star'
           style={{
             cursor: 'pointer',

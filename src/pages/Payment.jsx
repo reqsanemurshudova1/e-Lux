@@ -79,6 +79,8 @@ export default function Payment() {
 
       const data = await response.json();
 
+      // console.log(data,"data");
+      
       if ((data.status = "success")) {
         toast.success("Ödəniş uğurla tamamlandı");
         setModalOpen(true);
