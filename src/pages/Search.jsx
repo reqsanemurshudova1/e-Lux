@@ -28,7 +28,7 @@ export default function Search() {
       try {
         const response = await fetch("http://localhost:8000/api/products");
         const data = await response.json();
-        console.log(data)
+        // console.log(data)
         setProducts(data.products);
       } catch (error) {
         console.error("Error fetching products:", error);

@@ -183,8 +183,9 @@ export default function Cart() {
                 <div className="all">Hamısını seç</div>
                 <div className="cart-Title">
                   <h3>Məhsul</h3>
-                  <h3>Qiymət</h3>
                   <h3>Sayı</h3>
+                  <h3>Qiymət</h3>
+                 
                 </div>
               </div>
 

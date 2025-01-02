@@ -10,17 +10,16 @@ export default function DescRevDisc({ product }) {
 
   const fetchReviews = async () => {
     try {
-      // product.id'yi kullanarak URL'yi oluştur
+
       const response = await fetch(`http://localhost:8000/api/product-reviews/${product.id}`);
       const data = await response.json();
-      console.log(data.data);
+      // console.log(data.data);
       setReviews(data.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
   };
 
-  // product.id değiştiğinde yorumları çekmek için useEffect'i kullan
   useEffect(() => {
     if (product.id) {
       fetchReviews();
@@ -44,12 +43,12 @@ export default function DescRevDisc({ product }) {
         >
           Reviews ({reviews.length})
         </h2>
-        <h2
+        {/* <h2
           className={activeTab === "discussions" ? "active" : ""}
           onClick={() => setActiveTab("discussions")}
         >
           Discussions ({comments.length})
-        </h2>
+        </h2> */}
       </div>
       <div className="border"></div>
       <span
@@ -66,7 +65,7 @@ export default function DescRevDisc({ product }) {
       ></span>
       {activeTab === "description" && <DetailsDesc product={product} />}
       {activeTab === "reviews" && <ReviewList reviews={reviews} rating={product.rating} />}
-      {activeTab === "discussions" && (
+      {/* {activeTab === "discussions" && (
         <div className="comments-section">
           {comments.length > 0 ? (
             comments.map((comment) => <Comment key={comment.id} comment={comment} />)
@@ -74,7 +73,7 @@ export default function DescRevDisc({ product }) {
             <p>No discussions available.</p>
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
 }

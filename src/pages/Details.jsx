@@ -5,6 +5,7 @@ import Footer from "../Components/HomePage/Footer/Footer";
 import DescRevDisc from "../Components/HomePage/details/DescRevDisc";
 import "./Details.css";
 import { Toaster, toast } from "react-hot-toast";
+import Spinner from "../Components/Spinner";
 
 export default function Details() {
   const { id } = useParams();
@@ -13,42 +14,38 @@ export default function Details() {
   const [cart, setCart] = useState([]);
   const [selectedColor, setSelectedColor] = useState("");
   const [mainImage, setMainImage] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [userPhotos, setUserPhotos] = useState([]);
 
-
-
-
-  const [reviews, setReviews]=useState([]);
-  const fetchReviews=async()=>{
-    const response = await fetch("http://localhost:8000/api/product-reviews/"+id, {
+  const fetchReviews = async () => {
+    const response = await fetch(`http://localhost:8000/api/product-reviews/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-      
     });
-    const results = await response.json() ;
+    const results = await response.json();
     setReviews(results.data || []);
-    console.log(reviews);
-    
-  }
 
-  useEffect(()=>{ 
+    const totalRating = results.data.reduce((sum, review) => sum + review.common_review, 0);
+    const averageRating = results.data.length > 0 ? totalRating / results.data.length : 0;
+
+    setRating(averageRating);
+    setTotalReviews(results.data.length);
+    setUserPhotos(results.data.map(review => review.profile_photo || ""));
+  };
+
+  useEffect(() => {
     fetchReviews();
-    console.log(reviews);
-  }, []);
- 
-  console.log(id);
-
-
-
-
+  }, [id]);
 
   const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
-    console.log("Seçilmiş Ölçü:", size);
   };
 
   const addToCart = async (product) => {
@@ -125,7 +122,7 @@ export default function Details() {
     setCart(savedCart);
   }, []);
 
-  if (!selectedProduct) return <p>Yüklənir...</p>;
+  if (!selectedProduct) return <p className="loading"><Spinner /></p>;
 
   return (
     <div>
@@ -155,20 +152,24 @@ export default function Details() {
         </div>
         <div className="product-details-desc">
           <h1 className="product-title">{selectedProduct.product_name}</h1>
+
           <div className="product-rate">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className="star"
-                style={{
-                  color: selectedProduct.rating >= star ? "gold" : "gray",
-                  fontSize: "25px",
-                }}
-              >
-                ★
-              </span>
-            ))}
-            {selectedProduct.rating}
+            <span>{rating.toFixed(1)}</span>
+            <div className="star">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className="star"
+                  style={{
+                    color: rating >= star ? "gold" : "gray",
+                    fontSize: "25px",
+                  }}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            
           </div>
 
           <div className="product-price">

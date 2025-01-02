@@ -8,7 +8,8 @@ const ReviewList = ({ reviews, rating }) => {
   const totalReviews = reviews.length;
 
   const userPhotos = reviews.map(review => review.profile_photo).filter(photo => photo);
-
+  const productId = reviews && reviews.length > 0 ? reviews[0].product_id : null;
+  
   return (
     <div className="common-rev">
       <div className="rev-left">
@@ -16,6 +17,8 @@ const ReviewList = ({ reviews, rating }) => {
           rating={rating} 
           totalReviews={totalReviews} 
           userPhotos={userPhotos} 
+          productId={productId}
+
         />
       </div>
       <div className="review-list">

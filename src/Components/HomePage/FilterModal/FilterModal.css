@@ -7,11 +7,12 @@
   font-family: "Inter", sans-serif;
 }
 .filter-panel {
-    position: relative;
+    position:relative;
     top: -65px;
     right: 0; 
 
-    width: 30%;
+    max-width: 30%;
+    width: 50%;
  
     background: white;
   
@@ -173,6 +174,7 @@ justify-content:center;
 }
 
 .no-results-message {
+
   color: #ff0000;
   font-size: 16px;
   text-align: center;
