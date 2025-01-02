@@ -16,7 +16,6 @@ export default function Register({ closeRegister, openLogin }) {
     setError('');
     setSuccess('');
 
-    // Şifrə və təsdiq şifrəsini yoxlayın
     if (password !== confirmPassword) {
       setError('Şifrələr uyğun gəlmir.');
       return;
@@ -28,7 +27,7 @@ export default function Register({ closeRegister, openLogin }) {
         name,
         email,
         password,
-        password_confirmation: confirmPassword, // Laravel bunu yoxlayır
+        password_confirmation: confirmPassword, 
       });
 
       setSuccess('Qeydiyyat uğurla tamamlandı! İndi daxil ola bilərsiniz.');

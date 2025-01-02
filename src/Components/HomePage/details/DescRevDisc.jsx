@@ -13,7 +13,7 @@ export default function DescRevDisc({ product }) {
 
       const response = await fetch(`http://localhost:8000/api/product-reviews/${product.id}`);
       const data = await response.json();
-      // console.log(data.data);
+    
       setReviews(data.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -24,7 +24,7 @@ export default function DescRevDisc({ product }) {
     if (product.id) {
       fetchReviews();
     }
-  }, [product.id]); // product.id'yi dependency array'e ekledik
+  }, [product.id]);
 
   const comments = product.comments || [];
 

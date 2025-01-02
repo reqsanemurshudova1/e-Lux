@@ -40,8 +40,8 @@ const WriteModal = ({ isOpen, onClose, onReviewSubmit }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // Sayfa yenileme işlemi
-        window.location.reload(); // Sayfa yenilenecek
+        
+        window.location.reload(); 
       })
       .catch((err) => console.error(err));
   };

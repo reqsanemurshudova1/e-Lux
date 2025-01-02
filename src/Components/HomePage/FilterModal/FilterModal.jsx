@@ -95,7 +95,7 @@ const FilterModal = ({
 
     }
 
-    // console.log(updatedValues);
+
 
     if (checked) {
       if (!updatedValues[name]) {
